@@ -1,0 +1,19 @@
+
+language: node_js
+node_js:
+  - "node"
+
+before_install:
+  - npm install -g npm@latest
+
+install:
+  - npm install
+
+before_script:
+  - npm install gulp --save-dev
+
+script:
+  - gulp
+
+notifications:
+  email: false

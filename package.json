@@ -1,0 +1,33 @@
+{
+  "name": "noobscroll",
+  "version": "1.1.0",
+  "description": "A lightweight jQuery Plugin that adds some cool function to make scrolling more fun.",
+  "main": "dist/noobscroll.min.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arguiot/NoobScroll.git"
+  },
+  "keywords": [
+    "noobscroll",
+    "scroll",
+    "jquery",
+    "plugin",
+    "scrolling",
+    "jquery-plugin"
+  ],
+  "author": "Arthur Guiot",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arguiot/NoobScroll/issues"
+  },
+  "homepage": "https://noobscroll.js.org",
+  "devDependencies": {
+    "jquery": "^3.2.1"
+  }
+}
