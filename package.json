@@ -26,5 +26,9 @@
   "bugs": {
     "url": "https://github.com/arguiot/Display.JS/issues"
   },
-  "homepage": "https://display.js.org"
+  "homepage": "https://display.js.org",
+  "devDependencies": {
+    "babel-preset-env": "^1.4.0",
+    "gulp-babel": "^6.1.2"
+  }
 }
