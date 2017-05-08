@@ -15,7 +15,7 @@ $(window).scroll(function () {
 	});
 });
 $(document).ready(function () {
-	$.getJSON("https://unpkg.com/noobscroll?json", function (data) {
+	$.getJSON("https://unpkg.com/display.js?json", function (data) {
 		var size = data.size / 1024;
 		size = Math.round(size * 100) / 100
 		$(".kb").text(size);

@@ -149,6 +149,10 @@ nav a:hover {
 /* ===============
     ALL: IE Fixes
    =============== */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 
 .ie7 .title {
     padding-top: 20px;
@@ -158,7 +162,7 @@ nav a:hover {
 }
 body {
     margin-bottom: 223px;
-    margin-top: 75px;
+    /*margin-top: 75px;*/
     background-color: white;
 }
 .hamburger {
@@ -173,9 +177,10 @@ ul.js-toggled {
     transition: 200ms all cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 .show {
-    width: calc(100% - 40px);
+    width: calc(100%);
     height: calc(100vh - 75px);
-    /*background-attachment: fixed;*/
+    position: relative;
+    margin-top: 2.67em;
     color: white;
     display: flex;
     justify-content: center;
@@ -247,7 +252,7 @@ a:hover {
 }
 .footer-container {
     position: fixed;
-    z-index: -100;
+    z-index: -10;
     left: 0;
     right: 0;
     bottom: 0;
