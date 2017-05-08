@@ -1,8 +1,8 @@
 {
-  "name": "noobscroll",
-  "version": "1.1.0",
-  "description": "A lightweight jQuery Plugin that adds some cool function to make scrolling more fun.",
-  "main": "dist/noobscroll.min.js",
+  "name": "display.js",
+  "version": "0",
+  "description": "A simple framework for building ambitious UI, without thinking about how the text will be displayed.",
+  "main": "dist/display.min.js",
   "directories": {
     "doc": "docs"
   },
@@ -11,23 +11,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arguiot/NoobScroll.git"
+    "url": "git+https://github.com/arguiot/Display.JS.git"
   },
   "keywords": [
-    "noobscroll",
-    "scroll",
-    "jquery",
-    "plugin",
-    "scrolling",
-    "jquery-plugin"
+    "Display.JS",
+    "display",
+    "DOM",
+    "manipulation",
+    "framework",
+    "javascript"
   ],
   "author": "Arthur Guiot",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/arguiot/NoobScroll/issues"
+    "url": "https://github.com/arguiot/Display.JS/issues"
   },
-  "homepage": "https://noobscroll.js.org",
-  "devDependencies": {
-    "jquery": "^3.2.1"
-  }
+  "homepage": "https://display.js.org"
 }

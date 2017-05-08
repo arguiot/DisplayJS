@@ -1,9 +1,9 @@
-class DOM { 
+class DisplayJS { 
   constructor (obj) {
 	this.obj = obj;
   }
 }
-class RenderDOM extends DOM {
+class _DOM_DJS extends DisplayJS {
 	var (push) {
 		const var_push = () => {
 			const elements = document.querySelectorAll("[var]");
@@ -64,13 +64,22 @@ class RenderDOM extends DOM {
 		    });
 		});
 	}
-}  
-
-// const renderman = new RenderDOM (render);
-// renderman.target(() => {
-// 	renderman.var();
-// });
-// renderman.var(100);
-// window.setInterval(() => {
-// 	render.b = new Date().getTime()/1000;
-// }, 100);
+	prepend (element, html) {
+	    const div = document.createElement('div');
+	    div.innerHTML = html;
+	    element.insertBefore(div, element.firstChild);
+	}
+	append (element, html) {
+	    element.innerHTML += html;
+	}
+	select (str) {
+		var obj = document.querySelectorAll(str);
+		return obj;
+	}
+	empty (element) {
+		element.innerHTML = null;
+	}
+	remove (element) {
+		element.parentNode.removeChild(element);
+	}
+} 
