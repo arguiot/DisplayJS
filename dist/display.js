@@ -112,6 +112,34 @@ var _DOM_DJS = function (_DisplayJS) {
 		value: function remove(element) {
 			element.parentNode.removeChild(element);
 		}
+	}, {
+		key: "on",
+		value: function on(element, event, callback) {
+			var addEventListener = function () {
+				if (document.addEventListener) {
+					return function (element, event, handler) {
+						element.addEventListener(event, handler, false);
+					};
+				} else {
+					return function (element, event, handler) {
+						element.attachEvent("on" + event, handler);
+					};
+				}
+			}();
+			return addEventListener(element, event, callback);
+		}
+	}, {
+		key: "show",
+		value: function show(element) {
+			element.style.display = 'block';
+			return true;
+		}
+	}, {
+		key: "hide",
+		value: function hide(element) {
+			element.style.display = 'none';
+			return true;
+		}
 	}]);
 
 	return _DOM_DJS;

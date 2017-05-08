@@ -82,4 +82,27 @@ class _DOM_DJS extends DisplayJS {
 	remove (element) {
 		element.parentNode.removeChild(element);
 	}
+	on (element, event, callback) {
+		const addEventListener = ((() => {
+		    if(document.addEventListener) {
+		        return (element, event, handler) => {
+		            element.addEventListener(event, handler, false);
+		        };
+		    }
+		    else {
+		        return (element, event, handler) => {
+		            element.attachEvent(`on${event}`, handler);
+		        };
+		    }
+		})());
+		return addEventListener(element, event, callback);
+	}
+	show (element) {
+        element.style.display='block'; 
+        return true;
+	}
+	hide (element) {
+        element.style.display='none';
+        return true;
+	}
 } 
