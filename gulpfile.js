@@ -18,4 +18,9 @@ gulp.task("copy", function () {
 	}))
     .pipe(gulp.dest('dist'))
 });
-gulp.task('default', [ 'minify', 'copy' ]);
+gulp.task("modern", function () {
+	gulp.src('src/*.js')
+	.pipe(rename({suffix: '.es6'}))
+    .pipe(gulp.dest('dist'))
+});
+gulp.task('default', [ 'minify', 'copy', 'modern' ]);
