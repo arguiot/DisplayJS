@@ -140,6 +140,46 @@ var _DOM_DJS = function (_DisplayJS) {
 			element.style.display = 'none';
 			return true;
 		}
+	}, {
+		key: "ajax",
+		value: function ajax(url, callback) {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					callback(xmlhttp.responseText);
+				}
+			};
+			xmlhttp.open("GET", url, true);
+			xmlhttp.send();
+		}
+	}, {
+		key: "hasClass",
+		value: function hasClass(el, className) {
+			if (el.classList) return el.classList.contains(className);
+			return !!el.className.match(new RegExp("(\\s|^)" + className + "(\\s|$)"));
+		}
+	}, {
+		key: "addClass",
+		value: function addClass(el, className) {
+			if (el.classList) el.classList.add(className);else if (!hasClass(el, className)) el.className += " " + className;
+		}
+	}, {
+		key: "removeClass",
+		value: function removeClass(el, className) {
+			if (el.classList) el.classList.remove(className);else if (hasClass(el, className)) {
+				var reg = new RegExp("(\\s|^)" + className + "(\\s|$)");
+				el.className = el.className.replace(reg, ' ');
+			}
+		}
+	}, {
+		key: "toogleClass",
+		value: function toogleClass(ele, class1) {
+			var classes = ele.className;
+			var regex = new RegExp("\\b" + class1 + "\\b");
+			var hasOne = classes.match(regex);
+			class1 = class1.replace(/\s+/g, '');
+			if (hasOne) ele.className = classes.replace(regex, '');else ele.className = classes + class1;
+		}
 	}]);
 
 	return _DOM_DJS;
