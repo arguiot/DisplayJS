@@ -105,7 +105,7 @@ class _DOM_DJS extends DisplayJS {
         element.style.display='none';
         return true;
 	}
-	ajax (url, callback) {
+	ajaxGet (url, callback) {
 		const xmlhttp = new XMLHttpRequest();
 	    xmlhttp.onreadystatechange = () => {
 	        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
@@ -115,34 +115,81 @@ class _DOM_DJS extends DisplayJS {
 	    xmlhttp.open("GET", url, true);
 	    xmlhttp.send();
 	}
-	hasClass (el, className) {
-	    if (el.classList)
-	        return el.classList.contains(className);
-	    return !!el.className.match(new RegExp(`(\\s|^)${className}(\\s|$)`));
+	ajaxGet (url, send) {
+		const xmlhttp = new XMLHttpRequest();
+	    xmlhttp.onreadystatechange = () => {
+	        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+	            callback(xmlhttp.responseText);
+	        }
+	    }
+	    xmlhttp.open("POST", url, true);
+	    xmlhttp.send(send);
 	}
-	addClass (el, className) {
-	    if (el.classList)
-	        el.classList.add(className)
-	    else if (!hasClass(el, className))
-	        el.className += ` ${className}`;
+	hasClass (element, className) {
+	    if (element.classList)
+	        return element.classList.contains(className);
+	    return !!element.className.match(new RegExp(`(\\s|^)${className}(\\s|$)`));
 	}
-	removeClass (el, className) {
-	    if (el.classList)
-	        el.classList.remove(className)
-	    else if (hasClass(el, className))
+	addClass (element, className) {
+	    if (element.classList)
+	        element.classList.add(className)
+	    else if (!hasClass(element, className))
+	        element.className += ` ${className}`;
+	}
+	removeClass (element, className) {
+	    if (element.classList)
+	        element.classList.remove(className)
+	    else if (hasClass(element, className))
 	    {
 	        const reg = new RegExp(`(\\s|^)${className}(\\s|$)`);
-	        el.className = el.className.replace(reg, ' ');
+	        element.className = element.className.replace(reg, ' ');
 	    }
 	}
-	toogleClass(ele, class1) {
-	  const classes = ele.className;
+	toogleClass(element, class1) {
+	  const classes = element.className;
 	  const regex = new RegExp(`\\b${class1}\\b`);
 	  const hasOne = classes.match(regex);
 	  class1 = class1.replace(/\s+/g, '');
 	  if (hasOne)
-	    ele.className = classes.replace(regex, '');
+	    element.className = classes.replace(regex, '');
 	  else
-	    ele.className = classes + class1;
+	    element.className = classes + class1;
 	}
+	each (elements, callback) {
+		for (let i = 0; i < elements.length; i++) {
+			callback(elements[i]);
+		}
+	}
+	style (element, name, value) {
+		element.style[name] = value;
+	}
+	getStyle(element, styleProp) {
+        let value;
+        const defaultView = (element.ownerDocument || document).defaultView;
+        // W3C standard way:
+        if (defaultView && defaultView.getComputedStyle) {
+          // sanitize property name to css notation
+          // (hypen separated words eg. font-Size)
+          styleProp = styleProp.replace(/([A-Z])/g, "-$1").toLowerCase();
+          return defaultView.getComputedStyle(element, null).getPropertyValue(styleProp);
+        } else if (element.currentStyle) { // IE
+          // sanitize property name to camelCase
+          styleProp = styleProp.replace(/\-(\w)/g, (str, letter) => letter.toUpperCase());
+          value = element.currentStyle[styleProp];
+          // convert other units to pixels on IE
+          if (/^\d+(em|pt|%|ex)?$/i.test(value)) { 
+            return ((value => {
+                const oldLeft = element.style.left;
+                const oldRsLeft = element.runtimeStyle.left;
+                element.runtimeStyle.left = element.currentStyle.left;
+                element.style.left = value || 0;
+                value = `${element.style.pixelLeft}px`;
+                element.style.left = oldLeft;
+                element.runtimeStyle.left = oldRsLeft;
+                return value;
+            }))(value);
+          }
+          return value;
+        }
+    }
 }
