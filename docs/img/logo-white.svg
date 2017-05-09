@@ -1,0 +1,44 @@
+<svg width="2000" height="2000" viewBox="0 0 2000 2000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
+<title>Display.JS white</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-1498 -2804)" figma:type="canvas">
+<mask id="mask0_alpha" mask-type="alpha">
+<path d="M 1498 2804L 3498 2804L 3498 4804L 1498 4804L 1498 2804Z" fill="#FFFFFF"/>
+</mask>
+<g id="Display.JS white" mask="url(#mask0_alpha)" figma:type="frame">
+<g id="Polygon" figma:type="regular-polygon">
+<use xlink:href="#path0_fill" transform="translate(1748 3454)" fill="#FFFFFF"/>
+</g>
+<g id="Ellipse 2" figma:type="ellipse">
+<use xlink:href="#path1_fill" transform="translate(2235 3541)" fill="#4286F4"/>
+</g>
+<g id="Ellipse" figma:type="ellipse">
+<use xlink:href="#path2_fill" transform="translate(2273 3579)" fill="#FFFFFF"/>
+</g>
+<g id="Rectangle 2" figma:type="rounded-rectangle">
+<use xlink:href="#path3_fill" transform="translate(2476 3216)" fill="#FFFFFF"/>
+</g>
+<g id="Rectangle 2" figma:type="rounded-rectangle">
+<use xlink:href="#path4_fill" transform="matrix(0.906308 0.422618 -0.422618 0.906308 2747.51 3284.76)" fill="#FFFFFF"/>
+</g>
+<g id="Rectangle 2" figma:type="rounded-rectangle">
+<use xlink:href="#path4_fill" transform="matrix(0.906308 -0.422618 0.422618 0.906308 2204.48 3303.08)" fill="#FFFFFF"/>
+</g>
+<g id="Ellipse 3" figma:type="ellipse">
+<use xlink:href="#path5_fill" transform="translate(2443 3749)" fill="#4286F4"/>
+</g>
+<g id="Ellipse 4" figma:type="ellipse">
+<use xlink:href="#path6_fill" transform="translate(2327 3607)" fill="#4286F4"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 750 0L 1500 350L 750 700L 0 350L 750 0Z"/>
+<path id="path1_fill" d="M 525 262.5C 525 407.475 407.475 525 262.5 525C 117.525 525 0 407.475 0 262.5C 0 117.525 117.525 0 262.5 0C 407.475 0 525 117.525 525 262.5Z"/>
+<path id="path2_fill" d="M 450 225C 450 349.264 349.264 450 225 450C 100.736 450 0 349.264 0 225C 0 100.736 100.736 0 225 0C 349.264 0 450 100.736 450 225Z"/>
+<path id="path3_fill" d="M 0 0L 44 0L 44 175L 0 175L 0 0Z"/>
+<path id="path4_fill" d="M 0 0L 44 0L 44 150L 0 150L 0 0Z"/>
+<path id="path5_fill" d="M 110 55C 110 85.3757 85.3757 110 55 110C 24.6243 110 0 85.3757 0 55C 0 24.6243 24.6243 0 55 0C 85.3757 0 110 24.6243 110 55Z"/>
+<path id="path6_fill" d="M 80 40C 80 62.0914 62.0914 80 40 80C 17.9086 80 0 62.0914 0 40C 0 17.9086 17.9086 0 40 0C 62.0914 0 80 17.9086 80 40Z"/>
+</defs>
+</svg>

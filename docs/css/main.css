@@ -204,7 +204,9 @@ ul.js-toggled {
     will-change: transform;
     z-index: -100;
 }
+.logo {
 
+}
 .main-container {
     background-color: white;
 }
