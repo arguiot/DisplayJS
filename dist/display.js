@@ -146,28 +146,25 @@ var _DOM_DJS = function (_DisplayJS) {
 			return true;
 		}
 	}, {
-		key: "ajaxGet",
-		value: function ajaxGet(url, callback) {
-			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.onreadystatechange = function () {
-				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					callback(xmlhttp.responseText);
+		key: "ajax",
+		value: function ajax(url, method, callback) {
+			var request = new XMLHttpRequest();
+			request.open(method, url, true);
+
+			request.onload = function () {
+				if (request.status >= 200 && request.status < 400) {
+					var data = request.responseText;
+					callback(data);
+				} else {
+					console.error("DisplayJS error: The ajax request returned an error.");
 				}
 			};
-			xmlhttp.open("GET", url, true);
-			xmlhttp.send();
-		}
-	}, {
-		key: "ajaxGet",
-		value: function ajaxGet(url, send) {
-			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.onreadystatechange = function () {
-				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					callback(xmlhttp.responseText);
-				}
+
+			request.onerror = function () {
+				// There was a connection error of some sort
 			};
-			xmlhttp.open("POST", url, true);
-			xmlhttp.send(send);
+
+			request.send();
 		}
 	}, {
 		key: "hasClass",

@@ -108,25 +108,24 @@ class _DOM_DJS extends DisplayJS {
         element[0].style.display='none';
         return true;
 	}
-	ajaxGet (url, callback) {
-		const xmlhttp = new XMLHttpRequest();
-	    xmlhttp.onreadystatechange = () => {
-	        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
-	            callback(xmlhttp.responseText);
-	        }
-	    }
-	    xmlhttp.open("GET", url, true);
-	    xmlhttp.send();
-	}
-	ajaxGet (url, send) {
-		const xmlhttp = new XMLHttpRequest();
-	    xmlhttp.onreadystatechange = () => {
-	        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
-	            callback(xmlhttp.responseText);
-	        }
-	    }
-	    xmlhttp.open("POST", url, true);
-	    xmlhttp.send(send);
+	ajax (url, method, callback) {
+		var request = new XMLHttpRequest();
+		request.open(method, url, true);
+
+		request.onload = function() {
+		  if (request.status >= 200 && request.status < 400) {
+		    var data = request.responseText;
+		    callback(data);
+		  } else {
+		    console.error("DisplayJS error: The ajax request returned an error.");
+		  }
+		};
+
+		request.onerror = function() {
+		  // There was a connection error of some sort
+		};
+
+		request.send();
 	}
 	hasClass (element, className) {
 	    if (element[0].classList)
@@ -166,7 +165,7 @@ class _DOM_DJS extends DisplayJS {
 	style (element, name, value) {
 		element[0].style[name] = value;
 	}
-	getStyle(element, styleProp) {
+	getStyle (element, styleProp) {
         let value;
         const defaultView = (element[0].ownerDocument || document).defaultView;
         // W3C standard way:
@@ -195,4 +194,5 @@ class _DOM_DJS extends DisplayJS {
           return value;
         }
     }
+
 }
