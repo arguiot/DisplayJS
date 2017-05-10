@@ -85,16 +85,21 @@ var _DOM_DJS = function (_DisplayJS) {
 			});
 		}
 	}, {
+		key: "text",
+		value: function text(element, _text) {
+			element[0].innerHTML = _text;
+		}
+	}, {
 		key: "prepend",
 		value: function prepend(element, html) {
 			var div = document.createElement('div');
 			div.innerHTML = html;
-			element.insertBefore(div, element.firstChild);
+			element[0].insertBefore(div, element.firstChild);
 		}
 	}, {
 		key: "append",
 		value: function append(element, html) {
-			element.innerHTML += html;
+			element[0].innerHTML += html;
 		}
 	}, {
 		key: "select",
@@ -105,12 +110,12 @@ var _DOM_DJS = function (_DisplayJS) {
 	}, {
 		key: "empty",
 		value: function empty(element) {
-			element.innerHTML = null;
+			element[0].innerHTML = null;
 		}
 	}, {
 		key: "remove",
 		value: function remove(element) {
-			element.parentNode.removeChild(element);
+			element[0].parentNode.removeChild(element);
 		}
 	}, {
 		key: "on",
@@ -118,26 +123,26 @@ var _DOM_DJS = function (_DisplayJS) {
 			var addEventListener = function () {
 				if (document.addEventListener) {
 					return function (element, event, handler) {
-						element.addEventListener(event, handler, false);
+						element[0].addEventListener(event, handler, false);
 					};
 				} else {
 					return function (element, event, handler) {
-						element.attachEvent("on" + event, handler);
+						element[0].attachEvent("on" + event, handler);
 					};
 				}
 			}();
-			return addEventListener(element, event, callback);
+			return addEventListener(element[0], event, callback);
 		}
 	}, {
 		key: "show",
 		value: function show(element) {
-			element.style.display = 'block';
+			element[0].style.display = 'block';
 			return true;
 		}
 	}, {
 		key: "hide",
 		value: function hide(element) {
-			element.style.display = 'none';
+			element[0].style.display = 'none';
 			return true;
 		}
 	}, {
@@ -167,30 +172,30 @@ var _DOM_DJS = function (_DisplayJS) {
 	}, {
 		key: "hasClass",
 		value: function hasClass(element, className) {
-			if (element.classList) return element.classList.contains(className);
-			return !!element.className.match(new RegExp("(\\s|^)" + className + "(\\s|$)"));
+			if (element[0].classList) return element[0].classList.contains(className);
+			return !!element[0].className.match(new RegExp("(\\s|^)" + className + "(\\s|$)"));
 		}
 	}, {
 		key: "addClass",
 		value: function addClass(element, className) {
-			if (element.classList) element.classList.add(className);else if (!hasClass(element, className)) element.className += " " + className;
+			if (element[0].classList) element[0].classList.add(className);else if (!hasClass(element[0], className)) element[0].className += " " + className;
 		}
 	}, {
 		key: "removeClass",
 		value: function removeClass(element, className) {
-			if (element.classList) element.classList.remove(className);else if (hasClass(element, className)) {
+			if (element[0].classList) element[0].classList.remove(className);else if (hasClass(element[0], className)) {
 				var reg = new RegExp("(\\s|^)" + className + "(\\s|$)");
-				element.className = element.className.replace(reg, ' ');
+				element[0].className = element[0].className.replace(reg, ' ');
 			}
 		}
 	}, {
-		key: "toogleClass",
-		value: function toogleClass(element, class1) {
-			var classes = element.className;
+		key: "toggleClass",
+		value: function toggleClass(element, class1) {
+			var classes = element[0].className;
 			var regex = new RegExp("\\b" + class1 + "\\b");
 			var hasOne = classes.match(regex);
 			class1 = class1.replace(/\s+/g, '');
-			if (hasOne) element.className = classes.replace(regex, '');else element.className = classes + class1;
+			if (hasOne) element[0].className = classes.replace(regex, '');else element[0].className = classes + class1;
 		}
 	}, {
 		key: "each",
@@ -202,36 +207,36 @@ var _DOM_DJS = function (_DisplayJS) {
 	}, {
 		key: "style",
 		value: function style(element, name, value) {
-			element.style[name] = value;
+			element[0].style[name] = value;
 		}
 	}, {
 		key: "getStyle",
 		value: function getStyle(element, styleProp) {
 			var value = void 0;
-			var defaultView = (element.ownerDocument || document).defaultView;
+			var defaultView = (element[0].ownerDocument || document).defaultView;
 			// W3C standard way:
 			if (defaultView && defaultView.getComputedStyle) {
 				// sanitize property name to css notation
 				// (hypen separated words eg. font-Size)
 				styleProp = styleProp.replace(/([A-Z])/g, "-$1").toLowerCase();
 				return defaultView.getComputedStyle(element, null).getPropertyValue(styleProp);
-			} else if (element.currentStyle) {
+			} else if (element[0].currentStyle) {
 				// IE
 				// sanitize property name to camelCase
 				styleProp = styleProp.replace(/\-(\w)/g, function (str, letter) {
 					return letter.toUpperCase();
 				});
-				value = element.currentStyle[styleProp];
+				value = element[0].currentStyle[styleProp];
 				// convert other units to pixels on IE
 				if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
 					return function (value) {
 						var oldLeft = element.style.left;
 						var oldRsLeft = element.runtimeStyle.left;
-						element.runtimeStyle.left = element.currentStyle.left;
-						element.style.left = value || 0;
+						element[0].runtimeStyle.left = element.currentStyle.left;
+						element[0].style.left = value || 0;
 						value = element.style.pixelLeft + "px";
-						element.style.left = oldLeft;
-						element.runtimeStyle.left = oldRsLeft;
+						element[0].style.left = oldLeft;
+						element[0].runtimeStyle.left = oldRsLeft;
 						return value;
 					}(value);
 				}
