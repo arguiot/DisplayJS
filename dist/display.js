@@ -310,6 +310,21 @@ var _DOM_DJS = function (_DisplayJS) {
 
 			request.send();
 		}
+	}, {
+		key: "fadeIn",
+		value: function fadeIn(el) {
+			el.style.opacity = 0;
+
+			var last = +new Date();
+			var tick = function tick() {
+				el.style.opacity = +el.style.opacity + (new Date() - last) / 400;
+				last = +new Date();
+				if (+el.style.opacity < 1) {
+					window.requestAnimationFrame && requestAnimationFrame(tick) || setTimeout(tick, 16);
+				}
+			};
+			tick();
+		}
 	}]);
 
 	return _DOM_DJS;
