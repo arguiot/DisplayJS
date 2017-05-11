@@ -109,19 +109,19 @@ class _DOM_DJS extends DisplayJS {
         return true;
 	}
 	ajax (url, method, callback) {
-		var request = new XMLHttpRequest();
+		const request = new XMLHttpRequest();
 		request.open(method, url, true);
 
-		request.onload = function() {
+		request.onload = () => {
 		  if (request.status >= 200 && request.status < 400) {
-		    var data = request.responseText;
+		    const data = request.responseText;
 		    callback(data);
 		  } else {
 		    console.error("DisplayJS error: The ajax request returned an error.");
 		  }
 		};
 
-		request.onerror = function() {
+		request.onerror = () => {
 		  // There was a connection error of some sort
 		};
 
@@ -181,9 +181,9 @@ class _DOM_DJS extends DisplayJS {
           // convert other units to pixels on IE
           if (/^\d+(em|pt|%|ex)?$/i.test(value)) { 
             return ((value => {
-                const oldLeft = element.style.left;
-                const oldRsLeft = element.runtimeStyle.left;
-                element[0].runtimeStyle.left = element.currentStyle.left;
+                const oldLeft = element[0].style.left;
+                const oldRsLeft = element[0].runtimeStyle.left;
+                element[0].runtimeStyle.left = element[0].currentStyle.left;
                 element[0].style.left = value || 0;
                 value = `${element.style.pixelLeft}px`;
                 element[0].style.left = oldLeft;
@@ -194,5 +194,71 @@ class _DOM_DJS extends DisplayJS {
           return value;
         }
     }
+    load (element, url) {
+    	const request = new XMLHttpRequest();
+		request.open("GET", url, true);
 
+		request.onload = () => {
+		  if (request.status >= 200 && request.status < 400) {
+		    const data = request.responseText;
+		    json = mapDOM(data, true);
+			element[0].innerHTML = json[element[0]];
+
+			function mapDOM(element, json) {
+			    const treeObject = {};
+
+			    // If string convert to document Node
+			    if (typeof element === "string") {
+			        if (window.DOMParser) {
+			              parser = new DOMParser();
+			              docNode = parser.parseFromString(element,"text/xml");
+			        } else { // Microsoft strikes again
+			              docNode = new ActiveXObject("Microsoft.XMLDOM");
+			              docNode.async = false;
+			              docNode.loadXML(element); 
+			        } 
+			        element = docNode.firstChild;
+			    }
+
+			    //Recursively loop through DOM elements and assign properties to object
+			    function treeHTML(element, object) {
+			        object["type"] = element.nodeName;
+			        const nodeList = element.childNodes;
+			        if (nodeList != null) {
+			            if (nodeList.length) {
+			                object["content"] = [];
+			                for (var i = 0; i < nodeList.length; i++) {
+			                    if (nodeList[i].nodeType == 3) {
+			                        object["content"].push(nodeList[i].nodeValue);
+			                    } else {
+			                        object["content"].push({});
+			                        treeHTML(nodeList[i], object["content"][object["content"].length -1]);
+			                    }
+			                }
+			            }
+			        }
+			        if (element.attributes != null) {
+			            if (element.attributes.length) {
+			                object["attributes"] = {};
+			                for (var i = 0; i < element.attributes.length; i++) {
+			                    object["attributes"][element.attributes[i].nodeName] = element.attributes[i].nodeValue;
+			                }
+			            }
+			        }
+			    }
+			    treeHTML(element, treeObject);
+
+			    return (json) ? JSON.stringify(treeObject) : treeObject;
+			}
+		  } else {
+		    console.error("DisplayJS error: The load request returned an error.");
+		  }
+		};
+
+		request.onerror = () => {
+		  console.error("DisplayJS error: The load request returned an error. Please, check your connection.");
+		};
+
+		request.send();
+    }
 }
