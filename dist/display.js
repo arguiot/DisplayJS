@@ -325,6 +325,26 @@ var _DOM_DJS = function (_DisplayJS) {
 			};
 			tick();
 		}
+	}, {
+		key: "custom",
+		value: function custom(targetAttr, push) {
+			var _this3 = this;
+
+			var var_push = function var_push() {
+				var elements = document.querySelectorAll("[" + targetAttr + "]");
+				for (var i = 0; i < elements.length; i++) {
+					var attr = elements[i].getAttribute(targetAttr);
+					elements[i].innerHTML = _this3.obj[attr];
+				}
+			};
+			if (!push) {
+				var_push();
+			} else {
+				window.setInterval(function () {
+					var_push();
+				}, push);
+			}
+		}
 	}]);
 
 	return _DOM_DJS;

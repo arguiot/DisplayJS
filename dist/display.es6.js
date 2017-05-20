@@ -264,14 +264,32 @@ class _DOM_DJS extends DisplayJS {
     fadeIn (el) {
     	el.style.opacity = 0;
 
-	    var last = +new Date();
-		var tick = function() {
+	    let last = +new Date();
+		const tick = () => {
 			el.style.opacity = +el.style.opacity + (new Date() - last) / 400;
 			last = +new Date();
 		    if (+el.style.opacity < 1) {
 		    	(window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
 		    }
-		}
+		};
 		tick();
     }
+    custom (targetAttr,push) {
+		const var_push = () => {
+			const elements = document.querySelectorAll(`[${targetAttr}]`);
+			for (let i = 0; i < elements.length; i++) {
+				const attr = elements[i].getAttribute(targetAttr);
+				elements[i].innerHTML = this.obj[attr];
+			}
+		}
+		if (!push) {
+			var_push();
+		}
+		else {
+			window.setInterval(() => {
+				var_push();
+			}, push);
+		}
+				
+	}
 }
