@@ -1,5 +1,5 @@
 # Display.JS
-  <center><img src="https://rawgit.com/arguiot/Display.JS/master/docs/img/logo.svg" width="256">
+  <img src="https://rawgit.com/arguiot/DisplayJS/master/docs/img/logo.svg" width="256">
 <br/>
 A simple framework for building ambitious UI, without thinking about how everything will be displayed.
 <br/>
@@ -9,8 +9,6 @@ A simple framework for building ambitious UI, without thinking about how everyth
 [![npm](https://img.shields.io/npm/dt/display.js.svg)](https://www.npmjs.com/package/display.js)
 [![License](https://img.shields.io/github/license/arguiot/Display.JS.svg)](LICENSE)
   
-
-</center>
 
 ## Getting Started
 
