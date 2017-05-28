@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arguiot/Display.JS.git"
+    "url": "git+https://github.com/arguiot/DisplayJS.git"
   },
   "keywords": [
     "Display.JS",
@@ -24,7 +24,7 @@
   "author": "Arthur Guiot",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/arguiot/Display.JS/issues"
+    "url": "https://github.com/arguiot/DisplayJS/issues"
   },
   "homepage": "https://display.js.org",
   "devDependencies": {
