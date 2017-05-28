@@ -10,7 +10,7 @@ install:
   - npm install
 
 before_script:
-  - npm install gulp --save-dev
+  - npm install gulp gulp-uglify npm install gulp-rename gulp-babel babel-preset-env --save-dev
 
 script:
   - gulp
