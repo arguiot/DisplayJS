@@ -3,6 +3,7 @@
 <br/>
 A simple framework for building ambitious UI, without thinking about how everything will be displayed.
 <br/>
+
 [![GitHub release](https://img.shields.io/github/release/arguiot/Display.JS.svg)](https://github.com/arguiot/Display.JS/releases)
 [![Build Status](https://travis-ci.org/arguiot/Display.JS.svg?branch=master)](https://travis-ci.org/arguiot/NoobScroll)
 [![Github All Releases](https://img.shields.io/github/downloads/arguiot/Display.JS/total.svg)](https://github.com/arguiot/Display.JS/)
