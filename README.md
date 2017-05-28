@@ -4,11 +4,15 @@
 A simple framework for building ambitious UI, without thinking about how everything will be displayed.
 <br/>
 
-[![GitHub release](https://img.shields.io/github/release/arguiot/Display.JS.svg)](https://github.com/arguiot/Display.JS/releases)
-[![Build Status](https://travis-ci.org/arguiot/Display.JS.svg?branch=master)](https://travis-ci.org/arguiot/NoobScroll)
-[![Github All Releases](https://img.shields.io/github/downloads/arguiot/Display.JS/total.svg)](https://github.com/arguiot/Display.JS/)
+
+[![GitHub release](https://img.shields.io/github/release/arguiot/Display.JS.svg)](https://github.com/arguiot/DisplayJS/releases)
+[![Build Status](https://travis-ci.org/arguiot/Display.JS.svg?branch=master)](https://travis-ci.org/arguiot/DisplayJS)
+[![Github All Releases](https://img.shields.io/github/downloads/arguiot/DisplayJS/total.svg)](https://github.com/arguiot/DisplayJS/)
+[![GitHub release](https://img.shields.io/github/release/arguiot/DisplayJS.svg)](https://github.com/arguiot/DisplayJS/releases)
+[![Build Status](https://travis-ci.org/arguiot/DisplayJS.svg?branch=master)](https://travis-ci.org/arguiot/DisplayJS)
+[![Github All Releases](https://img.shields.io/github/downloads/arguiot/DisplayJS/total.svg)](https://github.com/arguiot/DisplayJS/)
 [![npm](https://img.shields.io/npm/dt/display.js.svg)](https://www.npmjs.com/package/display.js)
-[![License](https://img.shields.io/github/license/arguiot/Display.JS.svg)](LICENSE)
+[![License](https://img.shields.io/github/license/arguiot/DisplayJS.svg)](LICENSE)
   
 
 ## Getting Started
@@ -18,7 +22,7 @@ To use display.js, you'll need to download display.js and add it in your js fold
 // Add Display.js
 <script src="https://unpkg.com/display.js"></script>
 ```
-or you can install NoobScroll using [npm](https://npmjs.com/package/noobscroll)
+or you can install NoobScroll using [npm](https://npmjs.com/package/display.js)
 ```bash
 $ npm install display.js
 ```
