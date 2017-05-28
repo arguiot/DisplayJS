@@ -29,6 +29,7 @@
   "homepage": "https://display.js.org",
   "devDependencies": {
     "babel-preset-env": "^1.4.0",
+    "babili": "^0.1.2",
     "gulp-babel": "^6.1.2"
   }
 }

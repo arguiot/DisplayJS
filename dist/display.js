@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -85,6 +85,60 @@ var _DOM_DJS = function (_DisplayJS) {
 			});
 		}
 	}, {
+		key: "custom",
+		value: function custom(targetAttr, push) {
+			var _this3 = this;
+
+			var var_push = function var_push() {
+				var elements = document.querySelectorAll("[" + targetAttr + "]");
+				for (var i = 0; i < elements.length; i++) {
+					var attr = elements[i].getAttribute(targetAttr);
+					elements[i].innerHTML = _this3.obj[attr];
+				}
+			};
+			if (!push) {
+				var_push();
+			} else {
+				window.setInterval(function () {
+					var_push();
+				}, push);
+			}
+		}
+	}, {
+		key: "live",
+		value: function live(watch, obj, callback) {
+			if (!Object.prototype.watch) {
+				Object.defineProperty(Object.prototype, "watch", {
+					enumerable: false,
+					configurable: true,
+					writable: false,
+					value: function value(prop, handler) {
+						var oldval = this[prop];
+						var newval = oldval;
+						var getter = function getter() {
+							return newval;
+						};
+
+						var setter = function setter(val) {
+							oldval = newval;
+							return newval = handler.call(this, prop, oldval, val);
+						};
+
+						if (delete this[prop]) {
+							// can't watch constants
+							Object.defineProperty(this, prop, {
+								get: getter,
+								set: setter,
+								enumerable: true,
+								configurable: true
+							});
+						}
+					}
+				});
+			}
+			watch.watch(obj, callback(id, oldval, newval));
+		}
+	}, {
 		key: "text",
 		value: function text(element, _text) {
 			element[0].innerHTML = _text;
@@ -100,6 +154,30 @@ var _DOM_DJS = function (_DisplayJS) {
 		key: "append",
 		value: function append(element, html) {
 			element[0].innerHTML += html;
+		}
+	}, {
+		key: "after",
+		value: function after(element, html) {
+			element[0].insertAdjacentHTML('afterend', html);
+		}
+	}, {
+		key: "before",
+		value: function before(element, html) {
+			element[0].insertAdjacentHTML('beforebegin', html);
+		}
+	}, {
+		key: "clone",
+		value: function clone(element) {
+			element[0].cloneNode(true);
+		}
+	}, {
+		key: "is",
+		value: function is(el1, el2) {
+			if (el1 === el2) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}, {
 		key: "select",
@@ -328,57 +406,19 @@ var _DOM_DJS = function (_DisplayJS) {
 			tick();
 		}
 	}, {
-		key: "custom",
-		value: function custom(targetAttr, push) {
-			var _this3 = this;
+		key: "extend",
+		value: function extend() {
+			var out = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-			var var_push = function var_push() {
-				var elements = document.querySelectorAll("[" + targetAttr + "]");
-				for (var i = 0; i < elements.length; i++) {
-					var attr = elements[i].getAttribute(targetAttr);
-					elements[i].innerHTML = _this3.obj[attr];
+			for (var i = 1; i < arguments.length; i++) {
+				if (!arguments[i]) continue;
+
+				for (var key in arguments[i]) {
+					if (arguments[i].hasOwnProperty(key)) out[key] = arguments[i][key];
 				}
-			};
-			if (!push) {
-				var_push();
-			} else {
-				window.setInterval(function () {
-					var_push();
-				}, push);
 			}
-		}
-	}, {
-		key: "live",
-		value: function live(watch, obj, callback) {
-			if (!Object.prototype.watch) {
-				Object.defineProperty(Object.prototype, "watch", {
-					enumerable: false,
-					configurable: true,
-					writable: false,
-					value: function value(prop, handler) {
-						var oldval = this[prop],
-						    newval = oldval,
-						    getter = function getter() {
-							return newval;
-						},
-						    setter = function setter(val) {
-							oldval = newval;
-							return newval = handler.call(this, prop, oldval, val);
-						};
 
-						if (delete this[prop]) {
-							// can't watch constants
-							Object.defineProperty(this, prop, {
-								get: getter,
-								set: setter,
-								enumerable: true,
-								configurable: true
-							});
-						}
-					}
-				});
-			}
-			watch.watch(obj, callback(id, oldval, newval));
+			return out;
 		}
 	}]);
 

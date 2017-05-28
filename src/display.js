@@ -1,3 +1,4 @@
+'use strict';
 class DisplayJS { 
   constructor (obj) {
 	this.obj = obj;
@@ -64,6 +65,55 @@ class _DOM_DJS extends DisplayJS {
 		    });
 		});
 	}
+	    custom (targetAttr,push) {
+		const var_push = () => {
+			const elements = document.querySelectorAll(`[${targetAttr}]`);
+			for (let i = 0; i < elements.length; i++) {
+				const attr = elements[i].getAttribute(targetAttr);
+				elements[i].innerHTML = this.obj[attr];
+			}
+		}
+		if (!push) {
+			var_push();
+		}
+		else {
+			window.setInterval(() => {
+				var_push();
+			}, push);
+		}
+				
+	}
+	live (watch, obj, callback) {
+		if (!Object.prototype.watch) {
+			Object.defineProperty(Object.prototype, "watch", {
+				  enumerable: false
+				, configurable: true
+				, writable: false
+				, value(prop, handler) {
+                let oldval = this[prop];
+                let newval = oldval;
+                const getter = () => newval;
+
+                const setter = function (val) {
+                    oldval = newval;
+                    return newval = handler.call(this, prop, oldval, val);
+                };
+
+                if (delete this[prop]) { // can't watch constants
+                    Object.defineProperty(this, prop, {
+                          get: getter
+                        , set: setter
+                        , enumerable: true
+                        , configurable: true
+                    });
+                }
+            }
+			});
+		}
+		watch.watch(obj,
+		   callback(id, oldval, newval)
+		);
+	}
 	text (element, text) {
 		element[0].innerHTML = text;
 	}
@@ -74,6 +124,23 @@ class _DOM_DJS extends DisplayJS {
 	}
 	append (element, html) {
 	    element[0].innerHTML += html;
+	}
+	after (element, html) {
+		element[0].insertAdjacentHTML('afterend', html);
+	}
+	before (element, html) {
+		element[0].insertAdjacentHTML('beforebegin', html);
+	}
+	clone (element) {
+		element[0].cloneNode(true);
+	}
+	is (el1, el2) {
+		if (el1 === el2) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	select (str) {
 		const obj = document.querySelectorAll(str);
@@ -276,56 +343,17 @@ class _DOM_DJS extends DisplayJS {
 		};
 		tick();
     }
-    custom (targetAttr,push) {
-		const var_push = () => {
-			const elements = document.querySelectorAll(`[${targetAttr}]`);
-			for (let i = 0; i < elements.length; i++) {
-				const attr = elements[i].getAttribute(targetAttr);
-				elements[i].innerHTML = this.obj[attr];
-			}
-		}
-		if (!push) {
-			var_push();
-		}
-		else {
-			window.setInterval(() => {
-				var_push();
-			}, push);
-		}
-				
-	}
-	live (watch, obj, callback) {
-		if (!Object.prototype.watch) {
-			Object.defineProperty(Object.prototype, "watch", {
-				  enumerable: false
-				, configurable: true
-				, writable: false
-				, value: function (prop, handler) {
-					var
-					  oldval = this[prop]
-					, newval = oldval
-					, getter = function () {
-						return newval;
-					}
-					, setter = function (val) {
-						oldval = newval;
-						return newval = handler.call(this, prop, oldval, val);
-					}
-					;
-					
-					if (delete this[prop]) { // can't watch constants
-						Object.defineProperty(this, prop, {
-							  get: getter
-							, set: setter
-							, enumerable: true
-							, configurable: true
-						});
-					}
-				}
-			});
-		}
-		watch.watch(obj,
-		   callback(id, oldval, newval)
-		);
-	}
+    extend(out={}) {
+        for (let i = 1; i < arguments.length; i++) {
+          if (!arguments[i])
+            continue;
+
+          for (const key in arguments[i]) {
+            if (arguments[i].hasOwnProperty(key))
+              out[key] = arguments[i][key];
+          }
+        }
+
+        return out;
+    }
 }
