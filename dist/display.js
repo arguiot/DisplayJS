@@ -350,6 +350,34 @@ var _DOM_DJS = function (_DisplayJS) {
 	}, {
 		key: "live",
 		value: function live(watch, obj, callback) {
+			if (!Object.prototype.watch) {
+				Object.defineProperty(Object.prototype, "watch", {
+					enumerable: false,
+					configurable: true,
+					writable: false,
+					value: function value(prop, handler) {
+						var oldval = this[prop],
+						    newval = oldval,
+						    getter = function getter() {
+							return newval;
+						},
+						    setter = function setter(val) {
+							oldval = newval;
+							return newval = handler.call(this, prop, oldval, val);
+						};
+
+						if (delete this[prop]) {
+							// can't watch constants
+							Object.defineProperty(this, prop, {
+								get: getter,
+								set: setter,
+								enumerable: true,
+								configurable: true
+							});
+						}
+					}
+				});
+			}
 			watch.watch(obj, callback(id, oldval, newval));
 		}
 	}]);
