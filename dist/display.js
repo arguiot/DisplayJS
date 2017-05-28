@@ -147,14 +147,16 @@ var _DOM_DJS = function (_DisplayJS) {
 		}
 	}, {
 		key: "ajax",
-		value: function ajax(url, method, callback) {
+		value: function ajax(url, method, data, callback, header) {
 			var request = new XMLHttpRequest();
 			request.open(method, url, true);
-
+			if (header) {
+				request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+			}
 			request.onload = function () {
 				if (request.status >= 200 && request.status < 400) {
-					var data = request.responseText;
-					callback(data);
+					var _data = request.responseText;
+					callback(_data);
 				} else {
 					console.error("DisplayJS error: The ajax request returned an error.");
 				}
@@ -164,7 +166,7 @@ var _DOM_DJS = function (_DisplayJS) {
 				// There was a connection error of some sort
 			};
 
-			request.send();
+			request.send(data);
 		}
 	}, {
 		key: "hasClass",
@@ -344,6 +346,11 @@ var _DOM_DJS = function (_DisplayJS) {
 					var_push();
 				}, push);
 			}
+		}
+	}, {
+		key: "live",
+		value: function live(watch, obj, callback) {
+			watch.watch(obj, callback(id, oldval, newval));
 		}
 	}]);
 

@@ -108,10 +108,12 @@ class _DOM_DJS extends DisplayJS {
         element[0].style.display='none';
         return true;
 	}
-	ajax (url, method, callback) {
+	ajax (url, method, data, callback, header) {
 		const request = new XMLHttpRequest();
 		request.open(method, url, true);
-
+		if (header) {
+			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+		}
 		request.onload = () => {
 		  if (request.status >= 200 && request.status < 400) {
 		    const data = request.responseText;
@@ -125,7 +127,7 @@ class _DOM_DJS extends DisplayJS {
 		  // There was a connection error of some sort
 		};
 
-		request.send();
+		request.send(data);
 	}
 	hasClass (element, className) {
 	    if (element[0].classList)
@@ -291,5 +293,10 @@ class _DOM_DJS extends DisplayJS {
 			}, push);
 		}
 				
+	}
+	live (watch, obj, callback) {
+		watch.watch(obj,
+		   callback(id, oldval, newval)
+		);
 	}
 }
