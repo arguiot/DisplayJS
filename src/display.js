@@ -111,7 +111,7 @@ class _DOM_DJS extends DisplayJS {
 			});
 		}
 		watch.watch(obj,
-		   callback(id, oldval, newval)
+		   callback()
 		);
 	}
 	text (element, text) {
