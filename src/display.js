@@ -1,4 +1,3 @@
-'use strict';
 class DisplayJS { 
   constructor (obj) {
 	this.obj = obj;
@@ -65,7 +64,7 @@ class _DOM_DJS extends DisplayJS {
 		    });
 		});
 	}
-	    custom (targetAttr,push) {
+	custom (targetAttr,push) {
 		const var_push = () => {
 			const elements = document.querySelectorAll(`[${targetAttr}]`);
 			for (let i = 0; i < elements.length; i++) {
@@ -165,7 +164,7 @@ class _DOM_DJS extends DisplayJS {
 		        };
 		    }
 		})());
-		return addEventListener(element[0], event, callback);
+		addEventListener(element[0], event, callback);
 	}
 	show (element) {
         element[0].style.display='block'; 
@@ -216,15 +215,13 @@ class _DOM_DJS extends DisplayJS {
 	        element[0].className = element[0].className.replace(reg, ' ');
 	    }
 	}
-	toggleClass (element, class1) {
-	  const classes = element[0].className;
-	  const regex = new RegExp(`\\b${class1}\\b`);
-	  const hasOne = classes.match(regex);
-	  class1 = class1.replace(/\s+/g, '');
-	  if (hasOne)
-	    element[0].className = classes.replace(regex, '');
-	  else
-	    element[0].className = classes + class1;
+	toggleClass (element, className) {
+	  if (hasClass(element[0], className)) {
+	  	removeClass(element[0], className);
+	  }
+	  else {
+	  	addClass(element[0], className);
+	  }
 	}
 	each (elements, callback) {
 		for (let i = 0; i < elements.length; i++) {

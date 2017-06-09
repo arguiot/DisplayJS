@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -136,7 +136,7 @@ var _DOM_DJS = function (_DisplayJS) {
 					}
 				});
 			}
-			watch.watch(obj, callback(id, oldval, newval));
+			watch.watch(obj, callback());
 		}
 	}, {
 		key: "text",
@@ -209,7 +209,7 @@ var _DOM_DJS = function (_DisplayJS) {
 					};
 				}
 			}();
-			return addEventListener(element[0], event, callback);
+			addEventListener(element[0], event, callback);
 		}
 	}, {
 		key: "show",
@@ -267,12 +267,12 @@ var _DOM_DJS = function (_DisplayJS) {
 		}
 	}, {
 		key: "toggleClass",
-		value: function toggleClass(element, class1) {
-			var classes = element[0].className;
-			var regex = new RegExp("\\b" + class1 + "\\b");
-			var hasOne = classes.match(regex);
-			class1 = class1.replace(/\s+/g, '');
-			if (hasOne) element[0].className = classes.replace(regex, '');else element[0].className = classes + class1;
+		value: function toggleClass(element, className) {
+			if (hasClass(element[0], className)) {
+				removeClass(element[0], className);
+			} else {
+				addClass(element[0], className);
+			}
 		}
 	}, {
 		key: "each",
