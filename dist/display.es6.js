@@ -1,9 +1,7 @@
 class DisplayJS { 
-  constructor (obj) {
-	this.obj = obj;
-  }
-}
-class _DOM_DJS extends DisplayJS {
+	constructor (obj) {
+		this.obj = obj;
+	}
 	var (push) {
 		const var_push = () => {
 			const elements = document.querySelectorAll("[var]");
@@ -354,3 +352,5 @@ class _DOM_DJS extends DisplayJS {
         return out;
     }
 }
+// Retro compatibility
+class _DOM_DJS extends DisplayJS {}

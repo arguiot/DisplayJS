@@ -8,31 +8,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var DisplayJS = function DisplayJS(obj) {
-	_classCallCheck(this, DisplayJS);
+var DisplayJS = function () {
+	function DisplayJS(obj) {
+		_classCallCheck(this, DisplayJS);
 
-	this.obj = obj;
-};
-
-var _DOM_DJS = function (_DisplayJS) {
-	_inherits(_DOM_DJS, _DisplayJS);
-
-	function _DOM_DJS() {
-		_classCallCheck(this, _DOM_DJS);
-
-		return _possibleConstructorReturn(this, (_DOM_DJS.__proto__ || Object.getPrototypeOf(_DOM_DJS)).apply(this, arguments));
+		this.obj = obj;
 	}
 
-	_createClass(_DOM_DJS, [{
+	_createClass(DisplayJS, [{
 		key: "var",
 		value: function _var(push) {
-			var _this2 = this;
+			var _this = this;
 
 			var var_push = function var_push() {
 				var elements = document.querySelectorAll("[var]");
 				for (var i = 0; i < elements.length; i++) {
 					var attr = elements[i].getAttribute("var");
-					elements[i].innerHTML = _this2.obj[attr];
+					elements[i].innerHTML = _this.obj[attr];
 				}
 			};
 			if (!push) {
@@ -87,13 +79,13 @@ var _DOM_DJS = function (_DisplayJS) {
 	}, {
 		key: "custom",
 		value: function custom(targetAttr, push) {
-			var _this3 = this;
+			var _this2 = this;
 
 			var var_push = function var_push() {
 				var elements = document.querySelectorAll("[" + targetAttr + "]");
 				for (var i = 0; i < elements.length; i++) {
 					var attr = elements[i].getAttribute(targetAttr);
-					elements[i].innerHTML = _this3.obj[attr];
+					elements[i].innerHTML = _this2.obj[attr];
 				}
 			};
 			if (!push) {
@@ -421,6 +413,20 @@ var _DOM_DJS = function (_DisplayJS) {
 			return out;
 		}
 	}]);
+
+	return DisplayJS;
+}();
+// Retro compatibility
+
+
+var _DOM_DJS = function (_DisplayJS) {
+	_inherits(_DOM_DJS, _DisplayJS);
+
+	function _DOM_DJS() {
+		_classCallCheck(this, _DOM_DJS);
+
+		return _possibleConstructorReturn(this, (_DOM_DJS.__proto__ || Object.getPrototypeOf(_DOM_DJS)).apply(this, arguments));
+	}
 
 	return _DOM_DJS;
 }(DisplayJS);
