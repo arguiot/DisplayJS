@@ -1,23 +1,38 @@
-$('.footer-container').hide();
-$('.hamburger').click(() => {
-	$('.js-toggled').toggleClass('visible');
+var $ = new DisplayJS(window);
+$.hide($.select(".footer-container"));
+var hamburger = $.select(".hamburger");
+$.on(hamburger, "click", function() {
+	$.toggleClass($.select(".js-toggled"), "visible");
 });
-$(window).scroll(function () {
-	var wScroll = $(this).scrollTop();
-	  var jumpIn  = $('header').height() + 250;
+$.ajax("https://unpkg.com/display.js?json", "GET", "", function (data) {
+	data = JSON.parse(data)
+	var size = data.size / 1024;
+	size = Math.round(size * 100) / 100
+	console.log(size);
+	$.text($.select(".kb"), size);
+});
+window.addEventListener('scroll', function() {
+	var wScroll = window.scrollY;
+		var header = $.select("header");
+	  var jumpIn  = $.select("header")[0].style.height + 250;
 	  if (wScroll > jumpIn) {
-	    $('.footer-container').show();
+	    $.show($.select(".footer-container"));
 	  } else {
-	    $('.footer-container').hide();
+	    $.hide($.select(".footer-container"));
 	  }
-	$("header").css({
-		'top': 0-($(this).scrollTop() / 3) + "px"
-	});
+	// $.select(".show")[0].style.top = 0 - (window.scrollY / 3) + "px";
 });
-$(document).ready(function () {
-	$.getJSON("https://unpkg.com/display.js?json", function (data) {
-		var size = data.size / 1024;
-		size = Math.round(size * 100) / 100
-		$(".kb").text(size);
-	});
-});
+// $('.footer-container').hide();
+// $('.hamburger').click(() => {
+// 	$('.js-toggled').toggleClass('visible');
+// });
+// $(window).scroll(function () {
+// 	var wScroll = $(this).scrollTop();
+// 	  var jumpIn  = $('header').height() + 250;
+// 	  if (wScroll > jumpIn) {
+// 	    $('.footer-container').show();
+// 	  } else {
+// 	    $('.footer-container').hide();
+// 	  }
+// 	
+// });

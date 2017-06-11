@@ -160,6 +160,9 @@ class DisplayJS {
         element[0].style.display='none';
         return true;
 	}
+	style (element, st1, val) {
+		element[0].style[st1] = val;
+	}
 	ajax (url, method, data, callback, header) {
 		const request = new XMLHttpRequest();
 		request.open(method, url, true);
@@ -177,6 +180,7 @@ class DisplayJS {
 
 		request.onerror = () => {
 		  // There was a connection error of some sort
+		  console.error("DisplayJS error: The ajax request returned an error.");
 		};
 
 		request.send(data);

@@ -205,6 +205,11 @@ var DisplayJS = function () {
 			return true;
 		}
 	}, {
+		key: "style",
+		value: function style(element, st1, val) {
+			element[0].style[st1] = val;
+		}
+	}, {
 		key: "ajax",
 		value: function ajax(url, method, data, callback, header) {
 			var request = new XMLHttpRequest();
@@ -223,6 +228,7 @@ var DisplayJS = function () {
 
 			request.onerror = function () {
 				// There was a connection error of some sort
+				console.error("DisplayJS error: The ajax request returned an error.");
 			};
 
 			request.send(data);
