@@ -91,7 +91,14 @@ body {
 .title {
     color: white;
 }
-
+#particles-js {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: -100;
+  width: 100%;
+  height: 100%;
+}
 /* ==============
     MOBILE: Menu
    ============== */
@@ -188,13 +195,14 @@ ul.js-toggled {
     flex-direction: column;
     z-index: -10;
     padding: 20px;
+    background-color: #4286f4;
 }
-.show::before {
-    background-image: url('../img/show-bg.svg');
-    background-repeat: no-repeat;
+/*.show::before {
+    /*background-image: url('../img/show-bg.svg');*/
+    /*background-repeat: no-repeat;
     background-position: center top;
     background-size: cover;
-    background-color: #4286f4;
+    
     content: '';
     height: 100%;
     left: 0;
@@ -203,7 +211,7 @@ ul.js-toggled {
     width: 100%;
     will-change: transform;
     z-index: -100;
-}
+}*/
 .logo {
 
 }
