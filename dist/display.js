@@ -29,6 +29,10 @@ var DisplayJS = function () {
 			};
 			if (!push) {
 				var_push();
+			} else if (push == true) {
+				this.live(this.obj, function () {
+					var_push();
+				});
 			} else {
 				window.setInterval(function () {
 					var_push();
@@ -90,6 +94,10 @@ var DisplayJS = function () {
 			};
 			if (!push) {
 				var_push();
+			} else if (push == true) {
+				this.live(this.obj, function () {
+					var_push();
+				});
 			} else {
 				window.setInterval(function () {
 					var_push();
@@ -98,37 +106,42 @@ var DisplayJS = function () {
 		}
 	}, {
 		key: "live",
-		value: function live(watch, obj, callback) {
-			if (!Object.prototype.watch) {
-				Object.defineProperty(Object.prototype, "watch", {
-					enumerable: false,
-					configurable: true,
-					writable: false,
-					value: function value(prop, handler) {
-						var oldval = this[prop];
-						var newval = oldval;
-						var getter = function getter() {
-							return newval;
-						};
+		value: function live(watched, callback) {
+			var ObjUtils = {
+				watch: function watch(object, property, onPropertyChange) {
+					var descriptor = Object.getOwnPropertyDescriptor(object, property);
 
-						var setter = function setter(val) {
-							oldval = newval;
-							return newval = handler.call(this, prop, oldval, val);
-						};
+					if (typeof descriptor === "undefined") throw new Error("Invalid descriptor for property: " + property + ", object: " + object);
 
-						if (delete this[prop]) {
-							// can't watch constants
-							Object.defineProperty(this, prop, {
-								get: getter,
-								set: setter,
-								enumerable: true,
-								configurable: true
-							});
+					if (typeof onPropertyChange !== "function") throw new Error("Invalid onPropertyChange handler: " + onPropertyChange);
+
+					var value = object[property];
+
+					Object.defineProperty(object, property, {
+						enumerable: true,
+						configurable: true,
+						get: function get() {
+							return value;
+						},
+						set: function set(newValue) {
+							if (newValue === value) return;
+							onPropertyChange(object, property, newValue, value);
+							return value = newValue;
 						}
+					});
+				},
+
+				watchAll: function watchAll(object, onPropertyChange) {
+					if (typeof onPropertyChange !== "function") throw new Error("Invalid onPropertyChange handler: " + onPropertyChange);
+
+					for (var property in object) {
+						this.watch(object, property, onPropertyChange);
 					}
-				});
-			}
-			watch.watch(obj, callback());
+				}
+			};
+			ObjUtils.watchAll(watched, function (obj, prop, newVal, oldVal) {
+				callback(obj, prop, newVal, oldVal);
+			});
 		}
 	}, {
 		key: "text",
