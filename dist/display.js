@@ -190,18 +190,7 @@ var DisplayJS = function () {
 	}, {
 		key: "on",
 		value: function on(element, event, callback) {
-			var addEventListener = function () {
-				if (document.addEventListener) {
-					return function (element, event, handler) {
-						element[0].addEventListener(event, handler, false);
-					};
-				} else {
-					return function (element, event, handler) {
-						element[0].attachEvent("on" + event, handler);
-					};
-				}
-			}();
-			addEventListener(element[0], event, callback);
+			element[0].addEventListener(event, callback);
 		}
 	}, {
 		key: "show",
@@ -247,12 +236,12 @@ var DisplayJS = function () {
 	}, {
 		key: "addClass",
 		value: function addClass(element, className) {
-			if (element[0].classList) element[0].classList.add(className);else if (!hasClass(element[0], className)) element[0].className += " " + className;
+			if (element[0].classList) element[0].classList.add(className);else if (!this.hasClass(element, className)) element[0].className += " " + className;
 		}
 	}, {
 		key: "removeClass",
 		value: function removeClass(element, className) {
-			if (element[0].classList) element[0].classList.remove(className);else if (hasClass(element[0], className)) {
+			if (element[0].classList) element[0].classList.remove(className);else if (this.hasClass(element, className)) {
 				var reg = new RegExp("(\\s|^)" + className + "(\\s|$)");
 				element[0].className = element[0].className.replace(reg, ' ');
 			}
@@ -260,10 +249,10 @@ var DisplayJS = function () {
 	}, {
 		key: "toggleClass",
 		value: function toggleClass(element, className) {
-			if (hasClass(element[0], className)) {
-				removeClass(element[0], className);
+			if (this.hasClass(element, className)) {
+				this.removeClass(element, className);
 			} else {
-				addClass(element[0], className);
+				this.addClass(element, className);
 			}
 		}
 	}, {

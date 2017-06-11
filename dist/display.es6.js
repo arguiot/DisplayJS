@@ -150,19 +150,7 @@ class DisplayJS {
 		element[0].parentNode.removeChild(element);
 	}
 	on (element, event, callback) {
-		const addEventListener = ((() => {
-		    if(document.addEventListener) {
-		        return (element, event, handler) => {
-		            element[0].addEventListener(event, handler, false);
-		        };
-		    }
-		    else {
-		        return (element, event, handler) => {
-		            element[0].attachEvent(`on${event}`, handler);
-		        };
-		    }
-		})());
-		addEventListener(element[0], event, callback);
+		element[0].addEventListener(event, callback);
 	}
 	show (element) {
         element[0].style.display='block'; 
@@ -201,24 +189,24 @@ class DisplayJS {
 	addClass (element, className) {
 	    if (element[0].classList)
 	        element[0].classList.add(className)
-	    else if (!hasClass(element[0], className))
+	    else if (!this.hasClass(element, className))
 	        element[0].className += ` ${className}`;
 	}
 	removeClass (element, className) {
 	    if (element[0].classList)
 	        element[0].classList.remove(className)
-	    else if (hasClass(element[0], className))
+	    else if (this.hasClass(element, className))
 	    {
 	        const reg = new RegExp(`(\\s|^)${className}(\\s|$)`);
 	        element[0].className = element[0].className.replace(reg, ' ');
 	    }
 	}
 	toggleClass (element, className) {
-	  if (hasClass(element[0], className)) {
-	  	removeClass(element[0], className);
+	  if (this.hasClass(element, className)) {
+	  	this.removeClass(element, className);
 	  }
 	  else {
-	  	addClass(element[0], className);
+	  	this.addClass(element, className);
 	  }
 	}
 	each (elements, callback) {
