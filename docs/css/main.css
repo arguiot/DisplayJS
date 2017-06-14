@@ -184,10 +184,8 @@ ul.js-toggled {
     transition: 200ms all cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 .show {
-    width: calc(100%);
-    height: calc(100vh - 75px);
+    height: calc(100vh - 20px);
     position: relative;
-    margin-top: 2.67em;
     color: white;
     display: flex;
     justify-content: center;
@@ -196,6 +194,7 @@ ul.js-toggled {
     z-index: -10;
     padding: 20px;
     background-color: #4286f4;
+    text-align: center;
 }
 /*.show::before {
     /*background-image: url('../img/show-bg.svg');*/
