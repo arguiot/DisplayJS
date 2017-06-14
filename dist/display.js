@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -30,6 +30,7 @@ var DisplayJS = function () {
 			if (!push) {
 				var_push();
 			} else if (push == true) {
+				var_push();
 				this.live(this.obj, function () {
 					var_push();
 				});
@@ -95,6 +96,7 @@ var DisplayJS = function () {
 			if (!push) {
 				var_push();
 			} else if (push == true) {
+				var_push();
 				this.live(this.obj, function () {
 					var_push();
 				});
@@ -130,7 +132,6 @@ var DisplayJS = function () {
 						}
 					});
 				},
-
 				watchAll: function watchAll(object, onPropertyChange) {
 					if (typeof onPropertyChange !== "function") throw new Error("Invalid onPropertyChange handler: " + onPropertyChange);
 
@@ -141,6 +142,15 @@ var DisplayJS = function () {
 			};
 			ObjUtils.watchAll(watched, function (obj, prop, newVal, oldVal) {
 				callback(obj, prop, newVal, oldVal);
+			});
+		}
+	}, {
+		key: "all",
+		value: function all(element, callback) {
+			element.forEach(function (data) {
+				node = [];
+				node.push(data);
+				callback(node);
 			});
 		}
 	}, {

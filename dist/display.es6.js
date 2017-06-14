@@ -1,3 +1,5 @@
+'use strict';
+
 class DisplayJS { 
 	constructor (obj) {
 		this.obj = obj;
@@ -14,7 +16,8 @@ class DisplayJS {
 			var_push();
 		}
 		else if (push == true) {
-			this.live(this.obj, function(){var_push()});
+			var_push();
+			this.live(this.obj, () => {var_push();});
 		}
 		else {
 			window.setInterval(() => {
@@ -77,7 +80,8 @@ class DisplayJS {
 			var_push();
 		}
 		else if (push == true) {
-			this.live(this.obj, function(){var_push()});
+			var_push();
+			this.live(this.obj, () => {var_push()});
 		}
 		else {
 			window.setInterval(() => {
@@ -87,23 +91,23 @@ class DisplayJS {
 				
 	}
 	live (watched,  callback) {
-		var ObjUtils = {
-			watch: function(object, property, onPropertyChange) {
-				var descriptor = Object.getOwnPropertyDescriptor(object, property);
+		const ObjUtils = {
+			watch(object, property, onPropertyChange) {
+				const descriptor = Object.getOwnPropertyDescriptor(object, property);
 				
 				if(typeof descriptor === "undefined") 
-					throw new Error("Invalid descriptor for property: " + property + ", object: " + object);
+					throw new Error(`Invalid descriptor for property: ${property}, object: ${object}`);
 
 				if (typeof onPropertyChange !== "function") 
-					throw new Error("Invalid onPropertyChange handler: " + onPropertyChange);
+					throw new Error(`Invalid onPropertyChange handler: ${onPropertyChange}`);
 
-				var value = object[property];
+				let value = object[property];
 
 				Object.defineProperty(object, property, {
 					enumerable: true,
 					configurable: true,
-					get: function() { return value },
-					set: function (newValue) {
+					get() { return value },
+					set(newValue) {
 						if (newValue === value) return;
 						onPropertyChange(object, property, newValue, value);
 						return value = newValue;
@@ -111,16 +115,25 @@ class DisplayJS {
 				});
 			},
 
-			watchAll: function(object, onPropertyChange) {
+			watchAll(object, onPropertyChange) {
 				if (typeof onPropertyChange !== "function") 
-					throw new Error("Invalid onPropertyChange handler: " + onPropertyChange);
+					throw new Error(`Invalid onPropertyChange handler: ${onPropertyChange}`);
 
-				for (var property in object) {
+				for (const property in object) {
 					this.watch(object, property, onPropertyChange);
 				}
 			}
-		}
-		ObjUtils.watchAll(watched, function(obj, prop, newVal, oldVal){callback(obj, prop, newVal, oldVal)});
+		};
+		ObjUtils.watchAll(watched, (obj, prop, newVal, oldVal) => {
+			callback(obj, prop, newVal, oldVal);
+		});
+	}
+	all (element, callback) {
+		element.forEach((data) =>{
+			node = []
+			node.push(data)
+			callback(node);
+		});
 	}
 	text (element, text) {
 		element[0].innerHTML = text;
