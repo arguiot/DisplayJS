@@ -43,8 +43,12 @@ var DisplayJS = function () {
 	}, {
 		key: "target",
 		value: function target(callback) {
+			var _this2 = this;
+
 			if (!callback) {
-				var callback = function callback() {};
+				var callback = function callback() {
+					_this2.var();
+				};
 			}
 			var addEventListener = function () {
 				if (document.addEventListener) {
@@ -84,13 +88,13 @@ var DisplayJS = function () {
 	}, {
 		key: "custom",
 		value: function custom(targetAttr, push) {
-			var _this2 = this;
+			var _this3 = this;
 
 			var var_push = function var_push() {
 				var elements = document.querySelectorAll("[" + targetAttr + "]");
 				for (var i = 0; i < elements.length; i++) {
 					var attr = elements[i].getAttribute(targetAttr);
-					elements[i].innerHTML = _this2.obj[attr];
+					elements[i].innerHTML = _this3.obj[attr];
 				}
 			};
 			if (!push) {

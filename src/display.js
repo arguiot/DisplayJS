@@ -29,7 +29,7 @@ class DisplayJS {
 	target (callback) {
 		if (!callback) {
 			var callback = () => {
-
+				this.var()
 			}
 		}
 		const addEventListener = ((() => {
