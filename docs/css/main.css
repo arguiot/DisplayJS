@@ -259,6 +259,21 @@ a:hover {
   text-decoration: underline;
   text-decoration-color: white;
 }
+.examples {
+  width: 100vw;
+  padding: 30px;
+  position: relative;
+}
+.codepen {
+  width: calc(75vw);
+  position: relative;
+  margin: 0 auto;
+  transform: translateX(-30px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+}
 .footer-container {
     position: fixed;
     z-index: -10;
