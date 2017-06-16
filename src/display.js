@@ -1,5 +1,3 @@
-'use strict';
-
 class DisplayJS { 
 	constructor (obj) {
 		this.obj = obj;
@@ -130,7 +128,7 @@ class DisplayJS {
 	}
 	all (element, callback) {
 		element.forEach((data) =>{
-			node = []
+			const node = [];
 			node.push(data)
 			callback(node);
 		});
