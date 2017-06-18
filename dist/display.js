@@ -65,22 +65,38 @@ var DisplayJS = function () {
 			[].forEach.call(document.querySelectorAll('[target]'), function (x, i, a) {
 				addEventListener(a[i], "change", function () {
 					var attr1 = a[i].getAttribute("target");
-					obj[attr1] = this.value;
+					if (this.type == "checkbox") {
+						obj[attr1] = this.checked;
+					} else {
+						obj[attr1] = this.value;
+					}
 					callback();
 				});
 				addEventListener(a[i], "keydown", function () {
 					var attr2 = a[i].getAttribute("target");
-					obj[attr2] = this.value;
+					if (this.type == "checkbox") {
+						obj[attr2] = this.checked;
+					} else {
+						obj[attr2] = this.value;
+					}
 					callback();
 				});
 				addEventListener(a[i], "input", function () {
 					var attr3 = a[i].getAttribute("target");
-					obj[attr3] = this.value;
+					if (this.type == "checkbox") {
+						obj[attr3] = this.checked;
+					} else {
+						obj[attr3] = this.value;
+					}
 					callback();
 				});
 				addEventListener(a[i], "paste", function () {
 					var attr4 = a[i].getAttribute("target");
-					obj[attr4] = this.value;
+					if (this.type == "checkbox") {
+						obj[attr4] = this.checked;
+					} else {
+						obj[attr4] = this.value;
+					}
 					callback();
 				});
 			});
