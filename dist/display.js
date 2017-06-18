@@ -21,6 +21,8 @@ var DisplayJS = function () {
 			var _this = this;
 
 			var var_push = function var_push() {
+				_this.if();
+				_this.else();
 				var elements = document.querySelectorAll("[var]");
 				for (var i = 0; i < elements.length; i++) {
 					var attr = elements[i].getAttribute("var");

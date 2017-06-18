@@ -4,6 +4,8 @@ class DisplayJS {
 	}
 	var (push) {
 		const var_push = () => {
+			this.if()
+			this.else()
 			const elements = document.querySelectorAll("[var]");
 			for (let i = 0; i < elements.length; i++) {
 				const attr = elements[i].getAttribute("var");
