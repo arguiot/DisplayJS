@@ -102,15 +102,73 @@ var DisplayJS = function () {
 			});
 		}
 	}, {
+		key: "if",
+		value: function _if(push) {
+			var _this3 = this;
+
+			var if_push = function if_push() {
+				var elements = document.querySelectorAll("[if]");
+				for (var i = 0; i < elements.length; i++) {
+					var attr = elements[i].getAttribute("if");
+					if (_this3.obj[attr] == true) {
+						_this3.show(elements[i]);
+					} else {
+						_this3.hide(elements[i]);
+					}
+				}
+			};
+			if (!push) {
+				if_push();
+			} else if (push == true) {
+				if_push();
+				this.live(this.obj, function () {
+					if_push();
+				});
+			} else {
+				window.setInterval(function () {
+					if_push();
+				}, push);
+			}
+		}
+	}, {
+		key: "else",
+		value: function _else(push) {
+			var _this4 = this;
+
+			var else_push = function else_push() {
+				var elements = document.querySelectorAll("[else]");
+				for (var i = 0; i < elements.length; i++) {
+					var attr = elements[i].getAttribute("else");
+					if (_this4.obj[attr] == true) {
+						_this4.hide(elements[i]);
+					} else {
+						_this4.show(elements[i]);
+					}
+				}
+			};
+			if (!push) {
+				else_push();
+			} else if (push == true) {
+				else_push();
+				this.live(this.obj, function () {
+					else_push();
+				});
+			} else {
+				window.setInterval(function () {
+					else_push();
+				}, push);
+			}
+		}
+	}, {
 		key: "custom",
 		value: function custom(targetAttr, push) {
-			var _this3 = this;
+			var _this5 = this;
 
 			var var_push = function var_push() {
 				var elements = document.querySelectorAll("[" + targetAttr + "]");
 				for (var i = 0; i < elements.length; i++) {
 					var attr = elements[i].getAttribute(targetAttr);
-					elements[i].innerHTML = _this3.obj[attr];
+					elements[i].innerHTML = _this5.obj[attr];
 				}
 			};
 			if (!push) {

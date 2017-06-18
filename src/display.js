@@ -86,6 +86,58 @@ class DisplayJS {
 		    });
 		});
 	}
+	if (push) {
+		const if_push = () => {
+			const elements = document.querySelectorAll("[if]");
+			for (let i = 0; i < elements.length; i++) {
+				const attr = elements[i].getAttribute("if");
+				if (this.obj[attr] == true) {
+					this.show(elements[i]);
+				}
+				else {
+					this.hide(elements[i]);
+				}
+			}
+		}
+		if (!push) {
+			if_push();
+		}
+		else if (push == true) {
+			if_push();
+			this.live(this.obj, () => {if_push();});
+		}
+		else {
+			window.setInterval(() => {
+				if_push();
+			}, push);
+		}
+	}
+	else (push) {
+		const else_push = () => {
+			const elements = document.querySelectorAll("[else]");
+			for (let i = 0; i < elements.length; i++) {
+				const attr = elements[i].getAttribute("else");
+				if (this.obj[attr] == true) {
+					this.hide(elements[i]);
+				}
+				else {
+					this.show(elements[i]);
+				}
+			}
+		}
+		if (!push) {
+			else_push();
+		}
+		else if (push == true) {
+			else_push();
+			this.live(this.obj, () => {else_push();});
+		}
+		else {
+			window.setInterval(() => {
+				else_push();
+			}, push);
+		}
+	}
 	custom (targetAttr,push) {
 		const var_push = () => {
 			const elements = document.querySelectorAll(`[${targetAttr}]`);
