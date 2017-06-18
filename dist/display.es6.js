@@ -93,11 +93,13 @@ class DisplayJS {
 			const elements = document.querySelectorAll("[if]");
 			for (let i = 0; i < elements.length; i++) {
 				const attr = elements[i].getAttribute("if");
+				var el = []
+				el.push(elements[i])
 				if (this.obj[attr] == true) {
-					this.show(elements[i]);
+					this.show(el);
 				}
 				else {
-					this.hide(elements[i]);
+					this.hide(el);
 				}
 			}
 		}
@@ -119,11 +121,13 @@ class DisplayJS {
 			const elements = document.querySelectorAll("[else]");
 			for (let i = 0; i < elements.length; i++) {
 				const attr = elements[i].getAttribute("else");
+				var el = []
+				el.push(elements[i])
 				if (this.obj[attr] == true) {
-					this.hide(elements[i]);
+					this.hide(el);
 				}
 				else {
-					this.show(elements[i]);
+					this.show(el);
 				}
 			}
 		}

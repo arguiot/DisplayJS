@@ -112,10 +112,12 @@ var DisplayJS = function () {
 				var elements = document.querySelectorAll("[if]");
 				for (var i = 0; i < elements.length; i++) {
 					var attr = elements[i].getAttribute("if");
+					var el = [];
+					el.push(elements[i]);
 					if (_this3.obj[attr] == true) {
-						_this3.show(elements[i]);
+						_this3.show(el);
 					} else {
-						_this3.hide(elements[i]);
+						_this3.hide(el);
 					}
 				}
 			};
@@ -141,10 +143,12 @@ var DisplayJS = function () {
 				var elements = document.querySelectorAll("[else]");
 				for (var i = 0; i < elements.length; i++) {
 					var attr = elements[i].getAttribute("else");
+					var el = [];
+					el.push(elements[i]);
 					if (_this4.obj[attr] == true) {
-						_this4.hide(elements[i]);
+						_this4.hide(el);
 					} else {
-						_this4.show(elements[i]);
+						_this4.show(el);
 					}
 				}
 			};
