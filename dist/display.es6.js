@@ -93,7 +93,7 @@ class DisplayJS {
 			const elements = document.querySelectorAll("[if]");
 			for (let i = 0; i < elements.length; i++) {
 				const attr = elements[i].getAttribute("if");
-				var el = []
+				const el = [];
 				el.push(elements[i])
 				if (this.obj[attr] == true) {
 					this.show(el);
@@ -121,7 +121,7 @@ class DisplayJS {
 			const elements = document.querySelectorAll("[else]");
 			for (let i = 0; i < elements.length; i++) {
 				const attr = elements[i].getAttribute("else");
-				var el = []
+				const el = [];
 				el.push(elements[i])
 				if (this.obj[attr] == true) {
 					this.hide(el);
@@ -151,8 +151,8 @@ class DisplayJS {
 		if (!end) {
 			var end = "";
 		}
-		var text = start;
-		for (var i = 0; i < array.length; i++) {
+		let text = start;
+		for (let i = 0; i < array.length; i++) {
 			text += join + String(array[i])
 		}
 		text += end;
