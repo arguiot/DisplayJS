@@ -166,6 +166,22 @@ var DisplayJS = function () {
 			}
 		}
 	}, {
+		key: "repeat",
+		value: function repeat(el, array, join, start, end) {
+			if (!start) {
+				var start = "";
+			}
+			if (!end) {
+				var end = "";
+			}
+			var text = start;
+			for (var i = 0; i < array.length; i++) {
+				text += join + String(array[i]);
+			}
+			text += end;
+			el[0].innerHTML = text;
+		}
+	}, {
 		key: "custom",
 		value: function custom(targetAttr, push) {
 			var _this5 = this;

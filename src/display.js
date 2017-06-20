@@ -144,6 +144,20 @@ class DisplayJS {
 			}, push);
 		}
 	}
+	repeat (el, array, join, start, end) {
+		if (!start) {
+			var start = "";
+		}
+		if (!end) {
+			var end = "";
+		}
+		var text = start;
+		for (var i = 0; i < array.length; i++) {
+			text += join + String(array[i])
+		}
+		text += end;
+		el[0].innerHTML = text;
+	}
 	custom (targetAttr,push) {
 		const var_push = () => {
 			const elements = document.querySelectorAll(`[${targetAttr}]`);
