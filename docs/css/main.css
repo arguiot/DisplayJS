@@ -196,6 +196,11 @@ ul.js-toggled {
     background-color: #4286f4;
     text-align: center;
 }
+.twitter-a {
+  position: relative;
+  color: white;
+  text-decoration: underline;
+}
 /*.show::before {
     /*background-image: url('../img/show-bg.svg');*/
     /*background-repeat: no-repeat;
