@@ -403,6 +403,12 @@ li:hover {
     body {
         margin-top: 50px;
     }
+    .footer-fixed > .center {
+      display: none !important;
+    }
+    .footer-fixed > .right {
+      display: none !important;
+    }
 }
 
 @media only screen and (min-width: 480px) {

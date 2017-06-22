@@ -16,7 +16,7 @@ _site/
 *.DS_Store
 .AppleDouble
 .LSOverride
-
+*.config
 # Icon must end with two \r
 Icon
 
