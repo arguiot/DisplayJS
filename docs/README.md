@@ -1,1 +1,1 @@
-Display JS
+DisplayJS

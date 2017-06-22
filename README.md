@@ -1,4 +1,4 @@
-<h1 align="center">Display.JS</h1>
+<h1 align="center">DisplayJS</h1>
 <p align="center">
   <img src="https://rawgit.com/arguiot/DisplayJS/master/docs/img/logo.svg" width="256">
 <br/>
@@ -26,7 +26,7 @@ or you can install NoobScroll using [npm](https://npmjs.com/package/display.js)
 $ npm install display.js
 ```
 
-## Initialize Display.JS
+## Initialize DisplayJS
 
 ```javascript
 // Create an array where all the rendered text will be.
@@ -37,4 +37,4 @@ var myArray = {
 var $ = new _DOM_DJS (myArray);
 ```
 
-The full docs can be found [here](https://github.com/arguiot/Display.JS/wiki)
+The full docs can be found [here](https://github.com/arguiot/DisplayJS/wiki)

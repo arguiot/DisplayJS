@@ -11,16 +11,24 @@ $.ajax("https://unpkg.com/display.js?json", "GET", "", function (data) {
 	console.log(size);
 	$.text($.select(".kb"), size);
 });
-window.addEventListener('scroll', function() {
+$.on([window], 'scroll', function() {
 	var wScroll = window.scrollY;
 		var header = $.select("header");
 	  	var jumpIn  = window.innerHeight;
+    if (wScroll > 30) {
+      $.addClass($.select(".footer-fixed"), "visible");
+    }
+    else {
+      $.removeClass($.select(".footer-fixed"), "visible");
+    }
 	  if (wScroll > jumpIn) {
 	    $.show($.select(".footer-container"));
 	    $.hide($.select("#particles-js"));
+      
 	  } else {
 	    $.hide($.select(".footer-container"));
 	    $.show($.select("#particles-js"));
+      
 	  }
 	// $.select(".show")[0].style.top = 0 - (window.scrollY / 3) + "px";
 });

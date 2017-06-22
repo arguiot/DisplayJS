@@ -168,7 +168,7 @@ html, body {
     z-index: 0;
 }
 body {
-    margin-bottom: 223px;
+    margin-bottom: 243px;
     /*margin-top: 75px;*/
     background-color: white;
 }
@@ -196,9 +196,35 @@ ul.js-toggled {
     background-color: #4286f4;
     text-align: center;
 }
+.footer-fixed {
+  position: fixed;
+  display: none;
+  bottom: 0px;
+  z-index: 100;
+  width: 100vw;
+  padding: 10px;
+  overflow: hidden;
+  font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #586069;
+  background-color: #f7f7f7;
+  border-radius: 0 0 2px 2px;
+  transition: 500ms all cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.visible {
+  display: block;
+}
+.footer-fixed > .right {
+  margin-right: 40px;
+  float: right;
+}
+.footer-fixed > .center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .twitter-a {
   position: relative;
-  color: white;
   text-decoration: underline;
 }
 /*.show::before {
@@ -246,6 +272,7 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     background-image: url('../img/show-bg.svg');
     background-repeat: no-repeat;
     background-position: center top;
@@ -254,13 +281,38 @@ a:hover {
     background-attachment: fixed;
 }
 .download-btn {
-    padding: 10px 30px;
+    margin: 10px;
+    width: calc(1.5em + 200px);
+    height: calc(1.5em + 10px);
+    /*padding: 10px 30px;*/
     /*background: #4286f4;*/
+    text-align: center;
+    line-height: calc(1.5em + 10px);
     background: #4286f4;
     color: white;
     font-size: 1.5em;
 }
 .download-btn:hover {
+  text-decoration: underline;
+  text-decoration-color: white;
+}
+
+.star-btn {
+    /*transition: all 250ms ease-in-out;*/
+    margin: 10px;
+    width: calc(1.5em + 200px);
+    height: calc(1.5em + 4px);
+    /*padding: 7px 24px;*/
+    /*background: #4286f4;*/
+    text-align: center;
+    line-height: calc(1.5em + 4px);
+    border: 3px #4286f4 solid;
+    color: #4286f4;
+    font-size: 1.5em;
+}
+.star-btn:hover {
+  background: #4286f4;
+  color: white;
   text-decoration: underline;
   text-decoration-color: white;
 }
@@ -284,7 +336,7 @@ a:hover {
     z-index: -10;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 20px;
 }
 footer {
     text-align: center;
