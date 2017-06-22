@@ -257,8 +257,17 @@ class DisplayJS {
 		const obj = document.querySelectorAll(str);
 		return obj;
 	}
+	single (str) {
+		const obj = document.querySelectorAll(str);
+		const node = [];
+		node.push(obj[0]);
+		return node;
+	}
 	empty (element) {
 		element[0].innerHTML = null;
+	}
+	valEmpty (element) {
+		element[0].value = null;
 	}
 	remove (element) {
 		element[0].parentNode.removeChild(element);
