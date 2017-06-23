@@ -486,11 +486,15 @@ var DisplayJS = function () {
 		}
 	}, {
 		key: "fadeOut",
-		value: function fadeOut(el) {
+		value: function fadeOut(element, i) {
+			if (!i) {
+				var i = .1;
+			}
+			var el = element[0];
 			el.style.opacity = 1;
 
 			(function fade() {
-				if ((el.style.opacity -= .1) < 0) {
+				if ((el.style.opacity -= i) < 0) {
 					el.style.display = "none";
 				} else {
 					requestAnimationFrame(fade);
@@ -502,13 +506,17 @@ var DisplayJS = function () {
 
 	}, {
 		key: "fadeIn",
-		value: function fadeIn(el, display) {
+		value: function fadeIn(element, i, display) {
+			if (!i) {
+				var i = .1;
+			}
+			var el = element[0];
 			el.style.opacity = 0;
 			el.style.display = display || "block";
 
 			(function fade() {
 				var val = parseFloat(el.style.opacity);
-				if (!((val += .1) > 1)) {
+				if (!((val += i) > 1)) {
 					el.style.opacity = val;
 					requestAnimationFrame(fade);
 				}
