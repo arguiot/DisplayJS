@@ -301,9 +301,22 @@ var DisplayJS = function () {
 			return obj;
 		}
 	}, {
+		key: "single",
+		value: function single(str) {
+			var obj = document.querySelectorAll(str);
+			var node = [];
+			node.push(obj[0]);
+			return node;
+		}
+	}, {
 		key: "empty",
 		value: function empty(element) {
 			element[0].innerHTML = null;
+		}
+	}, {
+		key: "valEmpty",
+		value: function valEmpty(element) {
+			element[0].value = null;
 		}
 	}, {
 		key: "remove",
@@ -399,36 +412,7 @@ var DisplayJS = function () {
 	}, {
 		key: "getStyle",
 		value: function getStyle(element, styleProp) {
-			var value = void 0;
-			var defaultView = (element[0].ownerDocument || document).defaultView;
-			// W3C standard way:
-			if (defaultView && defaultView.getComputedStyle) {
-				// sanitize property name to css notation
-				// (hypen separated words eg. font-Size)
-				styleProp = styleProp.replace(/([A-Z])/g, "-$1").toLowerCase();
-				return defaultView.getComputedStyle(element, null).getPropertyValue(styleProp);
-			} else if (element[0].currentStyle) {
-				// IE
-				// sanitize property name to camelCase
-				styleProp = styleProp.replace(/\-(\w)/g, function (str, letter) {
-					return letter.toUpperCase();
-				});
-				value = element[0].currentStyle[styleProp];
-				// convert other units to pixels on IE
-				if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
-					return function (value) {
-						var oldLeft = element[0].style.left;
-						var oldRsLeft = element[0].runtimeStyle.left;
-						element[0].runtimeStyle.left = element[0].currentStyle.left;
-						element[0].style.left = value || 0;
-						value = element.style.pixelLeft + "px";
-						element[0].style.left = oldLeft;
-						element[0].runtimeStyle.left = oldRsLeft;
-						return value;
-					}(value);
-				}
-				return value;
-			}
+			return element[0].style[styleProp];
 		}
 	}, {
 		key: "load",
@@ -501,19 +485,34 @@ var DisplayJS = function () {
 			request.send();
 		}
 	}, {
-		key: "fadeIn",
-		value: function fadeIn(el) {
-			el.style.opacity = 0;
+		key: "fadeOut",
+		value: function fadeOut(el) {
+			el.style.opacity = 1;
 
-			var last = +new Date();
-			var tick = function tick() {
-				el.style.opacity = +el.style.opacity + (new Date() - last) / 400;
-				last = +new Date();
-				if (+el.style.opacity < 1) {
-					window.requestAnimationFrame && requestAnimationFrame(tick) || setTimeout(tick, 16);
+			(function fade() {
+				if ((el.style.opacity -= .1) < 0) {
+					el.style.display = "none";
+				} else {
+					requestAnimationFrame(fade);
 				}
-			};
-			tick();
+			})();
+		}
+
+		// fade in
+
+	}, {
+		key: "fadeIn",
+		value: function fadeIn(el, display) {
+			el.style.opacity = 0;
+			el.style.display = display || "block";
+
+			(function fade() {
+				var val = parseFloat(el.style.opacity);
+				if (!((val += .1) > 1)) {
+					el.style.opacity = val;
+					requestAnimationFrame(fade);
+				}
+			})();
 		}
 	}, {
 		key: "extend",

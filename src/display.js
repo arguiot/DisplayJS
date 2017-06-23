@@ -345,33 +345,7 @@ class DisplayJS {
 		element[0].style[name] = value;
 	}
 	getStyle (element, styleProp) {
-        let value;
-        const defaultView = (element[0].ownerDocument || document).defaultView;
-        // W3C standard way:
-        if (defaultView && defaultView.getComputedStyle) {
-          // sanitize property name to css notation
-          // (hypen separated words eg. font-Size)
-          styleProp = styleProp.replace(/([A-Z])/g, "-$1").toLowerCase();
-          return defaultView.getComputedStyle(element, null).getPropertyValue(styleProp);
-        } else if (element[0].currentStyle) { // IE
-          // sanitize property name to camelCase
-          styleProp = styleProp.replace(/\-(\w)/g, (str, letter) => letter.toUpperCase());
-          value = element[0].currentStyle[styleProp];
-          // convert other units to pixels on IE
-          if (/^\d+(em|pt|%|ex)?$/i.test(value)) { 
-            return ((value => {
-                const oldLeft = element[0].style.left;
-                const oldRsLeft = element[0].runtimeStyle.left;
-                element[0].runtimeStyle.left = element[0].currentStyle.left;
-                element[0].style.left = value || 0;
-                value = `${element.style.pixelLeft}px`;
-                element[0].style.left = oldLeft;
-                element[0].runtimeStyle.left = oldRsLeft;
-                return value;
-            }))(value);
-          }
-          return value;
-        }
+        return element[0].style[styleProp];
     }
     load (element, url) {
     	const request = new XMLHttpRequest();
@@ -440,19 +414,32 @@ class DisplayJS {
 
 		request.send();
     }
-    fadeIn (el) {
-    	el.style.opacity = 0;
+    fadeOut (el) {
+	  el.style.opacity = 1;
 
-	    let last = +new Date();
-		const tick = () => {
-			el.style.opacity = +el.style.opacity + (new Date() - last) / 400;
-			last = +new Date();
-		    if (+el.style.opacity < 1) {
-		    	(window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-		    }
-		};
-		tick();
-    }
+	  (function fade() {
+	    if ((el.style.opacity -= .1) < 0) {
+	      el.style.display = "none";
+	    } else {
+	      requestAnimationFrame(fade);
+	    }
+	  })();
+	}
+
+	// fade in
+
+	fadeIn (el, display) {
+	  el.style.opacity = 0;
+	  el.style.display = display || "block";
+
+	  (function fade() {
+	    let val = parseFloat(el.style.opacity);
+	    if (!((val += .1) > 1)) {
+	      el.style.opacity = val;
+	      requestAnimationFrame(fade);
+	    }
+	  })();
+	}
     extend(out={}) {
         for (let i = 1; i < arguments.length; i++) {
           if (!arguments[i])
