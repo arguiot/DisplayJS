@@ -8,12 +8,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/******************************************/
+/*          © Arthur Guiot 2017           */
+/*               DisplayJS                */
+/******************************************/
 var DisplayJS = function () {
 	function DisplayJS(obj) {
 		_classCallCheck(this, DisplayJS);
 
 		this.obj = obj;
 	}
+	// DOM manipulation and browser API.
+
 
 	_createClass(DisplayJS, [{
 		key: "var",
@@ -24,9 +30,9 @@ var DisplayJS = function () {
 				_this.if();
 				_this.else();
 				var elements = document.querySelectorAll("[var]");
-				for (var i = 0; i < elements.length; i++) {
-					var attr = elements[i].getAttribute("var");
-					elements[i].innerHTML = _this.obj[attr];
+				for (var _i = 0; _i < elements.length; _i++) {
+					var attr = elements[_i].getAttribute("var");
+					elements[_i].innerHTML = _this.obj[attr];
 				}
 			};
 			if (!push) {
@@ -41,6 +47,11 @@ var DisplayJS = function () {
 					var_push();
 				}, push);
 			}
+		}
+	}, {
+		key: "xss",
+		value: function xss(str) {
+			return encodeURI(str);
 		}
 	}, {
 		key: "target",
@@ -110,10 +121,10 @@ var DisplayJS = function () {
 
 			var if_push = function if_push() {
 				var elements = document.querySelectorAll("[if]");
-				for (var i = 0; i < elements.length; i++) {
-					var attr = elements[i].getAttribute("if");
+				for (var _i2 = 0; _i2 < elements.length; _i2++) {
+					var attr = elements[_i2].getAttribute("if");
 					var el = [];
-					el.push(elements[i]);
+					el.push(elements[_i2]);
 					if (_this3.obj[attr] == true) {
 						_this3.show(el);
 					} else {
@@ -141,10 +152,10 @@ var DisplayJS = function () {
 
 			var else_push = function else_push() {
 				var elements = document.querySelectorAll("[else]");
-				for (var i = 0; i < elements.length; i++) {
-					var attr = elements[i].getAttribute("else");
+				for (var _i3 = 0; _i3 < elements.length; _i3++) {
+					var attr = elements[_i3].getAttribute("else");
 					var el = [];
-					el.push(elements[i]);
+					el.push(elements[_i3]);
 					if (_this4.obj[attr] == true) {
 						_this4.hide(el);
 					} else {
@@ -175,8 +186,8 @@ var DisplayJS = function () {
 				var end = "";
 			}
 			var text = start;
-			for (var i = 0; i < array.length; i++) {
-				text += join + String(array[i]);
+			for (var _i4 = 0; _i4 < array.length; _i4++) {
+				text += join + String(array[_i4]);
 			}
 			text += end;
 			el[0].innerHTML = text;
@@ -188,9 +199,9 @@ var DisplayJS = function () {
 
 			var var_push = function var_push() {
 				var elements = document.querySelectorAll("[" + targetAttr + "]");
-				for (var i = 0; i < elements.length; i++) {
-					var attr = elements[i].getAttribute(targetAttr);
-					elements[i].innerHTML = _this5.obj[attr];
+				for (var _i5 = 0; _i5 < elements.length; _i5++) {
+					var attr = elements[_i5].getAttribute(targetAttr);
+					elements[_i5].innerHTML = _this5.obj[attr];
 				}
 			};
 			if (!push) {
@@ -255,8 +266,23 @@ var DisplayJS = function () {
 		}
 	}, {
 		key: "text",
-		value: function text(element, _text) {
-			element[0].innerHTML = _text;
+		value: function (_text) {
+			function text(_x, _x2) {
+				return _text.apply(this, arguments);
+			}
+
+			text.toString = function () {
+				return _text.toString();
+			};
+
+			return text;
+		}(function (element, text) {
+			element[0].innerHTML = this.xss(text);
+		})
+	}, {
+		key: "html",
+		value: function html(element, _html) {
+			element[0].innerHTML = text;
 		}
 	}, {
 		key: "prepend",
@@ -400,8 +426,8 @@ var DisplayJS = function () {
 	}, {
 		key: "each",
 		value: function each(elements, callback) {
-			for (var i = 0; i < elements.length; i++) {
-				callback(elements[i]);
+			for (var _i6 = 0; _i6 < elements.length; _i6++) {
+				callback(elements[_i6]);
 			}
 		}
 	}, {
@@ -527,15 +553,83 @@ var DisplayJS = function () {
 		value: function extend() {
 			var out = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-			for (var i = 1; i < arguments.length; i++) {
-				if (!arguments[i]) continue;
+			for (var _i7 = 1; _i7 < arguments.length; _i7++) {
+				if (!arguments[_i7]) continue;
 
-				for (var key in arguments[i]) {
-					if (arguments[i].hasOwnProperty(key)) out[key] = arguments[i][key];
+				for (var key in arguments[_i7]) {
+					if (arguments[_i7].hasOwnProperty(key)) out[key] = arguments[_i7][key];
 				}
 			}
 
 			return out;
+		}
+		// Math and array manipulation
+
+	}, {
+		key: "arange",
+		value: function arange(start, end, step, offset) {
+			var len = (Math.abs(end - start) + (offset || 0) * 2) / (step || 1) + 1;
+			var direction = start < end ? 1 : -1;
+			var startingPoint = start - direction * (offset || 0);
+			var stepSize = direction * (step || 1);
+
+			return Array(len).fill(0).map(function (_, index) {
+				return startingPoint + stepSize * index;
+			});
+		}
+	}, {
+		key: "range",
+		value: function range(n) {
+			return this.arange(0, n, 1);
+		}
+	}, {
+		key: "linespace",
+		value: function linespace(start, end, n) {
+			var diff = end - start;
+			var step = diff / n;
+			return this.arange(start, end, step);
+		}
+	}, {
+		key: "forIn",
+		value: function forIn(range, callback) {
+			for (var i = range.length - 1; i >= 0; i--) {
+				callback(range[i]);
+			}
+		}
+	}, {
+		key: "reshape",
+		value: function reshape(array, part) {
+			var tmp = [];
+			for (var i = 0; i < array.length; i += part) {
+				tmp.push(array.slice(i, i + part));
+			}
+			return tmp;
+		}
+	}, {
+		key: "Apply",
+		value: function Apply(array, callback) {
+			this.forIn(array, callback(i));
+		}
+	}, {
+		key: "sum",
+		value: function sum(array) {
+			return array.reduce(function (a, b) {
+				return a + b;
+			}, 0);
+		}
+	}, {
+		key: "multiply",
+		value: function multiply(array) {
+			return array.reduce(function (a, b) {
+				return a * b;
+			}, 0);
+		}
+	}, {
+		key: "flatten",
+		value: function flatten(array) {
+			return array.reduce(function (a, b) {
+				return a.concat(b);
+			}, []);
 		}
 	}]);
 
