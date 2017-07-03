@@ -8,10 +8,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/******************************************/
+/** ****************************************/
 /*          © Arthur Guiot 2017           */
 /*               DisplayJS                */
-/******************************************/
+/** ****************************************/
 var DisplayJS = function () {
 	function DisplayJS(obj) {
 		_classCallCheck(this, DisplayJS);
@@ -30,9 +30,9 @@ var DisplayJS = function () {
 				_this.if();
 				_this.else();
 				var elements = document.querySelectorAll("[var]");
-				for (var _i = 0; _i < elements.length; _i++) {
-					var attr = elements[_i].getAttribute("var");
-					elements[_i].innerHTML = _this.obj[attr];
+				for (var i = 0; i < elements.length; i++) {
+					var attr = elements[i].getAttribute("var");
+					elements[i].innerHTML = _this.obj[attr];
 				}
 			};
 			if (!push) {
@@ -56,26 +56,22 @@ var DisplayJS = function () {
 	}, {
 		key: "target",
 		value: function target(callback) {
-			var _this2 = this;
-
-			if (!callback) {
-				var callback = function callback() {
-					_this2.var();
-				};
-			}
+			callback = callback || function () {
+				this.var();
+			};
 			var addEventListener = function () {
 				if (document.addEventListener) {
 					return function (element, event, handler) {
 						element.addEventListener(event, handler, false);
 					};
-				} else {
-					return function (element, event, handler) {
-						element.attachEvent("on" + event, handler);
-					};
 				}
+
+				return function (element, event, handler) {
+					element.attachEvent("on" + event, handler);
+				};
 			}();
 			var obj = this.obj;
-			[].forEach.call(document.querySelectorAll('[target]'), function (x, i, a) {
+			[].forEach.call(document.querySelectorAll("[target]"), function (x, i, a) {
 				addEventListener(a[i], "change", function () {
 					var attr1 = a[i].getAttribute("target");
 					if (this.type == "checkbox") {
@@ -117,18 +113,18 @@ var DisplayJS = function () {
 	}, {
 		key: "if",
 		value: function _if(push) {
-			var _this3 = this;
+			var _this2 = this;
 
 			var if_push = function if_push() {
 				var elements = document.querySelectorAll("[if]");
-				for (var _i2 = 0; _i2 < elements.length; _i2++) {
-					var attr = elements[_i2].getAttribute("if");
+				for (var i = 0; i < elements.length; i++) {
+					var attr = elements[i].getAttribute("if");
 					var el = [];
-					el.push(elements[_i2]);
-					if (_this3.obj[attr] == true) {
-						_this3.show(el);
+					el.push(elements[i]);
+					if (_this2.obj[attr] == true) {
+						_this2.show(el);
 					} else {
-						_this3.hide(el);
+						_this2.hide(el);
 					}
 				}
 			};
@@ -148,18 +144,18 @@ var DisplayJS = function () {
 	}, {
 		key: "else",
 		value: function _else(push) {
-			var _this4 = this;
+			var _this3 = this;
 
 			var else_push = function else_push() {
 				var elements = document.querySelectorAll("[else]");
-				for (var _i3 = 0; _i3 < elements.length; _i3++) {
-					var attr = elements[_i3].getAttribute("else");
+				for (var i = 0; i < elements.length; i++) {
+					var attr = elements[i].getAttribute("else");
 					var el = [];
-					el.push(elements[_i3]);
-					if (_this4.obj[attr] == true) {
-						_this4.hide(el);
+					el.push(elements[i]);
+					if (_this3.obj[attr] == true) {
+						_this3.hide(el);
 					} else {
-						_this4.show(el);
+						_this3.show(el);
 					}
 				}
 			};
@@ -179,15 +175,11 @@ var DisplayJS = function () {
 	}, {
 		key: "repeat",
 		value: function repeat(el, array, join, start, end) {
-			if (!start) {
-				var start = "";
-			}
-			if (!end) {
-				var end = "";
-			}
+			start = start || "";
+			end = end || "";
 			var text = start;
-			for (var _i4 = 0; _i4 < array.length; _i4++) {
-				text += join + String(array[_i4]);
+			for (var i = 0; i < array.length; i++) {
+				text += join + String(array[i]);
 			}
 			text += end;
 			el[0].innerHTML = text;
@@ -195,13 +187,13 @@ var DisplayJS = function () {
 	}, {
 		key: "custom",
 		value: function custom(targetAttr, push) {
-			var _this5 = this;
+			var _this4 = this;
 
 			var var_push = function var_push() {
 				var elements = document.querySelectorAll("[" + targetAttr + "]");
-				for (var _i5 = 0; _i5 < elements.length; _i5++) {
-					var attr = elements[_i5].getAttribute(targetAttr);
-					elements[_i5].innerHTML = _this5.obj[attr];
+				for (var i = 0; i < elements.length; i++) {
+					var attr = elements[i].getAttribute(targetAttr);
+					elements[i].innerHTML = _this4.obj[attr];
 				}
 			};
 			if (!push) {
@@ -224,9 +216,13 @@ var DisplayJS = function () {
 				watch: function watch(object, property, onPropertyChange) {
 					var descriptor = Object.getOwnPropertyDescriptor(object, property);
 
-					if (typeof descriptor === "undefined") throw new Error("Invalid descriptor for property: " + property + ", object: " + object);
+					if (typeof descriptor === "undefined") {
+						throw new Error("Invalid descriptor for property: " + property + ", object: " + object);
+					}
 
-					if (typeof onPropertyChange !== "function") throw new Error("Invalid onPropertyChange handler: " + onPropertyChange);
+					if (typeof onPropertyChange !== "function") {
+						throw new Error("Invalid onPropertyChange handler: " + onPropertyChange);
+					}
 
 					var value = object[property];
 
@@ -244,7 +240,9 @@ var DisplayJS = function () {
 					});
 				},
 				watchAll: function watchAll(object, onPropertyChange) {
-					if (typeof onPropertyChange !== "function") throw new Error("Invalid onPropertyChange handler: " + onPropertyChange);
+					if (typeof onPropertyChange !== "function") {
+						throw new Error("Invalid onPropertyChange handler: " + onPropertyChange);
+					}
 
 					for (var property in object) {
 						this.watch(object, property, onPropertyChange);
@@ -266,28 +264,18 @@ var DisplayJS = function () {
 		}
 	}, {
 		key: "text",
-		value: function (_text) {
-			function text(_x, _x2) {
-				return _text.apply(this, arguments);
-			}
-
-			text.toString = function () {
-				return _text.toString();
-			};
-
-			return text;
-		}(function (element, text) {
-			element[0].innerHTML = this.xss(text);
-		})
+		value: function text(element, _text) {
+			element[0].innerHTML = this.xss(_text);
+		}
 	}, {
 		key: "html",
 		value: function html(element, _html) {
-			element[0].innerHTML = text;
+			element[0].innerHTML = _html;
 		}
 	}, {
 		key: "prepend",
 		value: function prepend(element, html) {
-			var div = document.createElement('div');
+			var div = document.createElement("div");
 			div.innerHTML = html;
 			element[0].insertBefore(div, element.firstChild);
 		}
@@ -299,12 +287,12 @@ var DisplayJS = function () {
 	}, {
 		key: "after",
 		value: function after(element, html) {
-			element[0].insertAdjacentHTML('afterend', html);
+			element[0].insertAdjacentHTML("afterend", html);
 		}
 	}, {
 		key: "before",
 		value: function before(element, html) {
-			element[0].insertAdjacentHTML('beforebegin', html);
+			element[0].insertAdjacentHTML("beforebegin", html);
 		}
 	}, {
 		key: "clone",
@@ -316,9 +304,8 @@ var DisplayJS = function () {
 		value: function is(el1, el2) {
 			if (el1 === el2) {
 				return true;
-			} else {
-				return false;
 			}
+			return false;
 		}
 	}, {
 		key: "select",
@@ -357,13 +344,13 @@ var DisplayJS = function () {
 	}, {
 		key: "show",
 		value: function show(element) {
-			element[0].style.display = 'block';
+			element[0].style.display = "block";
 			return true;
 		}
 	}, {
 		key: "hide",
 		value: function hide(element) {
-			element[0].style.display = 'none';
+			element[0].style.display = "none";
 			return true;
 		}
 	}, {
@@ -377,7 +364,7 @@ var DisplayJS = function () {
 			var request = new XMLHttpRequest();
 			request.open(method, url, true);
 			if (header) {
-				request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+				request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 			}
 			request.onload = function () {
 				if (request.status >= 200 && request.status < 400) {
@@ -398,20 +385,28 @@ var DisplayJS = function () {
 	}, {
 		key: "hasClass",
 		value: function hasClass(element, className) {
-			if (element[0].classList) return element[0].classList.contains(className);
+			if (element[0].classList) {
+				return element[0].classList.contains(className);
+			}
 			return !!element[0].className.match(new RegExp("(\\s|^)" + className + "(\\s|$)"));
 		}
 	}, {
 		key: "addClass",
 		value: function addClass(element, className) {
-			if (element[0].classList) element[0].classList.add(className);else if (!this.hasClass(element, className)) element[0].className += " " + className;
+			if (element[0].classList) {
+				element[0].classList.add(className);
+			} else if (!this.hasClass(element, className)) {
+				element[0].className += " " + className;
+			}
 		}
 	}, {
 		key: "removeClass",
 		value: function removeClass(element, className) {
-			if (element[0].classList) element[0].classList.remove(className);else if (this.hasClass(element, className)) {
+			if (element[0].classList) {
+				element[0].classList.remove(className);
+			} else if (this.hasClass(element, className)) {
 				var reg = new RegExp("(\\s|^)" + className + "(\\s|$)");
-				element[0].className = element[0].className.replace(reg, ' ');
+				element[0].className = element[0].className.replace(reg, " ");
 			}
 		}
 	}, {
@@ -426,13 +421,13 @@ var DisplayJS = function () {
 	}, {
 		key: "each",
 		value: function each(elements, callback) {
-			for (var _i6 = 0; _i6 < elements.length; _i6++) {
-				callback(elements[_i6]);
+			for (var i = 0; i < elements.length; i++) {
+				callback(elements[i]);
 			}
 		}
 	}, {
-		key: "style",
-		value: function style(element, name, value) {
+		key: "css",
+		value: function css(element, name, value) {
 			element[0].style[name] = value;
 		}
 	}, {
@@ -441,81 +436,9 @@ var DisplayJS = function () {
 			return element[0].style[styleProp];
 		}
 	}, {
-		key: "load",
-		value: function load(element, url) {
-			var request = new XMLHttpRequest();
-			request.open("GET", url, true);
-
-			request.onload = function () {
-				if (request.status >= 200 && request.status < 400) {
-					var mapDOM = function mapDOM(element, json) {
-						var treeObject = {};
-
-						// If string convert to document Node
-						if (typeof element === "string") {
-							if (window.DOMParser) {
-								parser = new DOMParser();
-								docNode = parser.parseFromString(element, "text/xml");
-							} else {
-								// Microsoft strikes again
-								docNode = new ActiveXObject("Microsoft.XMLDOM");
-								docNode.async = false;
-								docNode.loadXML(element);
-							}
-							element = docNode.firstChild;
-						}
-
-						//Recursively loop through DOM elements and assign properties to object
-						function treeHTML(element, object) {
-							object["type"] = element.nodeName;
-							var nodeList = element.childNodes;
-							if (nodeList != null) {
-								if (nodeList.length) {
-									object["content"] = [];
-									for (var i = 0; i < nodeList.length; i++) {
-										if (nodeList[i].nodeType == 3) {
-											object["content"].push(nodeList[i].nodeValue);
-										} else {
-											object["content"].push({});
-											treeHTML(nodeList[i], object["content"][object["content"].length - 1]);
-										}
-									}
-								}
-							}
-							if (element.attributes != null) {
-								if (element.attributes.length) {
-									object["attributes"] = {};
-									for (var i = 0; i < element.attributes.length; i++) {
-										object["attributes"][element.attributes[i].nodeName] = element.attributes[i].nodeValue;
-									}
-								}
-							}
-						}
-						treeHTML(element, treeObject);
-
-						return json ? JSON.stringify(treeObject) : treeObject;
-					};
-
-					var data = request.responseText;
-					json = mapDOM(data, true);
-					element[0].innerHTML = json[element[0]];
-				} else {
-					console.error("DisplayJS error: The load request returned an error.");
-				}
-			};
-
-			request.onerror = function () {
-				console.error("DisplayJS error: The load request returned an error. Please, check your connection.");
-			};
-
-			request.send();
-		}
-	}, {
 		key: "fadeOut",
 		value: function fadeOut(element, i) {
-			if (!i) {
-				var i = .1;
-			}
+			i = i || 0.1;
 			var el = element[0];
 			el.style.opacity = 1;
 
@@ -533,9 +456,7 @@ var DisplayJS = function () {
 	}, {
 		key: "fadeIn",
 		value: function fadeIn(element, i, display) {
-			if (!i) {
-				var i = .1;
-			}
+			i = i || 0.1;
 			var el = element[0];
 			el.style.opacity = 0;
 			el.style.display = display || "block";
@@ -553,11 +474,15 @@ var DisplayJS = function () {
 		value: function extend() {
 			var out = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-			for (var _i7 = 1; _i7 < arguments.length; _i7++) {
-				if (!arguments[_i7]) continue;
+			for (var i = 1; i < arguments.length; i++) {
+				if (!arguments[i]) {
+					continue;
+				}
 
-				for (var key in arguments[_i7]) {
-					if (arguments[_i7].hasOwnProperty(key)) out[key] = arguments[_i7][key];
+				for (var key in arguments[i]) {
+					if (arguments[i].hasOwnProperty(key)) {
+						out[key] = arguments[i][key];
+					}
 				}
 			}
 
@@ -592,23 +517,25 @@ var DisplayJS = function () {
 	}, {
 		key: "forIn",
 		value: function forIn(range, callback) {
-			for (var _i8 = range.length - 1; _i8 >= 0; _i8--) {
-				callback(range[_i8]);
+			for (var i = range.length - 1; i >= 0; i--) {
+				callback(range[i]);
 			}
 		}
 	}, {
 		key: "reshape",
 		value: function reshape(array, part) {
 			var tmp = [];
-			for (var _i9 = 0; _i9 < array.length; _i9 += part) {
-				tmp.push(array.slice(_i9, _i9 + part));
+			for (var i = 0; i < array.length; i += part) {
+				tmp.push(array.slice(i, i + part));
 			}
 			return tmp;
 		}
 	}, {
-		key: "Apply",
-		value: function Apply(array, callback) {
-			this.forIn(array, callback(i));
+		key: "apply",
+		value: function apply(array, callback) {
+			this.forIn(array, function (i) {
+				return callback(i);
+			});
 		}
 	}, {
 		key: "sum",
@@ -630,6 +557,33 @@ var DisplayJS = function () {
 			return array.reduce(function (a, b) {
 				return a.concat(b);
 			}, []);
+		}
+	}, {
+		key: "drop",
+		value: function drop(array, val) {
+			if (val > 0) {
+				return array.slice(val, array.length);
+			}
+			return array.slice(0, array.length - val);
+		}
+	}, {
+		key: "isIn",
+		value: function isIn(array, val) {
+			if (array.indexOf(val) > -1) {
+				return true;
+			}
+			return false;
+		}
+	}, {
+		key: "rmFromArray",
+		value: function rmFromArray(array, condition) {
+			var obj = [];
+			this.forIn(array, function (i) {
+				if (!condition(i)) {
+					obj.push(array[i]);
+				}
+				return obj;
+			});
 		}
 	}]);
 

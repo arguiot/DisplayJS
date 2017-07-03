@@ -7,7 +7,9 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run gulp && npm run lint && exit 0",
+    "gulp": "gulp",
+    "lint": "./node_modules/.bin/eslint src/display.js --fix"
   },
   "repository": {
     "type": "git",
@@ -30,7 +32,12 @@
   "devDependencies": {
     "babel-preset-env": "^1.5.2",
     "babili": "^0.1.4",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.6.1",
     "gulp-babel": "^6.1.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "eslint-config-airbnb": "^15.0.1"
+  }
 }
