@@ -215,6 +215,14 @@ class DisplayJS {
 			callback(obj, prop, newVal, oldVal);
 		});
 	}
+	onEvent () {
+		const elements = document.querySelectorAll("[on]");
+		for (let i = 0; i < elements.length; i++) {
+			const attr = elements[i].getAttribute("on");
+			const action = elements[i].getAttribute("action");
+			elements[i].addEventListener(attr, eval(action));
+		}
+	}
 	all(element, callback) {
 		element.forEach((data) => {
 			const node = [];

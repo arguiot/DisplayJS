@@ -254,6 +254,16 @@ var DisplayJS = function () {
 			});
 		}
 	}, {
+		key: "onEvent",
+		value: function onEvent() {
+			var elements = document.querySelectorAll("[on]");
+			for (var i = 0; i < elements.length; i++) {
+				var attr = elements[i].getAttribute("on");
+				var action = elements[i].getAttribute("action");
+				elements[i].addEventListener(attr, eval(action));
+			}
+		}
+	}, {
 		key: "all",
 		value: function all(element, callback) {
 			element.forEach(function (data) {
