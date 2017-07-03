@@ -28,8 +28,9 @@
   },
   "homepage": "https://display.js.org",
   "devDependencies": {
-    "babel-preset-env": "^1.4.0",
-    "babili": "^0.1.2",
+    "babel-preset-env": "^1.5.2",
+    "babili": "^0.1.4",
     "gulp-babel": "^6.1.2"
-  }
+  },
+  "dependencies": {}
 }
