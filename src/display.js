@@ -474,32 +474,30 @@ class DisplayJS {
     }
     // Math and array manipulation
     arange(start, end, step, offset) {
-	  var len = (Math.abs(end - start) + ((offset || 0) * 2)) / (step || 1) + 1;
-	  var direction = start < end ? 1 : -1;
-	  var startingPoint = start - (direction * (offset || 0));
-	  var stepSize = direction * (step || 1);
+	  const len = (Math.abs(end - start) + ((offset || 0) * 2)) / (step || 1) + 1;
+	  const direction = start < end ? 1 : -1;
+	  const startingPoint = start - (direction * (offset || 0));
+	  const stepSize = direction * (step || 1);
 	  
-	  return Array(len).fill(0).map(function(_, index) {
-	    return startingPoint + (stepSize * index);
-	  });
+	  return Array(len).fill(0).map((_, index) => startingPoint + (stepSize * index));
 	  
 	}
 	range(n) {
 		return this.arange(0,n,1)
 	}
     linespace(start, end, n) {
-    	var diff = end - start;
-    	var step = diff / n;
+    	const diff = end - start;
+    	const step = diff / n;
     	return this.arange(start, end, step);
     }
     forIn(range, callback) {
-    	for (var i = range.length - 1; i >= 0; i--) {
+    	for (let i = range.length - 1; i >= 0; i--) {
     		callback(range[i]);
     	}
     }
     reshape(array, part) {
-	    var tmp = [];
-	    for(var i = 0; i < array.length; i += part) {
+	    const tmp = [];
+	    for(let i = 0; i < array.length; i += part) {
 	        tmp.push(array.slice(i, i + part));
 	    }
 	    return tmp;

@@ -592,16 +592,16 @@ var DisplayJS = function () {
 	}, {
 		key: "forIn",
 		value: function forIn(range, callback) {
-			for (var i = range.length - 1; i >= 0; i--) {
-				callback(range[i]);
+			for (var _i8 = range.length - 1; _i8 >= 0; _i8--) {
+				callback(range[_i8]);
 			}
 		}
 	}, {
 		key: "reshape",
 		value: function reshape(array, part) {
 			var tmp = [];
-			for (var i = 0; i < array.length; i += part) {
-				tmp.push(array.slice(i, i + part));
+			for (var _i9 = 0; _i9 < array.length; _i9 += part) {
+				tmp.push(array.slice(_i9, _i9 + part));
 			}
 			return tmp;
 		}
