@@ -18,10 +18,10 @@ A simple framework for building ambitious UI, without thinking about how everyth
 
 To use display.js, you'll need to download display.js and add it in your js folder. Or, you can add these line of code in the head or in the body of your page:
 ```html
-// Add Display.js
+// Add DisplayJS
 <script src="https://unpkg.com/display.js"></script>
 ```
-or you can install NoobScroll using [npm](https://npmjs.com/package/display.js)
+or you can install DisplayJS using [npm](https://npmjs.com/package/display.js)
 ```bash
 $ npm install display.js
 ```
@@ -29,12 +29,10 @@ $ npm install display.js
 ## Initialize DisplayJS
 
 ```javascript
-// Create an array where all the rendered text will be.
-var myArray = {
-  myVar1: "Hello World!",
-}
 // Create a var for Display.JS. You don't have to add the $ var, you can change the name.
-var $ = new _DOM_DJS (myArray);
+var $ = new DisplayJS (window);
 ```
 
 The full docs can be found [here](https://github.com/arguiot/DisplayJS/wiki)
+
+⚠️ Docs aren't avaible yet
