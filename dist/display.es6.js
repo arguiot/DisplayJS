@@ -30,7 +30,14 @@ class DisplayJS {
 			}, push);
 		}
 	}
-	xss(str) {
+	xss (str) {
+		var lt = /</g,
+		gt = />/g,
+		ap = /'/g,
+		ic = /"/g;
+		return str.toString().replace(lt, "&lt;").replace(gt, "&gt;").replace(ap, "&#39;").replace(ic, "&#34;");
+	}
+	xssURI(str) {
 		return encodeURI(str);
 	}
 	target(callback) {

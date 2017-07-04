@@ -51,6 +51,15 @@ var DisplayJS = function () {
 	}, {
 		key: "xss",
 		value: function xss(str) {
+			var lt = /</g,
+			    gt = />/g,
+			    ap = /'/g,
+			    ic = /"/g;
+			return str.toString().replace(lt, "&lt;").replace(gt, "&gt;").replace(ap, "&#39;").replace(ic, "&#34;");
+		}
+	}, {
+		key: "xssURI",
+		value: function xssURI(str) {
 			return encodeURI(str);
 		}
 	}, {
