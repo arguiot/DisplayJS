@@ -31,19 +31,19 @@ class DisplayJS {
 		}
 	}
 	xss (str) {
-		var lt = /</g,
-			gt = />/g,
-			ap = /'/g,
-			ic = /"/g;
+		const lt = /</g;
+		const gt = />/g;
+		const ap = /'/g;
+		const ic = /"/g;
 		return str.toString().replace(lt, "&lt;").replace(gt, "&gt;").replace(ap, "&#39;").replace(ic, "&#34;");
 	}
 	xssURI(str) {
 		return encodeURI(str);
 	}
-	target(callback) {
-		callback = callback || function () {
-			this.var();
-		};
+	target(
+        callback=function () {
+	this.var();
+}) {
 		const addEventListener = ((() => {
 			if (document.addEventListener) {
 				return (element, event, handler) => {
@@ -121,7 +121,8 @@ class DisplayJS {
 				if_push();
 			}, push);
 		}
-	} else(push) {
+	} 
+	else(push) {
 		const else_push = () => {
 			const elements = document.querySelectorAll("[else]");
 			for (let i = 0; i < elements.length; i++) {
@@ -148,12 +149,17 @@ class DisplayJS {
 			}, push);
 		}
 	}
-	repeat(el, array, join, start, end) {
-		start = start || "";
-		end = end || "";
+	repeat(el, array, join, start="", end="") {
 		let text = start;
-		for (let i = 0; i < array.length; i++) {
-			text += join + String(array[i]);
+		if (typeof(join) == "object") {
+			for (let i = 0; i < array.length; i++) {
+				text += join[i] + String(array[i]);
+			}
+		}
+		else {
+			for (let i = 0; i < array.length; i++) {
+				text += join + String(array[i]);
+			}
 		}
 		text += end;
 		el[0].innerHTML = text;
@@ -360,8 +366,7 @@ class DisplayJS {
 	getStyle(element, styleProp) {
 		return element[0].style[styleProp];
 	}
-	fadeOut(element, i) {
-		i = i || 0.1;
+	fadeOut(element, i=0.1) {
 		const el = element[0];
 		el.style.opacity = 1;
 
@@ -376,8 +381,7 @@ class DisplayJS {
 
 	// fade in
 
-	fadeIn(element, i, display) {
-		i = i || 0.1;
+	fadeIn(element, i=0.1, display) {
 		const el = element[0];
 		el.style.opacity = 0;
 		el.style.display = display || "block";
@@ -453,7 +457,7 @@ class DisplayJS {
 		return array.slice(0, array.length - val);
 	}
 	isIn(array, val) {
-		if (array.indexOf(val) > -1) {
+		if (array.includes(val)) {
 			return true;
 		}
 		return false;

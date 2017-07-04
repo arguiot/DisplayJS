@@ -1,5 +1,7 @@
 "use strict";
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -51,10 +53,10 @@ var DisplayJS = function () {
 	}, {
 		key: "xss",
 		value: function xss(str) {
-			var lt = /</g,
-			    gt = />/g,
-			    ap = /'/g,
-			    ic = /"/g;
+			var lt = /</g;
+			var gt = />/g;
+			var ap = /'/g;
+			var ic = /"/g;
 			return str.toString().replace(lt, "&lt;").replace(gt, "&gt;").replace(ap, "&#39;").replace(ic, "&#34;");
 		}
 	}, {
@@ -64,10 +66,11 @@ var DisplayJS = function () {
 		}
 	}, {
 		key: "target",
-		value: function target(callback) {
-			callback = callback || function () {
+		value: function target() {
+			var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {
 				this.var();
 			};
+
 			var addEventListener = function () {
 				if (document.addEventListener) {
 					return function (element, event, handler) {
@@ -183,12 +186,19 @@ var DisplayJS = function () {
 		}
 	}, {
 		key: "repeat",
-		value: function repeat(el, array, join, start, end) {
-			start = start || "";
-			end = end || "";
+		value: function repeat(el, array, join) {
+			var start = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
+			var end = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
+
 			var text = start;
-			for (var i = 0; i < array.length; i++) {
-				text += join + String(array[i]);
+			if ((typeof join === "undefined" ? "undefined" : _typeof(join)) == "object") {
+				for (var i = 0; i < array.length; i++) {
+					text += join[i] + String(array[i]);
+				}
+			} else {
+				for (var _i = 0; _i < array.length; _i++) {
+					text += join + String(array[_i]);
+				}
 			}
 			text += end;
 			el[0].innerHTML = text;
@@ -456,8 +466,9 @@ var DisplayJS = function () {
 		}
 	}, {
 		key: "fadeOut",
-		value: function fadeOut(element, i) {
-			i = i || 0.1;
+		value: function fadeOut(element) {
+			var i = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.1;
+
 			var el = element[0];
 			el.style.opacity = 1;
 
@@ -474,8 +485,10 @@ var DisplayJS = function () {
 
 	}, {
 		key: "fadeIn",
-		value: function fadeIn(element, i, display) {
-			i = i || 0.1;
+		value: function fadeIn(element) {
+			var i = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.1;
+			var display = arguments[2];
+
 			var el = element[0];
 			el.style.opacity = 0;
 			el.style.display = display || "block";
@@ -588,7 +601,7 @@ var DisplayJS = function () {
 	}, {
 		key: "isIn",
 		value: function isIn(array, val) {
-			if (array.indexOf(val) > -1) {
+			if (array.includes(val)) {
 				return true;
 			}
 			return false;
