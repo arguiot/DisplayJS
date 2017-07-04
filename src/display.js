@@ -1,6 +1,6 @@
 /** ****************************************/
-/*          © Arthur Guiot 2017           */
-/*               DisplayJS                */
+/*           © Arthur Guiot 2017           */
+/*                DisplayJS                */
 /** ****************************************/
 class DisplayJS {
 	constructor(obj) {
@@ -95,7 +95,7 @@ class DisplayJS {
 				const attr = elements[i].getAttribute("if");
 				const el = [];
 				el.push(elements[i]);
-				if (this.obj[attr] == true) {
+				if (eval(this.obj[attr])) {
 					this.show(el);
 				} else {
 					this.hide(el);
@@ -121,7 +121,7 @@ class DisplayJS {
 				const attr = elements[i].getAttribute("else");
 				const el = [];
 				el.push(elements[i]);
-				if (this.obj[attr] == true) {
+				if (eval(this.obj[attr])) {
 					this.hide(el);
 				} else {
 					this.show(el);
