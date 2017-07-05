@@ -67,8 +67,10 @@ var DisplayJS = function () {
 	}, {
 		key: "target",
 		value: function target() {
+			var _this2 = this;
+
 			var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {
-				this.var();
+				_this2.var();
 			};
 
 			var addEventListener = function () {
@@ -125,7 +127,7 @@ var DisplayJS = function () {
 	}, {
 		key: "if",
 		value: function _if(push) {
-			var _this2 = this;
+			var _this3 = this;
 
 			var if_push = function if_push() {
 				var elements = document.querySelectorAll("[if]");
@@ -133,10 +135,10 @@ var DisplayJS = function () {
 					var attr = elements[i].getAttribute("if");
 					var el = [];
 					el.push(elements[i]);
-					if (eval(_this2.obj[attr])) {
-						_this2.show(el);
+					if (eval(_this3.obj[attr])) {
+						_this3.show(el);
 					} else {
-						_this2.hide(el);
+						_this3.hide(el);
 					}
 				}
 			};
@@ -156,7 +158,7 @@ var DisplayJS = function () {
 	}, {
 		key: "else",
 		value: function _else(push) {
-			var _this3 = this;
+			var _this4 = this;
 
 			var else_push = function else_push() {
 				var elements = document.querySelectorAll("[else]");
@@ -164,10 +166,10 @@ var DisplayJS = function () {
 					var attr = elements[i].getAttribute("else");
 					var el = [];
 					el.push(elements[i]);
-					if (eval(_this3.obj[attr])) {
-						_this3.hide(el);
+					if (eval(_this4.obj[attr])) {
+						_this4.hide(el);
 					} else {
-						_this3.show(el);
+						_this4.show(el);
 					}
 				}
 			};
@@ -206,13 +208,13 @@ var DisplayJS = function () {
 	}, {
 		key: "custom",
 		value: function custom(targetAttr, push) {
-			var _this4 = this;
+			var _this5 = this;
 
 			var var_push = function var_push() {
 				var elements = document.querySelectorAll("[" + targetAttr + "]");
 				for (var i = 0; i < elements.length; i++) {
 					var attr = elements[i].getAttribute(targetAttr);
-					elements[i].innerHTML = _this4.obj[attr];
+					elements[i].innerHTML = _this5.obj[attr];
 				}
 			};
 			if (!push) {
@@ -616,6 +618,25 @@ var DisplayJS = function () {
 				}
 				return obj;
 			});
+		}
+	}, {
+		key: "average",
+		value: function average(array) {
+			var summed = this.sum(array);
+			return summed / array.length;
+		}
+	}, {
+		key: "median",
+		value: function median(array) {
+			array.sort(function (a, b) {
+				return a - b;
+			});
+			var half = Math.floor(array.length / 2);
+			if (array.length % 2) {
+				return array[half];
+			} else {
+				return (array[half - 1] + array[half]) / 2.0;
+			}
 		}
 	}]);
 

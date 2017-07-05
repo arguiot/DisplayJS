@@ -40,10 +40,7 @@ class DisplayJS {
 	xssURI(str) {
 		return encodeURI(str);
 	}
-	target(
-        callback=function () {
-	this.var();
-}) {
+	target(callback= () => { this.var(); }) {
 		const addEventListener = ((() => {
 			if (document.addEventListener) {
 				return (element, event, handler) => {
@@ -470,6 +467,20 @@ class DisplayJS {
 			}
 			return obj;
 		});
+	}
+	average(array) {
+		const summed = this.sum(array);
+		return summed / array.length;
+	}
+	median(array) {
+		array.sort( (a, b) => a - b );
+		const half = Math.floor(array.length/2);
+		if(array.length % 2) {
+			return array[half];
+		}
+		else {
+			return (array[half-1] + array[half]) / 2.0;
+		}
 	}
 }
 // Retro compatibility

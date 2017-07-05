@@ -31,20 +31,17 @@ class DisplayJS {
 		}
 	}
 	xss (str) {
-        const lt = /</g;
-        const gt = />/g;
-        const ap = /'/g;
-        const ic = /"/g;
-        return str.toString().replace(lt, "&lt;").replace(gt, "&gt;").replace(ap, "&#39;").replace(ic, "&#34;");
-    }
+		const lt = /</g;
+		const gt = />/g;
+		const ap = /'/g;
+		const ic = /"/g;
+		return str.toString().replace(lt, "&lt;").replace(gt, "&gt;").replace(ap, "&#39;").replace(ic, "&#34;");
+	}
 	xssURI(str) {
 		return encodeURI(str);
 	}
-	target(
-        callback=function () {
-			this.var();
-		}) {
-        const addEventListener = ((() => {
+	target(callback= () => { this.var(); }) {
+		const addEventListener = ((() => {
 			if (document.addEventListener) {
 				return (element, event, handler) => {
 					element.addEventListener(event, handler, false);
@@ -55,8 +52,8 @@ class DisplayJS {
 				element.attachEvent(`on${event}`, handler);
 			};
 		})());
-        const obj = this.obj;
-        [].forEach.call(document.querySelectorAll("[target]"), (x, i, a) => {
+		const obj = this.obj;
+		[].forEach.call(document.querySelectorAll("[target]"), (x, i, a) => {
 			addEventListener(a[i], "change", function () {
 				const attr1 = a[i].getAttribute("target");
 				if (this.type == "checkbox") {
@@ -94,7 +91,7 @@ class DisplayJS {
 				callback();
 			});
 		});
-    }
+	}
 	if(push) {
 		const if_push = () => {
 			const elements = document.querySelectorAll("[if]");
@@ -150,8 +147,8 @@ class DisplayJS {
 		}
 	}
 	repeat(el, array, join, start="", end="") {
-        let text = start;
-        if (typeof(join) == "object") {
+		let text = start;
+		if (typeof(join) == "object") {
 			for (let i = 0; i < array.length; i++) {
 				text += join[i] + String(array[i]);
 			}
@@ -161,9 +158,9 @@ class DisplayJS {
 				text += join + String(array[i]);
 			}
 		}
-        text += end;
-        el[0].innerHTML = text;
-    }
+		text += end;
+		el[0].innerHTML = text;
+	}
 	custom(targetAttr, push) {
 		const var_push = () => {
 			const elements = document.querySelectorAll(`[${targetAttr}]`);
@@ -367,33 +364,33 @@ class DisplayJS {
 		return element[0].style[styleProp];
 	}
 	fadeOut(element, i=0.1) {
-        const el = element[0];
-        el.style.opacity = 1;
+		const el = element[0];
+		el.style.opacity = 1;
 
-        (function fade() {
+		(function fade() {
 			if ((el.style.opacity -= i) < 0) {
 				el.style.display = "none";
 			} else {
 				requestAnimationFrame(fade);
 			}
 		}());
-    }
+	}
 
 	// fade in
 
 	fadeIn(element, i=0.1, display) {
-        const el = element[0];
-        el.style.opacity = 0;
-        el.style.display = display || "block";
+		const el = element[0];
+		el.style.opacity = 0;
+		el.style.display = display || "block";
 
-        (function fade() {
+		(function fade() {
 			let val = parseFloat(el.style.opacity);
 			if (!((val += i) > 1)) {
 				el.style.opacity = val;
 				requestAnimationFrame(fade);
 			}
 		}());
-    }
+	}
 	extend(out = {}) {
 		for (let i = 1; i < arguments.length; i++) {
 			if (!arguments[i]) {
@@ -470,6 +467,20 @@ class DisplayJS {
 			}
 			return obj;
 		});
+	}
+	average(array) {
+		const summed = this.sum(array);
+		return summed / array.length;
+	}
+	median(array) {
+		array.sort( (a, b) => a - b );
+		const half = Math.floor(array.length/2);
+		if(array.length % 2) {
+			return array[half];
+		}
+		else {
+			return (array[half-1] + array[half]) / 2.0;
+		}
 	}
 }
 // Retro compatibility
