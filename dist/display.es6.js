@@ -484,32 +484,32 @@ class DisplayJS {
 	}
 	predict(array, val) {
 		function main(valC) {
-			var first = array[0][0]
-			var second = array[1][0]
-			var firstVal = array[0][1]
-			var secondVal = array[1][1]
-			var a = (firstVal - secondVal) / (first - second)
-			var b = secondVal - (second * a)
+			const first = array[0][0];
+			const second = array[1][0];
+			const firstVal = array[0][1];
+			const secondVal = array[1][1];
+			const a = (firstVal - secondVal) / (first - second);
+			const b = secondVal - (second * a);
 			return valC * a + b;
 		}
 		function patternMatching (array) {
 			if (array.length > 2) {
 				if (main(array[2][0]) == array[2][1]) {
-					return true
+					return true;
 				}
 				else {
-					return false
+					return false;
 				}
 			}
 			else {
-				return true
+				return true;
 			}
 		}
 		if (patternMatching(array)) {
-			return main(val)
+			return main(val);
 		}
 		else {
-			return "DisplayJS: Error, can't find any pattern."
+			return "DisplayJS: Error, can't find any pattern.";
 		}
 		
 	}
