@@ -161,24 +161,24 @@ class DisplayJS {
 		text += end;
 		el[0].innerHTML = text;
 	}
-	custom(targetAttr, push) {
-		const var_push = () => {
+	custom(targetAttr, callback, push) {
+		const custom_push = () => {
 			const elements = document.querySelectorAll(`[${targetAttr}]`);
 			for (let i = 0; i < elements.length; i++) {
 				const attr = elements[i].getAttribute(targetAttr);
-				elements[i].innerHTML = this.obj[attr];
+				callback(elements[i], attr);
 			}
 		};
 		if (!push) {
-			var_push();
+			custom_push();
 		} else if (push == true) {
-			var_push();
+			custom_push();
 			this.live(this.obj, () => {
-				var_push();
+				custom_push();
 			});
 		} else {
 			window.setInterval(() => {
-				var_push();
+				custom_push();
 			}, push);
 		}
 	}
@@ -188,11 +188,11 @@ class DisplayJS {
 				const descriptor = Object.getOwnPropertyDescriptor(object, property);
 
 				if (typeof descriptor === "undefined") {
-					throw new Error(`Invalid descriptor for property: ${property}, object: ${object}`);
+					throw new Error(`DisplayJS: Invalid descriptor for property: ${property}, object: ${object}`);
 				}
 
 				if (typeof onPropertyChange !== "function") {
-					throw new Error(`Invalid onPropertyChange handler: ${onPropertyChange}`);
+					throw new Error(`DisplayJS: Invalid onPropertyChange handler: ${onPropertyChange}`);
 				}
 
 				let value = object[property];
@@ -213,7 +213,7 @@ class DisplayJS {
 
 			watchAll(object, onPropertyChange) {
 				if (typeof onPropertyChange !== "function") {
-					throw new Error(`Invalid onPropertyChange handler: ${onPropertyChange}`);
+					throw new Error(`DisplayJS: Invalid onPropertyChange handler: ${onPropertyChange}`);
 				}
 
 				for (const property in object) {
@@ -230,7 +230,7 @@ class DisplayJS {
 		for (let i = 0; i < elements.length; i++) {
 			const attr = elements[i].getAttribute("on");
 			const action = elements[i].getAttribute("action");
-			elements[i].addEventListener(attr, eval(action));
+			elements[i].addEventListener(attr, () => { eval(action); });
 		}
 	}
 	all(element, callback) {
@@ -481,6 +481,37 @@ class DisplayJS {
 		else {
 			return (array[half-1] + array[half]) / 2.0;
 		}
+	}
+	predict(array, val) {
+		function main(valC) {
+			var first = array[0][0]
+			var second = array[1][0]
+			var firstVal = array[0][1]
+			var secondVal = array[1][1]
+			var a = (firstVal - secondVal) / (first - second)
+			var b = secondVal - (second * a)
+			return valC * a + b;
+		}
+		function patternMatching (array) {
+			if (array.length > 2) {
+				if (main(array[2][0]) == array[2][1]) {
+					return true
+				}
+				else {
+					return false
+				}
+			}
+			else {
+				return true
+			}
+		}
+		if (patternMatching(array)) {
+			return main(val)
+		}
+		else {
+			return "DisplayJS: Error, can't find any pattern."
+		}
+		
 	}
 }
 // Retro compatibility

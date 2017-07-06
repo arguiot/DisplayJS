@@ -207,26 +207,24 @@ var DisplayJS = function () {
 		}
 	}, {
 		key: "custom",
-		value: function custom(targetAttr, push) {
-			var _this5 = this;
-
-			var var_push = function var_push() {
+		value: function custom(targetAttr, callback, push) {
+			var custom_push = function custom_push() {
 				var elements = document.querySelectorAll("[" + targetAttr + "]");
 				for (var i = 0; i < elements.length; i++) {
 					var attr = elements[i].getAttribute(targetAttr);
-					elements[i].innerHTML = _this5.obj[attr];
+					callback(elements[i], attr);
 				}
 			};
 			if (!push) {
-				var_push();
+				custom_push();
 			} else if (push == true) {
-				var_push();
+				custom_push();
 				this.live(this.obj, function () {
-					var_push();
+					custom_push();
 				});
 			} else {
 				window.setInterval(function () {
-					var_push();
+					custom_push();
 				}, push);
 			}
 		}
@@ -238,11 +236,11 @@ var DisplayJS = function () {
 					var descriptor = Object.getOwnPropertyDescriptor(object, property);
 
 					if (typeof descriptor === "undefined") {
-						throw new Error("Invalid descriptor for property: " + property + ", object: " + object);
+						throw new Error("DisplayJS: Invalid descriptor for property: " + property + ", object: " + object);
 					}
 
 					if (typeof onPropertyChange !== "function") {
-						throw new Error("Invalid onPropertyChange handler: " + onPropertyChange);
+						throw new Error("DisplayJS: Invalid onPropertyChange handler: " + onPropertyChange);
 					}
 
 					var value = object[property];
@@ -262,7 +260,7 @@ var DisplayJS = function () {
 				},
 				watchAll: function watchAll(object, onPropertyChange) {
 					if (typeof onPropertyChange !== "function") {
-						throw new Error("Invalid onPropertyChange handler: " + onPropertyChange);
+						throw new Error("DisplayJS: Invalid onPropertyChange handler: " + onPropertyChange);
 					}
 
 					for (var property in object) {
@@ -278,10 +276,17 @@ var DisplayJS = function () {
 		key: "onEvent",
 		value: function onEvent() {
 			var elements = document.querySelectorAll("[on]");
-			for (var i = 0; i < elements.length; i++) {
+
+			var _loop = function _loop(i) {
 				var attr = elements[i].getAttribute("on");
 				var action = elements[i].getAttribute("action");
-				elements[i].addEventListener(attr, eval(action));
+				elements[i].addEventListener(attr, function () {
+					eval(action);
+				});
+			};
+
+			for (var i = 0; i < elements.length; i++) {
+				_loop(i);
 			}
 		}
 	}, {
@@ -636,6 +641,35 @@ var DisplayJS = function () {
 				return array[half];
 			} else {
 				return (array[half - 1] + array[half]) / 2.0;
+			}
+		}
+	}, {
+		key: "predict",
+		value: function predict(array, val) {
+			function main(valC) {
+				var first = array[0][0];
+				var second = array[1][0];
+				var firstVal = array[0][1];
+				var secondVal = array[1][1];
+				var a = (firstVal - secondVal) / (first - second);
+				var b = secondVal - second * a;
+				return valC * a + b;
+			}
+			function patternMatching(array) {
+				if (array.length > 2) {
+					if (main(array[2][0]) == array[2][1]) {
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					return true;
+				}
+			}
+			if (patternMatching(array)) {
+				return main(val);
+			} else {
+				return "DisplayJS: Error, can't find any pattern.";
 			}
 		}
 	}]);
