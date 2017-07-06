@@ -309,13 +309,6 @@ var DisplayJS = function () {
 			element[0].innerHTML = _html;
 		}
 	}, {
-		key: "prepend",
-		value: function prepend(element, html) {
-			var div = document.createElement("div");
-			div.innerHTML = html;
-			element[0].insertBefore(div, element.firstChild);
-		}
-	}, {
 		key: "append",
 		value: function append(element, html) {
 			element[0].innerHTML += html;
@@ -452,13 +445,6 @@ var DisplayJS = function () {
 				this.removeClass(element, className);
 			} else {
 				this.addClass(element, className);
-			}
-		}
-	}, {
-		key: "each",
-		value: function each(elements, callback) {
-			for (var i = 0; i < elements.length; i++) {
-				callback(elements[i]);
 			}
 		}
 	}, {

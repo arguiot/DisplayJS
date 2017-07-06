@@ -246,11 +246,6 @@ class DisplayJS {
 	html(element, html) {
 		element[0].innerHTML = html;
 	}
-	prepend(element, html) {
-		const div = document.createElement("div");
-		div.innerHTML = html;
-		element[0].insertBefore(div, element.firstChild);
-	}
 	append(element, html) {
 		element[0].innerHTML += html;
 	}
@@ -350,11 +345,6 @@ class DisplayJS {
 			this.removeClass(element, className);
 		} else {
 			this.addClass(element, className);
-		}
-	}
-	each(elements, callback) {
-		for (let i = 0; i < elements.length; i++) {
-			callback(elements[i]);
 		}
 	}
 	css(element, name, value) {
