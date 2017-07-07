@@ -259,7 +259,7 @@ class DisplayJS {
 		element[0].cloneNode(true);
 	}
 	is(el1, el2) {
-		if (el1 === el2) {
+		if (el1[0] === el2[0]) {
 			return true;
 		}
 		return false;

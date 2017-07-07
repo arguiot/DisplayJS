@@ -331,7 +331,7 @@ var DisplayJS = function () {
 	}, {
 		key: "is",
 		value: function is(el1, el2) {
-			if (el1 === el2) {
+			if (el1[0] === el2[0]) {
 				return true;
 			}
 			return false;
