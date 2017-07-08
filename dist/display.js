@@ -634,7 +634,7 @@ var DisplayJS = function () {
 		value: function predict(array, val) {
 			var text = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-			function main(valC) {
+			function main(valC, text) {
 				var first = array[0][0];
 				var second = array[1][0];
 				var firstVal = array[0][1];
@@ -649,7 +649,7 @@ var DisplayJS = function () {
 			}
 			function patternMatching(array) {
 				if (array.length > 2) {
-					if (main(array[2][0]) == array[2][1]) {
+					if (main(array[2][0], false) == array[2][1]) {
 						return true;
 					} else {
 						return false;
@@ -659,7 +659,7 @@ var DisplayJS = function () {
 				}
 			}
 			if (patternMatching(array)) {
-				return main(val);
+				return main(val, text);
 			} else {
 				return "DisplayJS: Error, can't find any pattern.";
 			}

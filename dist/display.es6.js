@@ -473,7 +473,7 @@ class DisplayJS {
 		}
 	}
 	predict(array, val, text=false) {
-		function main(valC) {
+		function main(valC, text) {
 			const first = array[0][0];
 			const second = array[1][0];
 			const firstVal = array[0][1];
@@ -489,7 +489,7 @@ class DisplayJS {
 		}
 		function patternMatching (array) {
 			if (array.length > 2) {
-				if (main(array[2][0]) == array[2][1]) {
+				if (main(array[2][0], false) == array[2][1]) {
 					return true;
 				}
 				else {
@@ -501,7 +501,7 @@ class DisplayJS {
 			}
 		}
 		if (patternMatching(array)) {
-			return main(val);
+			return main(val, text);
 		}
 		else {
 			return "DisplayJS: Error, can't find any pattern.";
