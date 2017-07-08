@@ -632,6 +632,8 @@ var DisplayJS = function () {
 	}, {
 		key: "predict",
 		value: function predict(array, val) {
+			var text = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
 			function main(valC) {
 				var first = array[0][0];
 				var second = array[1][0];
@@ -639,7 +641,11 @@ var DisplayJS = function () {
 				var secondVal = array[1][1];
 				var a = (firstVal - secondVal) / (first - second);
 				var b = secondVal - second * a;
-				return valC * a + b;
+				if (text == true) {
+					return "f(x) = " + a + "x+" + b + "; f(" + valC + ") = " + (valC * a + b);
+				} else {
+					return valC * a + b;
+				}
 			}
 			function patternMatching(array) {
 				if (array.length > 2) {

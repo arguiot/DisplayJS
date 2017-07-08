@@ -472,7 +472,7 @@ class DisplayJS {
 			return (array[half-1] + array[half]) / 2.0;
 		}
 	}
-	predict(array, val) {
+	predict(array, val, text=false) {
 		function main(valC) {
 			const first = array[0][0];
 			const second = array[1][0];
@@ -480,7 +480,12 @@ class DisplayJS {
 			const secondVal = array[1][1];
 			const a = (firstVal - secondVal) / (first - second);
 			const b = secondVal - (second * a);
-			return valC * a + b;
+			if (text == true) {
+				return `f(x) = ${a}x+${b}; f(${valC}) = ${valC * a + b}`;
+			}
+			else {
+				return valC * a + b;
+			}
 		}
 		function patternMatching (array) {
 			if (array.length > 2) {
