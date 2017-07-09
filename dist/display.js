@@ -383,18 +383,13 @@ var DisplayJS = function () {
 			return true;
 		}
 	}, {
-		key: "style",
-		value: function style(element, st1, val) {
-			element[0].style[st1] = val;
-		}
-	}, {
 		key: "ajax",
-		value: function ajax(url, method, data, callback, header) {
+		value: function ajax(url, method, data, callback) {
+			var header = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "application/x-www-form-urlencoded; charset=UTF-8";
+
 			var request = new XMLHttpRequest();
 			request.open(method, url, true);
-			if (header) {
-				request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-			}
+			request.setRequestHeader("Content-Type", header);
 			request.onload = function () {
 				if (request.status >= 200 && request.status < 400) {
 					var _data = request.responseText;

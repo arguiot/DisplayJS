@@ -294,15 +294,10 @@ class DisplayJS {
 		element[0].style.display = "none";
 		return true;
 	}
-	style(element, st1, val) {
-		element[0].style[st1] = val;
-	}
-	ajax(url, method, data, callback, header) {
+	ajax(url, method, data, callback, header="application/x-www-form-urlencoded; charset=UTF-8") {
 		const request = new XMLHttpRequest();
 		request.open(method, url, true);
-		if (header) {
-			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-		}
+		request.setRequestHeader("Content-Type", header);
 		request.onload = () => {
 			if (request.status >= 200 && request.status < 400) {
 				const data = request.responseText;
