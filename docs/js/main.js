@@ -32,6 +32,10 @@ $.on([window], 'scroll', function() {
 	  }
 	// $.select(".show")[0].style.top = 0 - (window.scrollY / 3) + "px";
 });
+$.on($.select(".watch"), "click", function() {
+  $.toggleClass($.select(".videoDisplayJS"), "visible");
+});
+
 particlesJS("particles-js", {
   "particles": {
     "number": {

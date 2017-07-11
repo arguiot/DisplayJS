@@ -296,7 +296,24 @@ a:hover {
   text-decoration: underline;
   text-decoration-color: white;
 }
-
+.watch {
+    width: 100%;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    font-size: 2em;
+}
+.watch:hover {
+  color: #4286f4;
+  cursor: pointer;
+}
+.videoDisplayJS {
+  padding: 20px;
+  display: none;
+}
 .star-btn {
     /*transition: all 250ms ease-in-out;*/
     margin: 10px;
