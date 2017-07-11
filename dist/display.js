@@ -533,13 +533,6 @@ var DisplayJS = function () {
 			return this.arange(start, end, step);
 		}
 	}, {
-		key: "forIn",
-		value: function forIn(range, callback) {
-			for (var i = range.length - 1; i >= 0; i--) {
-				callback(range[i]);
-			}
-		}
-	}, {
 		key: "reshape",
 		value: function reshape(array, part) {
 			var tmp = [];

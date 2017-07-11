@@ -408,11 +408,6 @@ class DisplayJS {
 		const step = diff / n;
 		return this.arange(start, end, step);
 	}
-	forIn(range, callback) {
-		for (let i = range.length - 1; i >= 0; i--) {
-			callback(range[i]);
-		}
-	}
 	reshape(array, part) {
 		const tmp = [];
 		for (let i = 0; i < array.length; i += part) {
