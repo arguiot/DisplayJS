@@ -376,20 +376,20 @@ class DisplayJS {
 			}
 		}());
 	}
-	extend(out = {}) {
-		for (let i = 1; i < arguments.length; i++) {
-			if (!arguments[i]) {
-				continue;
-			}
-
-			for (const key in arguments[i]) {
-				if (arguments[i].hasOwnProperty(key)) {
-					out[key] = arguments[i][key];
-				}
+	extend( defaults, options ) {
+		const extended = {};
+		let prop;
+		for (prop in defaults) {
+			if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
+				extended[prop] = defaults[prop];
 			}
 		}
-
-		return out;
+		for (prop in options) {
+			if (Object.prototype.hasOwnProperty.call(options, prop)) {
+				extended[prop] = options[prop];
+			}
+		}
+		return extended;
 	}
 	// Math and array manipulation
 	arange(start, end, step, offset) {

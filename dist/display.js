@@ -491,22 +491,20 @@ var DisplayJS = function () {
 		}
 	}, {
 		key: "extend",
-		value: function extend() {
-			var out = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-			for (var i = 1; i < arguments.length; i++) {
-				if (!arguments[i]) {
-					continue;
-				}
-
-				for (var key in arguments[i]) {
-					if (arguments[i].hasOwnProperty(key)) {
-						out[key] = arguments[i][key];
-					}
+		value: function extend(defaults, options) {
+			var extended = {};
+			var prop = void 0;
+			for (prop in defaults) {
+				if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
+					extended[prop] = defaults[prop];
 				}
 			}
-
-			return out;
+			for (prop in options) {
+				if (Object.prototype.hasOwnProperty.call(options, prop)) {
+					extended[prop] = options[prop];
+				}
+			}
+			return extended;
 		}
 		// Math and array manipulation
 
