@@ -415,9 +415,6 @@ class DisplayJS {
 		}
 		return tmp;
 	}
-	apply(array, callback) {
-		this.forIn(array, i => callback(i));
-	}
 	sum(array) {
 		return array.reduce((a, b) => a + b, 0);
 	}

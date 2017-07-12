@@ -542,13 +542,6 @@ var DisplayJS = function () {
 			return tmp;
 		}
 	}, {
-		key: "apply",
-		value: function apply(array, callback) {
-			this.forIn(array, function (i) {
-				return callback(i);
-			});
-		}
-	}, {
 		key: "sum",
 		value: function sum(array) {
 			return array.reduce(function (a, b) {
