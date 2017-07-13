@@ -438,12 +438,12 @@ class DisplayJS {
 	}
 	rmFromArray(array, condition) {
 		const obj = [];
-		this.forIn(array, (i) => {
+		for (const i in array) {
 			if (!condition(i)) {
 				obj.push(array[i]);
 			}
-			return obj;
-		});
+		}
+		return obj;
 	}
 	average(array) {
 		const summed = this.sum(array);

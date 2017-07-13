@@ -582,12 +582,12 @@ var DisplayJS = function () {
 		key: "rmFromArray",
 		value: function rmFromArray(array, condition) {
 			var obj = [];
-			this.forIn(array, function (i) {
+			for (var i in array) {
 				if (!condition(i)) {
 					obj.push(array[i]);
 				}
-				return obj;
-			});
+			}
+			return obj;
 		}
 	}, {
 		key: "average",
