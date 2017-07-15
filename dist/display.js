@@ -506,6 +506,11 @@ var DisplayJS = function () {
 			}
 			return extended;
 		}
+	}, {
+		key: "fn",
+		value: function fn() {
+			return DisplayJS.prototype;
+		}
 		// Math and array manipulation
 
 	}, {

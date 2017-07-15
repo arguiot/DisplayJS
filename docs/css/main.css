@@ -297,7 +297,7 @@ a:hover {
   text-decoration-color: white;
 }
 .watch {
-    width: 100%;
+    width: calc(100vw - 100px);
     padding: 50px;
     display: flex;
     justify-content: center;
@@ -311,7 +311,6 @@ a:hover {
   cursor: pointer;
 }
 .videoDisplayJS {
-  padding: 20px;
   display: none;
 }
 .star-btn {

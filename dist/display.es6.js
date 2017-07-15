@@ -391,6 +391,10 @@ class DisplayJS {
 		}
 		return extended;
 	}
+
+	fn () {
+		return DisplayJS.prototype;
+	}
 	// Math and array manipulation
 	arange(start, end, step, offset) {
 		const len = (Math.abs(end - start) + ((offset || 0) * 2)) / (step || 1) + 1;
