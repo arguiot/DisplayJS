@@ -11,8 +11,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /** ****************************************/
-/*           © Arthur Guiot 2017           */
-/*                DisplayJS                */
+/*					 © Arthur Guiot 2017					 */
+/*								DisplayJS								*/
 /** ****************************************/
 var DisplayJS = function () {
 	function DisplayJS(obj) {
@@ -369,6 +369,15 @@ var DisplayJS = function () {
 		key: "on",
 		value: function on(element, event, callback) {
 			element[0].addEventListener(event, callback);
+		}
+	}, {
+		key: "ready",
+		value: function ready(fn) {
+			if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
 		}
 	}, {
 		key: "show",

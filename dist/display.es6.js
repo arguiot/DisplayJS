@@ -1,6 +1,6 @@
 /** ****************************************/
-/*           © Arthur Guiot 2017           */
-/*                DisplayJS                */
+/*					 © Arthur Guiot 2017					 */
+/*								DisplayJS								*/
 /** ****************************************/
 class DisplayJS {
 	constructor(obj) {
@@ -285,6 +285,13 @@ class DisplayJS {
 	}
 	on(element, event, callback) {
 		element[0].addEventListener(event, callback);
+	}
+	ready(fn) {
+		if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
+			fn();
+		} else {
+			document.addEventListener('DOMContentLoaded', fn);
+		}
 	}
 	show(element) {
 		element[0].style.display = "block";
