@@ -7,7 +7,7 @@ class DisplayJS {
 		this.obj = obj;
 	}
 	// DOM manipulation and browser API.
-	var(push) {
+	renderVariables(push) {
 		const var_push = () => {
 			this.if();
 			this.else();
@@ -40,7 +40,7 @@ class DisplayJS {
 	xssURI(str) {
 		return encodeURI(str);
 	}
-	target(callback= () => { this.var(); }) {
+	target(callback= () => { this.renderVariables(); }) {
 		const addEventListener = ((() => {
 			if (document.addEventListener) {
 				return (element, event, handler) => {
