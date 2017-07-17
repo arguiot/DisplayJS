@@ -30,6 +30,12 @@ class DisplayJS {
 			}, push);
 		}
 	}
+	render (push) {
+		this.var(push);
+	}
+	renderVariables (push) {
+		this.var(push);
+	}
 	xss (str) {
 		const lt = /</g;
 		const gt = />/g;
@@ -290,7 +296,7 @@ class DisplayJS {
 		if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
 			fn();
 		} else {
-			document.addEventListener('DOMContentLoaded', fn);
+			document.addEventListener("DOMContentLoaded", fn);
 		}
 	}
 	show(element) {

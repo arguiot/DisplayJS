@@ -51,6 +51,16 @@ var DisplayJS = function () {
 			}
 		}
 	}, {
+		key: "render",
+		value: function render(push) {
+			this.var(push);
+		}
+	}, {
+		key: "renderVariables",
+		value: function renderVariables(push) {
+			this.var(push);
+		}
+	}, {
 		key: "xss",
 		value: function xss(str) {
 			var lt = /</g;
@@ -376,7 +386,7 @@ var DisplayJS = function () {
 			if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
 				fn();
 			} else {
-				document.addEventListener('DOMContentLoaded', fn);
+				document.addEventListener("DOMContentLoaded", fn);
 			}
 		}
 	}, {

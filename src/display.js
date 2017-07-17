@@ -31,10 +31,10 @@ class DisplayJS {
 		}
 	}
 	render (push) {
-		this.var(push)
+		this.var(push);
 	}
 	renderVariables (push) {
-		this.var(push)
+		this.var(push);
 	}
 	xss (str) {
 		const lt = /</g;
