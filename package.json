@@ -39,5 +39,19 @@
   },
   "dependencies": {
     "eslint-config-airbnb": "^15.0.1"
+  },
+  "autoupdate": {
+    "source": "git",
+    "target": "git://github.com/arguiot/DisplayJS.git",
+    "fileMap": [
+      {
+        "basePath": "dist",
+        "files": [
+          "display.min.js",
+          "display.js",
+          "display.es6.js"
+        ]
+      }
+    ]
   }
 }
