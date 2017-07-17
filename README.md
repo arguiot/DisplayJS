@@ -5,8 +5,9 @@
 A simple framework for building ambitious UI, without thinking about how everything will be displayed.
 <br/>
 ⚠️ Display is in BETA, you can use it, but it might change.<br/>
-By the way, you can ⭐️ the project to support it 😊<br/>
-[![GitHub release](https://img.shields.io/github/release/arguiot/DisplayJS.svg)](https://github.com/arguiot/DisplayJS/releases)
+By the way, you can ⭐️ the project to support it 😊
+
+[![GitHub release](https://img.shields.io/github/release/arguiot/DisplayJS.svg)](https://github.com/arguiot/DisplayJS/release
 [![Build Status](https://travis-ci.org/arguiot/DisplayJS.svg?branch=master)](https://travis-ci.org/arguiot/DisplayJS)
 [![Github All Releases](https://img.shields.io/github/downloads/arguiot/DisplayJS/total.svg)](https://github.com/arguiot/DisplayJS/)
 [![npm](https://img.shields.io/npm/dt/display.js.svg)](https://www.npmjs.com/package/display.js)
