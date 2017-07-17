@@ -5,8 +5,7 @@
 A simple framework for building ambitious UI, without thinking about how everything will be displayed.
 <br/>
 ⚠️ Display is in BETA, you can use it, but it might change.<br/>
-By the way, you can ⭐️ the project to support it 😊
-
+By the way, you can ⭐️ the project to support it 😊<br/>
 [![GitHub release](https://img.shields.io/github/release/arguiot/DisplayJS.svg)](https://github.com/arguiot/DisplayJS/releases)
 [![Build Status](https://travis-ci.org/arguiot/DisplayJS.svg?branch=master)](https://travis-ci.org/arguiot/DisplayJS)
 [![Github All Releases](https://img.shields.io/github/downloads/arguiot/DisplayJS/total.svg)](https://github.com/arguiot/DisplayJS/)
@@ -34,6 +33,4 @@ $ npm install display.js
 var $ = new DisplayJS (window);
 ```
 
-The full docs can be found [here](https://github.com/arguiot/DisplayJS/wiki)
-
-⚠️ Docs aren't avaible yet
+## The full docs can be found [here](https://github.com/arguiot/DisplayJS/wiki)
