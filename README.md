@@ -1,6 +1,6 @@
 <h1 align="center">DisplayJS</h1>
 <p align="center">
-  <img src="https://rawgit.com/arguiot/DisplayJS/master/docs/img/logo.svg" width="256">
+  <img src="https://rawgit.com/arguiot/DisplayJS/master/src/docs/img/logo.svg" width="256">
 <br/>
 A simple framework for building ambitious UI, without thinking about how everything will be displayed.
 <br/>
@@ -17,7 +17,7 @@ By the way, you can ⭐️ the project to support it 😊
 </p>
 
 ## Browser support
-| <img src="https://github.com/alrra/browser-logos/blob/master/chrome/chrome_128x128.png?raw=true" width="48px" height="48px" alt="Chrome logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/firefox/firefox_128x128.png?raw=true" width="48px" height="48px" alt="Firefox logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/internet-explorer/internet-explorer_128x128.png?raw=true" width="48px" height="48px" alt="Internet Explorer logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/opera/opera_128x128.png?raw=true" width="48px" height="48px" alt="Opera logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/safari/safari_128x128.png?raw=true" width="48px" height="48px" alt="Safari logo"> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/android/android_128x128.png" width="48px" height="48px" alt="Android Browser Logo" >
+| <img src="https://github.com/alrra/browser-logos/blob/master/src/chrome/chrome_128x128.png?raw=true" width="48px" height="48px" alt="Chrome logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/src/firefox/firefox_128x128.png?raw=true" width="48px" height="48px" alt="Firefox logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/src/internet-explorer/internet-explorer_128x128.png?raw=true" width="48px" height="48px" alt="Internet Explorer logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/src/opera/opera_128x128.png?raw=true" width="48px" height="48px" alt="Opera logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/src/safari/safari_128x128.png?raw=true" width="48px" height="48px" alt="Safari logo"> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/android/android_128x128.png" width="48px" height="48px" alt="Android Browser Logo" >
 |:---:|:---:|:---:|:---:|:---:|:---:|
 | 43+ ✅ | 52+ ✅ | 10+⛔ | 30+ ⛔ | 9+ ✅ | 5.2+ ⛔
 ## Getting Started
