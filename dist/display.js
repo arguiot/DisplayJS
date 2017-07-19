@@ -355,10 +355,8 @@ var DisplayJS = function () {
 	}, {
 		key: "single",
 		value: function single(str) {
-			var obj = document.querySelectorAll(str);
-			var node = [];
-			node.push(obj[0]);
-			return node;
+			var obj = document.querySelector(str);
+			return obj;
 		}
 	}, {
 		key: "empty",
@@ -373,7 +371,7 @@ var DisplayJS = function () {
 	}, {
 		key: "remove",
 		value: function remove(element) {
-			element[0].parentNode.removeChild(element);
+			element[0].parentNode.removeChild(element[0]);
 		}
 	}, {
 		key: "on",
@@ -529,6 +527,13 @@ var DisplayJS = function () {
 		key: "fn",
 		value: function fn() {
 			return DisplayJS.prototype;
+		}
+	}, {
+		key: "dynamic",
+		value: function dynamic(callback) {
+			var push = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 250;
+
+			window.setInterval(callback, push);
 		}
 		// Math and array manipulation
 

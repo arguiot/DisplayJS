@@ -275,10 +275,8 @@ class DisplayJS {
 		return obj;
 	}
 	single(str) {
-		const obj = document.querySelectorAll(str);
-		const node = [];
-		node.push(obj[0]);
-		return node;
+		const obj = document.querySelector(str);
+		return obj;
 	}
 	empty(element) {
 		element[0].innerHTML = null;
@@ -287,7 +285,7 @@ class DisplayJS {
 		element[0].value = null;
 	}
 	remove(element) {
-		element[0].parentNode.removeChild(element);
+		element[0].parentNode.removeChild(element[0]);
 	}
 	on(element, event, callback) {
 		element[0].addEventListener(event, callback);
@@ -407,6 +405,10 @@ class DisplayJS {
 
 	fn () {
 		return DisplayJS.prototype;
+	}
+
+	dynamic (callback, push=250) {
+		window.setInterval(callback, push);
 	}
 	// Math and array manipulation
 	arange(start, end, step, offset) {
