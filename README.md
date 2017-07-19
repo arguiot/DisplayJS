@@ -1,6 +1,6 @@
 <h1 align="center">DisplayJS</h1>
 <p align="center">
-  <img src="https://rawgit.com/arguiot/DisplayJS/master/src/docs/img/logo.svg" width="256">
+  <img src="https://rawgit.com/arguiot/DisplayJS/master/docs/img/logo.svg" width="256">
 <br/>
 A simple framework for building ambitious UI, without thinking about how everything will be displayed.
 <br/>
