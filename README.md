@@ -16,6 +16,10 @@ By the way, you can ⭐️ the project to support it 😊
   
 </p>
 
+## Browser support
+| <img src="https://github.com/alrra/browser-logos/blob/master/chrome/chrome_128x128.png?raw=true" width="48px" height="48px" alt="Chrome logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/firefox/firefox_128x128.png?raw=true" width="48px" height="48px" alt="Firefox logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/internet-explorer/internet-explorer_128x128.png?raw=true" width="48px" height="48px" alt="Internet Explorer logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/opera/opera_128x128.png?raw=true" width="48px" height="48px" alt="Opera logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/safari/safari_128x128.png?raw=true" width="48px" height="48px" alt="Safari logo"> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/android/android_128x128.png" width="48px" height="48px" alt="Android Browser Logo" >
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| 43+ ✅ | 52+ ✅ | 10+⛔ | 30+ ⛔ | 9+ ✅ | 5.2+ ⛔
 ## Getting Started
 
 To use display.js, you'll need to download display.js and add it in your js folder. Or, you can add these line of code in the head or in the body of your page:
