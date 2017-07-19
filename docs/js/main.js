@@ -1,4 +1,6 @@
-var $ = new DisplayJS(window);
+
+const $ = new DisplayJS(window);
+
 $.hide($.select(".footer-container"));
 var hamburger = $.select(".hamburger");
 $.on(hamburger, "click", function() {
