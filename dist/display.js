@@ -349,12 +349,18 @@ var DisplayJS = function () {
 	}, {
 		key: "select",
 		value: function select(str) {
+			if (this.isElement(str)) {
+				return str;
+			}
 			var obj = document.querySelectorAll(str);
 			return obj;
 		}
 	}, {
 		key: "single",
 		value: function single(str) {
+			if (this.isElement(str)) {
+				return str;
+			}
 			var obj = document.querySelector(str);
 			return obj;
 		}
@@ -534,6 +540,28 @@ var DisplayJS = function () {
 			var push = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 250;
 
 			window.setInterval(callback, push);
+		}
+	}, {
+		key: "parent",
+		value: function parent(el) {
+			var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+			var newEl = el[0];
+			for (var i in this.range(n)) {
+				newEl = newEl.parentNode;
+			}
+			return newEl;
+		}
+	}, {
+		key: "isNode",
+		value: function isNode(el) {
+			return (typeof Node === "undefined" ? "undefined" : _typeof(Node)) === "object" ? el instanceof Node : el && (typeof el === "undefined" ? "undefined" : _typeof(el)) === "object" && typeof el.nodeType === "number" && typeof el.nodeName === "string";
+		}
+	}, {
+		key: "isElement",
+		value: function isElement(el) {
+			return (typeof HTMLElement === "undefined" ? "undefined" : _typeof(HTMLElement)) === "object" ? el instanceof HTMLElement : //DOM2
+			el && (typeof el === "undefined" ? "undefined" : _typeof(el)) === "object" && el !== null && el.nodeType === 1 && typeof el.nodeName === "string";
 		}
 		// Math and array manipulation
 

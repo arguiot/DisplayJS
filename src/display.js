@@ -271,10 +271,16 @@ class DisplayJS {
 		return false;
 	}
 	select(str) {
+		if (this.isElement(str)) {
+			return str;
+		}
 		const obj = document.querySelectorAll(str);
 		return obj;
 	}
 	single(str) {
+		if (this.isElement(str)) {
+			return str;
+		}
 		const obj = document.querySelector(str);
 		return obj;
 	}
@@ -409,6 +415,26 @@ class DisplayJS {
 
 	dynamic (callback, push=250) {
 		window.setInterval(callback, push);
+	}
+
+	parent (el, n = 0) {
+		let newEl = el[0];
+		for (const i in this.range(n)) {
+			newEl = newEl.parentNode;
+		}
+		return newEl;
+	}
+	isNode(el){
+		return (
+			typeof Node === "object" ? el instanceof Node : 
+			el && typeof el === "object" && typeof el.nodeType === "number" && typeof el.nodeName==="string"
+		);
+	}	
+	isElement(el){
+		return (
+			typeof HTMLElement === "object" ? el instanceof HTMLElement : //DOM2
+			el && typeof el === "object" && el !== null && el.nodeType === 1 && typeof el.nodeName==="string"
+		);
 	}
 	// Math and array manipulation
 	arange(start, end, step, offset) {
