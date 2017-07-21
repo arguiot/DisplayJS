@@ -62,8 +62,9 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 - **Arthur Guiot** - *Initial work* - [@arguiot](https://github.com/arguiot)
 - **Nikhil Bhaskar** - *Added aliases for the `$.var()` function* - [@Nikhil22](https://github.com/Nikhil22)
+- **devrafalko** - *Helped a lot for the `$.math()` function* - [@devrafalko](https://github.con/devrafalko)
 
-See also the list of [contributors](https://github.com/arguiot/DisplayJS/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/arguiot/DisplayJS/contributors) who participated in this project. If you don't code but you have great ideas, don't hesitate to write your idea in the issue part. If your idea is accepted, I will add you to this list 😊.
 
 ## License
 
