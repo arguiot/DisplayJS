@@ -585,18 +585,18 @@ class DisplayJS {
 				var result = nums[0];
 				for(var i=1;i<nums.length;i++){
 					switch(operation){
-						case 0:
-							result += nums[i];
-							break;
-						case 1:
-							result -= nums[i];
-							break;
-						case 2:
-							result *= nums[i];
-							break;
-						case 3:
-							result /= nums[i];
-							break;
+					case 0:
+						result += nums[i];
+						break;
+					case 1:
+						result -= nums[i];
+						break;
+					case 2:
+						result *= nums[i];
+						break;
+					case 3:
+						result /= nums[i];
+						break;
 					}
 				}
 				return result;
@@ -640,7 +640,7 @@ class DisplayJS {
 				return decimals;
 			}
 		};
-		return exactMath
+		return exactMath;
 	}
 }
 // Retro compatibility
