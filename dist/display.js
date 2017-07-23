@@ -609,15 +609,19 @@ var DisplayJS = function () {
 	}, {
 		key: "sum",
 		value: function sum(array) {
+			var _this5 = this;
+
 			return array.reduce(function (a, b) {
-				return a + b;
+				return _this5.math().add(a, b);
 			}, 0);
 		}
 	}, {
 		key: "multiply",
 		value: function multiply(array) {
+			var _this6 = this;
+
 			return array.reduce(function (a, b) {
-				return a * b;
+				return _this6.math().mul(a, b);
 			}, 0);
 		}
 	}, {
@@ -658,19 +662,22 @@ var DisplayJS = function () {
 		key: "average",
 		value: function average(array) {
 			var summed = this.sum(array);
-			return summed / array.length;
+			var average = this.math().div(summed, array.length);
+			return average;
 		}
 	}, {
 		key: "median",
 		value: function median(array) {
+			var _this7 = this;
+
 			array.sort(function (a, b) {
-				return a - b;
+				return _this7.math().sub(a, b);
 			});
-			var half = Math.floor(array.length / 2);
+			var half = Math.floor(this.math().div(array.length, 2));
 			if (array.length % 2) {
 				return array[half];
 			} else {
-				return (array[half - 1] + array[half]) / 2.0;
+				return this.math().div(this.math().add(array[half - 1], array[half]), 2.0);
 			}
 		}
 	}, {
@@ -678,13 +685,14 @@ var DisplayJS = function () {
 		value: function predict(array, val) {
 			var text = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
+			var djs = this;
 			function main(valC, text) {
 				var first = array[0][0];
 				var second = array[1][0];
 				var firstVal = array[0][1];
 				var secondVal = array[1][1];
-				var a = (firstVal - secondVal) / (first - second);
-				var b = secondVal - second * a;
+				var a = djs.math().div(djs.math().sub(firstVal, secondVal), djs.math().sub(first, second));
+				var b = djs.math().sub(secondVal, djs.math().mul(second, a));
 				if (text == true) {
 					return "f(x) = " + a + "x+" + b + "; f(" + valC + ") = " + (valC * a + b);
 				} else {

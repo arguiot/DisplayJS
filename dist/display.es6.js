@@ -469,10 +469,10 @@ class DisplayJS {
 		return tmp;
 	}
 	sum(array) {
-		return array.reduce((a, b) => a + b, 0);
+		return array.reduce((a, b) => this.math().add(a, b), 0);
 	}
 	multiply(array) {
-		return array.reduce((a, b) => a * b, 0);
+		return array.reduce((a, b) => this.math().mul(a, b), 0);
 	}
 	flatten(array) {
 		return array.reduce((a, b) => a.concat(b), []);
@@ -500,26 +500,28 @@ class DisplayJS {
 	}
 	average(array) {
 		const summed = this.sum(array);
-		return summed / array.length;
+		const average = this.math().div(summed, array.length);
+		return average;
 	}
 	median(array) {
-		array.sort( (a, b) => a - b );
-		const half = Math.floor(array.length/2);
+		array.sort( (a, b) => this.math().sub(a, b) );
+		const half = Math.floor(this.math().div(array.length,2));
 		if(array.length % 2) {
 			return array[half];
 		}
 		else {
-			return (array[half-1] + array[half]) / 2.0;
+			return this.math().div(this.math().add(array[half-1], array[half]), 2.0);
 		}
 	}
 	predict(array, val, text=false) {
+		var djs = this
 		function main(valC, text) {
 			const first = array[0][0];
 			const second = array[1][0];
 			const firstVal = array[0][1];
 			const secondVal = array[1][1];
-			const a = (firstVal - secondVal) / (first - second);
-			const b = secondVal - (second * a);
+			const a = djs.math().div(djs.math().sub(firstVal, secondVal), djs.math().sub(first, second));
+			const b = djs.math().sub(secondVal, djs.math().mul(second, a));
 			if (text == true) {
 				return `f(x) = ${a}x+${b}; f(${valC}) = ${valC * a + b}`;
 			}
