@@ -10,10 +10,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/** ****************************************/
-/*					 © Arthur Guiot 2017					 */
-/*								DisplayJS								*/
-/** ****************************************/
+/** *****************************************/
+/*				© Arthur Guiot 2017			*/
+/*					DisplayJS				*/
+/** *****************************************/
 var DisplayJS = function () {
 	function DisplayJS(obj) {
 		_classCallCheck(this, DisplayJS);
@@ -100,6 +100,8 @@ var DisplayJS = function () {
 					var attr1 = a[i].getAttribute("target");
 					if (this.type == "checkbox") {
 						obj[attr1] = this.checked;
+					} else if (this.type == "select") {
+						obj[attr1] = this.options[this.selectedIndex].value;
 					} else {
 						obj[attr1] = this.value;
 					}
@@ -109,6 +111,8 @@ var DisplayJS = function () {
 					var attr2 = a[i].getAttribute("target");
 					if (this.type == "checkbox") {
 						obj[attr2] = this.checked;
+					} else if (this.type == "select") {
+						obj[attr2] = this.options[this.selectedIndex].value;
 					} else {
 						obj[attr2] = this.value;
 					}
@@ -118,6 +122,8 @@ var DisplayJS = function () {
 					var attr3 = a[i].getAttribute("target");
 					if (this.type == "checkbox") {
 						obj[attr3] = this.checked;
+					} else if (this.type == "select") {
+						obj[attr3] = this.options[this.selectedIndex].value;
 					} else {
 						obj[attr3] = this.value;
 					}
@@ -127,6 +133,8 @@ var DisplayJS = function () {
 					var attr4 = a[i].getAttribute("target");
 					if (this.type == "checkbox") {
 						obj[attr4] = this.checked;
+					} else if (this.type == "select") {
+						obj[attr4] = this.options[this.selectedIndex].value;
 					} else {
 						obj[attr4] = this.value;
 					}
