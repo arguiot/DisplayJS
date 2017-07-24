@@ -21,7 +21,7 @@ The browser support table is not 100% accurate. The ⛔ mean that I didn't teste
 
 | <img src="https://github.com/alrra/browser-logos/blob/master/src/chrome/chrome_128x128.png?raw=true" width="48px" height="48px" alt="Chrome logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/src/firefox/firefox_128x128.png?raw=true" width="48px" height="48px" alt="Firefox logo"> | IE | <img src="https://github.com/alrra/browser-logos/blob/master/src/opera/opera_128x128.png?raw=true" width="48px" height="48px" alt="Opera logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/src/safari/safari_128x128.png?raw=true" width="48px" height="48px" alt="Safari logo"> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/android/android_128x128.png" width="48px" height="48px" alt="Android Browser Logo" >
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| 43+ ✅ | 52+ ✅ | 10+⛔ | 30+ ⛔ | 9+ ✅ | 5.2+ ⛔
+| 52+ ✅ | 52+ ✅ | 10+⛔ | 40+ ✅ | 9+ ✅ | 5.2+ ⛔
 ## Getting Started
 
 To use display.js, you'll need to download display.js and add it in your js folder. Or, you can add these line of code in the head or in the body of your page:
