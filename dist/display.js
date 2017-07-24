@@ -373,6 +373,11 @@ var DisplayJS = function () {
 			return obj;
 		}
 	}, {
+		key: "s",
+		value: function s() {
+			return this.select(arguments);
+		}
+	}, {
 		key: "empty",
 		value: function empty(element) {
 			element[0].innerHTML = null;
@@ -838,3 +843,9 @@ var _DOM_DJS = function (_DisplayJS) {
 
 	return _DOM_DJS;
 }(DisplayJS);
+// Browaserify / Node.js
+
+
+if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports) {
+	module.exports = new DisplayJS();
+}

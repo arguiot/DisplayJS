@@ -292,6 +292,9 @@ class DisplayJS {
 		const obj = document.querySelector(str);
 		return obj;
 	}
+	s () {
+		return this.select(arguments);
+	}
 	empty(element) {
 		element[0].innerHTML = null;
 	}
@@ -514,7 +517,7 @@ class DisplayJS {
 		}
 	}
 	predict(array, val, text=false) {
-		var djs = this
+		var djs = this;
 		function main(valC, text) {
 			const first = array[0][0];
 			const second = array[1][0];
@@ -655,3 +658,7 @@ class DisplayJS {
 }
 // Retro compatibility
 class _DOM_DJS extends DisplayJS {}
+// Browaserify / Node.js
+if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports) {
+	module.exports = new DisplayJS;
+}
