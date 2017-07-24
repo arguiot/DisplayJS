@@ -172,6 +172,15 @@ body {
     /*margin-top: 75px;*/
     background-color: white;
 }
+#HW_badge_cont {
+  display: inline-block !important;
+  line-height: 100%;
+  position: relative;
+  top: 5px;
+}
+#HW_badge {
+  background: #5ab987;
+}
 .hamburger {
     display: none !important;
 }

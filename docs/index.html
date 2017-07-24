@@ -214,7 +214,13 @@
         ga('create', 'UA-XXXXX-X', 'auto');
         ga('send', 'pageview');
     </script>
-    <script src="https://widget.battleforthenet.com/widget.js" async></script>
+    <script>
+      var HW_config = {
+        selector: ".title", // CSS selector where to inject the badge
+        account: "xbDkNJ" // your account ID
+      };
+    </script>
+    <script async src="https://cdn.headwayapp.co/widget.js"></script>
 </body>
 
 </html>
