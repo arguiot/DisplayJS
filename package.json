@@ -9,7 +9,7 @@
   "scripts": {
     "run": "npm test",
     "build": "npm test",
-    "test": "npm run gulp && npm run lint && exit 0",
+    "test": "npm run lint && npm run gulp && exit 0",
     "gulp": "gulp",
     "lint": "./node_modules/.bin/eslint src/display.js --fix"
   },

@@ -314,6 +314,15 @@ class DisplayJS {
 			document.addEventListener("DOMContentLoaded", fn);
 		}
 	}
+	scroll (callback) {
+		window.addEventListener("scroll", callback);
+	}
+	scrollTo (x, y) {
+		window.scroll(x, y);
+	}
+	scrollTop (el = [document.body]) {
+		return el[0].scrollTop;
+	}
 	show(element) {
 		element[0].style.display = "block";
 		return true;

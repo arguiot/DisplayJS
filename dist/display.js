@@ -407,6 +407,23 @@ var DisplayJS = function () {
 			}
 		}
 	}, {
+		key: "scroll",
+		value: function scroll(callback) {
+			window.addEventListener("scroll", callback);
+		}
+	}, {
+		key: "scrollTo",
+		value: function scrollTo(x, y) {
+			window.scroll(x, y);
+		}
+	}, {
+		key: "scrollTop",
+		value: function scrollTop() {
+			var el = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [document.body];
+
+			return el[0].scrollTop;
+		}
+	}, {
 		key: "show",
 		value: function show(element) {
 			element[0].style.display = "block";
