@@ -10,10 +10,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/** *****************************************/
+/********************************************/
 /*				© Arthur Guiot 2017			*/
 /*					DisplayJS				*/
-/** *****************************************/
+/********************************************/
 var DisplayJS = function () {
 	function DisplayJS(obj) {
 		_classCallCheck(this, DisplayJS);
@@ -563,7 +563,7 @@ var DisplayJS = function () {
 			for (var i in this.range(n)) {
 				newEl = newEl.parentNode;
 			}
-			return newEl;
+			return [newEl];
 		}
 	}, {
 		key: "isNode",

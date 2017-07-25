@@ -1,7 +1,7 @@
-/** *****************************************/
+/********************************************/
 /*				© Arthur Guiot 2017			*/
 /*					DisplayJS				*/
-/** *****************************************/
+/********************************************/
 class DisplayJS {
 	constructor(obj) {
 		this.obj = obj;
@@ -433,7 +433,7 @@ class DisplayJS {
 		for (const i in this.range(n)) {
 			newEl = newEl.parentNode;
 		}
-		return newEl;
+		return [newEl];
 	}
 	isNode(el){
 		return (
@@ -517,7 +517,7 @@ class DisplayJS {
 		}
 	}
 	predict(array, val, text=false) {
-		var djs = this;
+		const djs = this;
 		function main(valC, text) {
 			const first = array[0][0];
 			const second = array[1][0];
@@ -589,7 +589,7 @@ class DisplayJS {
 				return this.shiftComma(this.countResult(intArr,2),commaSum);
 			},
 			isSafeInteger(result) {
-				if(result<=-(Math.pow(2,53)-1)||result>=(Math.pow(2,53)-1)) throw "The result is not a safe integer.";
+				if(result<=-(Math.pow(2, 53)-1)||result>=(Math.pow(2, 53)-1)) throw "The result is not a safe integer.";
 			},
 			shiftComma(result, commaPos) {
 				return this.toExponent(this.countDecimals([result]),-commaPos)[0];
