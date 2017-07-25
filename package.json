@@ -63,7 +63,7 @@
     "gulp-babili": "^0.1.4"
   },
   "dependencies": {
-    "eslint-config-airbnb": "^15.0.1"
+    
   },
   "autoupdate": {
     "source": "git",
