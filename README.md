@@ -4,7 +4,6 @@
 <br/>
 A simple framework for building ambitious UI, without thinking about how everything will be displayed.
 <br/>
-⚠️ Display is in BETA, you can use it, but it might change.<br/>
 By the way, you can ⭐️ the project to support it 😊
 
 
