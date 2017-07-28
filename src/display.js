@@ -282,15 +282,13 @@ class DisplayJS {
 		if (this.isElement(str)) {
 			return str;
 		}
-		const obj = document.querySelectorAll(str);
-		return obj;
+		return document.querySelectorAll(str);
 	}
 	single(str) {
 		if (this.isElement(str)) {
 			return str;
 		}
-		const obj = document.querySelector(str);
-		return obj;
+		return document.querySelector(str);
 	}
 	s () {
 		return this.select(arguments);

@@ -360,8 +360,7 @@ var DisplayJS = function () {
 			if (this.isElement(str)) {
 				return str;
 			}
-			var obj = document.querySelectorAll(str);
-			return obj;
+			return document.querySelectorAll(str);
 		}
 	}, {
 		key: "single",
@@ -369,8 +368,7 @@ var DisplayJS = function () {
 			if (this.isElement(str)) {
 				return str;
 			}
-			var obj = document.querySelector(str);
-			return obj;
+			return document.querySelector(str);
 		}
 	}, {
 		key: "s",
@@ -560,11 +558,6 @@ var DisplayJS = function () {
 			return extended;
 		}
 	}, {
-		key: "fn",
-		value: function fn() {
-			return DisplayJS.prototype;
-		}
-	}, {
 		key: "dynamic",
 		value: function dynamic(callback) {
 			var push = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 250;
@@ -739,8 +732,13 @@ var DisplayJS = function () {
 			}
 		}
 	}, {
+		key: "fn",
+		get: function get() {
+			return DisplayJS.prototype;
+		}
+	}, {
 		key: "math",
-		value: function math() {
+		get: function get() {
 			var exactMath = {
 				add: function add() {
 					return mathFunctions.addSubDiv(arguments, 0);

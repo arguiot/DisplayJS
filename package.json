@@ -62,9 +62,7 @@
     "gulp-babel": "^6.1.2",
     "gulp-babili": "^0.1.4"
   },
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "autoupdate": {
     "source": "git",
     "target": "git://github.com/arguiot/DisplayJS.git",

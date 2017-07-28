@@ -282,15 +282,13 @@ class DisplayJS {
 		if (this.isElement(str)) {
 			return str;
 		}
-		const obj = document.querySelectorAll(str);
-		return obj;
+		return document.querySelectorAll(str);
 	}
 	single(str) {
 		if (this.isElement(str)) {
 			return str;
 		}
-		const obj = document.querySelector(str);
-		return obj;
+		return document.querySelector(str);
 	}
 	s () {
 		return this.select(arguments);
@@ -428,8 +426,7 @@ class DisplayJS {
 		}
 		return extended;
 	}
-
-	fn () {
+	get fn () {
 		return DisplayJS.prototype;
 	}
 
@@ -447,13 +444,13 @@ class DisplayJS {
 	isNode(el){
 		return (
 			typeof Node === "object" ? el instanceof Node : 
-			el && typeof el === "object" && typeof el.nodeType === "number" && typeof el.nodeName==="string"
+				el && typeof el === "object" && typeof el.nodeType === "number" && typeof el.nodeName==="string"
 		);
 	}	
 	isElement(el){
 		return (
 			typeof HTMLElement === "object" ? el instanceof HTMLElement : //DOM2
-			el && typeof el === "object" && el !== null && el.nodeType === 1 && typeof el.nodeName==="string"
+				el && typeof el === "object" && el !== null && el.nodeType === 1 && typeof el.nodeName==="string"
 		);
 	}
 	// Math and array manipulation
@@ -562,7 +559,7 @@ class DisplayJS {
 		}
 		
 	}
-	math() {
+	get math() {
 		const exactMath = {
 			add() {
 				return mathFunctions.addSubDiv(arguments,0);
