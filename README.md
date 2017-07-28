@@ -48,7 +48,7 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of cond
 
 #### Made a website using the DisplayJS?
 
-Add the built with waffle-grid badge to your `README.md`
+Add the built with DisplayJS badge to your `README.md`
 
 [![Built with DisplayJS](https://img.shields.io/badge/Built%20with-DisplayJS-blue.svg)](https://img.shields.io/badge/Built%20with-DisplayJS-blue.svg)
 
