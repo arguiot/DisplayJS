@@ -54,7 +54,19 @@
 </head>
 <body>
     <h1>Page Not Found</h1>
-    <p>Sorry, but the page you were trying to view does not exist.</p>
+    <p>
+        Sorry, but the page you were trying to view does not exist.
+    </p>
+    <p>
+        Click anywhere to go on the home page.
+    </p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/DisplayJS/1.0.0/display.min.js" integrity="sha256-qgJxQgVj+9q5m01rR8zOMzFBEyYpk+ohryH9ME1R8A8=" crossorigin="anonymous"></script>
+    <script>
+        var $ = new DisplayJS(window);
+        $.on([document.body], "click", function() {
+            window.location.href = "https://display.js.org"
+        })
+    </script>
 </body>
 </html>
 <!-- IE needs 512+ bytes: http://blogs.msdn.com/b/ieinternals/archive/2010/08/19/http-error-pages-in-internet-explorer.aspx -->
