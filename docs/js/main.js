@@ -1,41 +1,41 @@
 
 const $ = new DisplayJS(window);
 
-$.hide($.select(".footer-container"));
-var hamburger = $.select(".hamburger");
+$.hide($.s(".footer-container"));
+var hamburger = $.s(".hamburger");
 $.on(hamburger, "click", function() {
-	$.toggleClass($.select(".js-toggled"), "visible");
+	$.toggleClass($.s(".js-toggled"), "visible");
 });
 $.ajax("https://unpkg.com/display.js?json", "GET", "", function (data) {
 	data = JSON.parse(data)
 	var size = data.size / 1024;
 	size = Math.round(size * 100) / 100
 	console.log(size);
-	$.text($.select(".kb"), size);
+	$.text($.s(".kb"), size);
 });
 $.on([window], 'scroll', function() {
 	var wScroll = window.scrollY;
-		var header = $.select("header");
+		var header = $.s("header");
 	  	var jumpIn  = window.innerHeight;
     if (wScroll > 30) {
-      $.addClass($.select(".footer-fixed"), "visible");
+      $.addClass($.s(".footer-fixed"), "visible");
     }
     else {
-      $.removeClass($.select(".footer-fixed"), "visible");
+      $.removeClass($.s(".footer-fixed"), "visible");
     }
 	  if (wScroll > jumpIn) {
-	    $.show($.select(".footer-container"));
-	    $.hide($.select("#particles-js"));
+	    $.show($.s(".footer-container"));
+	    $.hide($.s("#particles-js"));
       
 	  } else {
-	    $.hide($.select(".footer-container"));
-	    $.show($.select("#particles-js"));
+	    $.hide($.s(".footer-container"));
+	    $.show($.s("#particles-js"));
       
 	  }
-	// $.select(".show")[0].style.top = 0 - (window.scrollY / 3) + "px";
+	// $.s(".show")[0].style.top = 0 - (window.scrollY / 3) + "px";
 });
-$.on($.select(".watch"), "click", function() {
-  $.toggleClass($.select(".videoDisplayJS"), "visible");
+$.on($.s(".watch"), "click", function() {
+  $.toggleClass($.s(".videoDisplayJS"), "visible");
 });
 
 particlesJS("particles-js", {
