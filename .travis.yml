@@ -8,11 +8,6 @@ before_install:
 install:
   - npm install
 
-before_script:
-  - npm install gulp gulp-uglify --save-dev 
-  - npm install gulp-rename gulp-babel babel-preset-env --save-dev
-  - npm install --save-dev eslint buffer-shims
-
 script:
   - npm run test
 
