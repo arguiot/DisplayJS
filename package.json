@@ -54,13 +54,17 @@
     "babel-plugin-transform-simplify-comparison-operators": "^6.8.4",
     "babel-plugin-transform-undefined-to-void": "^6.8.2",
     "babel-preset-babili": "^0.1.4",
-    "babel-preset-env": "^1.5.2",
+    "babel-preset-env": "^1.6.0",
     "babili": "^0.1.4",
+    "buffer-shims": "^1.0.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.6.1",
+    "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
-    "gulp-babili": "^0.1.4"
+    "gulp-babili": "^0.1.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0"
   },
   "dependencies": {},
   "autoupdate": {
