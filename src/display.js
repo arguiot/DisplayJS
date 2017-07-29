@@ -290,8 +290,8 @@ class DisplayJS {
 		}
 		return document.querySelector(str);
 	}
-	s () {
-		return this.select(arguments);
+	s (str) {
+		return this.select(str);
 	}
 	empty(element) {
 		element[0].innerHTML = null;

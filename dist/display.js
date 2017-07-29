@@ -372,8 +372,8 @@ var DisplayJS = function () {
 		}
 	}, {
 		key: "s",
-		value: function s() {
-			return this.select(arguments);
+		value: function s(str) {
+			return this.select(str);
 		}
 	}, {
 		key: "empty",
