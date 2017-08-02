@@ -239,6 +239,17 @@ class DisplayJS {
 			callback(obj, prop, newVal, oldVal);
 		});
 	}
+	load (el, url, callback=() => {}) {
+		this.ajax(url, "GET", "", function(xhr) {
+			try {
+				document.querySelector(el).innerHTML = xhr.responseXML.querySelector(el);
+				callback();
+			} catch(e) {
+				callback(e);
+			}
+			
+		});
+	}
 	onEvent () {
 		const elements = document.querySelectorAll("[on]");
 		for (let i = 0; i < elements.length; i++) {
@@ -439,7 +450,7 @@ class DisplayJS {
 		for (const i in this.range(n)) {
 			newEl = newEl.parentNode;
 		}
-		return [newEl];
+		return new Array(newEl);
 	}
 	isNode(el){
 		return (

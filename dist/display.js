@@ -291,6 +291,20 @@ var DisplayJS = function () {
 			});
 		}
 	}, {
+		key: "load",
+		value: function load(el, url) {
+			var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+
+			this.ajax(url, "GET", "", function (xhr) {
+				try {
+					document.querySelector(el).innerHTML = xhr.responseXML.querySelector(el);
+					callback();
+				} catch (e) {
+					callback(e);
+				}
+			});
+		}
+	}, {
 		key: "onEvent",
 		value: function onEvent() {
 			var elements = document.querySelectorAll("[on]");
@@ -573,7 +587,7 @@ var DisplayJS = function () {
 			for (var i in this.range(n)) {
 				newEl = newEl.parentNode;
 			}
-			return [newEl];
+			return new Array(newEl);
 		}
 	}, {
 		key: "isNode",
