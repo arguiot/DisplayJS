@@ -10,9 +10,15 @@ $.ajax("https://unpkg.com/display.js?json", "GET", "", function (data) {
 	data = JSON.parse(data)
 	var size = data.size / 1024;
 	size = Math.round(size * 100) / 100
-	console.log(size);
-	$.text($.s(".kb"), size);
+	kb_polyfill = size;
 });
+$.ajax("https://api.github.com/repos/arguiot/DisplayJS/releases/latest", "GET", null, function(data) {
+  data = JSON.parse(data)
+  var size = data.assets[1].size / 1024;
+  size = Math.round(size * 100) / 100
+  console.log(size);
+  kb = size;
+})
 $.on([window], 'scroll', function() {
 	var wScroll = window.scrollY;
 		var header = $.s("header");
@@ -37,7 +43,7 @@ $.on([window], 'scroll', function() {
 $.on($.s(".watch"), "click", function() {
   $.toggleClass($.s(".videoDisplayJS"), "visible");
 });
-
+$.var(2000);
 particlesJS("particles-js", {
   "particles": {
     "number": {
