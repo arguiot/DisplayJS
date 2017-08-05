@@ -672,6 +672,27 @@ var DisplayJS = function () {
 			}
 			return time;
 		}
+	}, {
+		key: "import",
+		value: function _import(source, callback) {
+			var script = document.createElement("script");
+			var prior = document.getElementsByTagName("script")[0];
+			script.async = 1;
+
+			script.onload = script.onreadystatechange = function (_, isAbort) {
+				if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
+					script.onload = script.onreadystatechange = null;
+					script = undefined;
+
+					if (!isAbort) {
+						if (callback) callback();
+					}
+				}
+			};
+
+			script.src = source;
+			prior.parentNode.insertBefore(script, prior);
+		}
 		// Math and array manipulation
 
 	}, {
@@ -930,20 +951,6 @@ var DisplayJS = function () {
 
 	return DisplayJS;
 }();
-// Retro compatibility
-
-
-var _DOM_DJS = function (_DisplayJS) {
-	_inherits(_DOM_DJS, _DisplayJS);
-
-	function _DOM_DJS() {
-		_classCallCheck(this, _DOM_DJS);
-
-		return _possibleConstructorReturn(this, (_DOM_DJS.__proto__ || Object.getPrototypeOf(_DOM_DJS)).apply(this, arguments));
-	}
-
-	return _DOM_DJS;
-}(DisplayJS);
 // Browserify / Node.js
 
 

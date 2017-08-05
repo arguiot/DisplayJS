@@ -240,7 +240,7 @@ class DisplayJS {
 		});
 	}
 	load (el, url, callback=() => {}) {
-		this.ajax(url, "GET", "", function(xhr) {
+		this.ajax(url, "GET", "", xhr => {
 			try {
 				document.querySelector(el).innerHTML = xhr.responseXML.querySelector(el);
 				callback();
@@ -527,6 +527,23 @@ class DisplayJS {
 		}
 		return time;
 	}
+	import(source, callback) {
+		let script = document.createElement("script");
+		const prior = document.getElementsByTagName("script")[0];
+		script.async = 1;
+
+		script.onload = script.onreadystatechange = (_, isAbort) => {
+			if(isAbort || !script.readyState || /loaded|complete/.test(script.readyState) ) {
+				script.onload = script.onreadystatechange = null;
+				script = undefined;
+
+				if(!isAbort) { if(callback) callback(); }
+			}
+		};
+
+		script.src = source;
+		prior.parentNode.insertBefore(script, prior);
+	}
 	// Math and array manipulation
 	arange(start, end, step, offset) {
 		const len = (Math.abs(end - start) + ((offset || 0) * 2)) / (step || 1) + 1;
@@ -669,7 +686,7 @@ class DisplayJS {
 				return this.shiftComma(this.countResult(intArr,2),commaSum);
 			},
 			isSafeInteger(result) {
-				if(result<=-(Math.pow(2, 53)-1)||result>=(Math.pow(2, 53)-1)) throw "The result is not a safe integer."; 
+				if(result<=-(2 ** 53-1)||result>=(2 ** 53-1)) throw "The result is not a safe integer."; 
 			},
 			shiftComma(result, commaPos) {
 				return this.toExponent(this.countDecimals([result]),-commaPos)[0];
@@ -736,8 +753,6 @@ class DisplayJS {
 		return exactMath;
 	}
 }
-// Retro compatibility
-class _DOM_DJS extends DisplayJS {}
 // Browserify / Node.js
 if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports) {
 	module.exports = new DisplayJS;
