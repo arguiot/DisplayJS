@@ -813,8 +813,8 @@ var DisplayJS = function () {
 				var second = array[1][0];
 				var firstVal = array[0][1];
 				var secondVal = array[1][1];
-				var a = djs.math().div(djs.math().sub(firstVal, secondVal), djs.math().sub(first, second));
-				var b = djs.math().sub(secondVal, djs.math().mul(second, a));
+				var a = djs.math.div(djs.math.sub(firstVal, secondVal), djs.math.sub(first, second));
+				var b = djs.math.sub(secondVal, djs.math.mul(second, a));
 				if (text == true) {
 					return "f(x) = " + a + "x+" + b + "; f(" + valC + ") = " + (valC * a + b);
 				} else {

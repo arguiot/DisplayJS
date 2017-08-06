@@ -620,8 +620,8 @@ class DisplayJS {
 			const second = array[1][0];
 			const firstVal = array[0][1];
 			const secondVal = array[1][1];
-			const a = djs.math().div(djs.math().sub(firstVal, secondVal), djs.math().sub(first, second));
-			const b = djs.math().sub(secondVal, djs.math().mul(second, a));
+			const a = djs.math.div(djs.math.sub(firstVal, secondVal), djs.math.sub(first, second));
+			const b = djs.math.sub(secondVal, djs.math.mul(second, a));
 			if (text == true) {
 				return `f(x) = ${a}x+${b}; f(${valC}) = ${valC * a + b}`;
 			}
