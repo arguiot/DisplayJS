@@ -734,7 +734,7 @@ var DisplayJS = function () {
 			var _this6 = this;
 
 			return array.reduce(function (a, b) {
-				return _this6.math().add(a, b);
+				return _this6.math.add(a, b);
 			}, 0);
 		}
 	}, {
@@ -743,7 +743,7 @@ var DisplayJS = function () {
 			var _this7 = this;
 
 			return array.reduce(function (a, b) {
-				return _this7.math().mul(a, b);
+				return _this7.math.mul(a, b);
 			}, 0);
 		}
 	}, {
@@ -784,7 +784,7 @@ var DisplayJS = function () {
 		key: "average",
 		value: function average(array) {
 			var summed = this.sum(array);
-			var average = this.math().div(summed, array.length);
+			var average = this.math.div(summed, array.length);
 			return average;
 		}
 	}, {
@@ -793,13 +793,13 @@ var DisplayJS = function () {
 			var _this8 = this;
 
 			array.sort(function (a, b) {
-				return _this8.math().sub(a, b);
+				return _this8.math.sub(a, b);
 			});
-			var half = Math.floor(this.math().div(array.length, 2));
+			var half = Math.floor(this.math.div(array.length, 2));
 			if (array.length % 2) {
 				return array[half];
 			} else {
-				return this.math().div(this.math().add(array[half - 1], array[half]), 2.0);
+				return this.math.div(this.math.add(array[half - 1], array[half]), 2.0);
 			}
 		}
 	}, {

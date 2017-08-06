@@ -569,10 +569,10 @@ class DisplayJS {
 		return tmp;
 	}
 	sum(array) {
-		return array.reduce((a, b) => this.math().add(a, b), 0);
+		return array.reduce((a, b) => this.math.add(a, b), 0);
 	}
 	multiply(array) {
-		return array.reduce((a, b) => this.math().mul(a, b), 0);
+		return array.reduce((a, b) => this.math.mul(a, b), 0);
 	}
 	flatten(array) {
 		return array.reduce((a, b) => a.concat(b), []);
@@ -600,17 +600,17 @@ class DisplayJS {
 	}
 	average(array) {
 		const summed = this.sum(array);
-		const average = this.math().div(summed, array.length);
+		const average = this.math.div(summed, array.length);
 		return average;
 	}
 	median(array) {
-		array.sort( (a, b) => this.math().sub(a, b) );
-		const half = Math.floor(this.math().div(array.length,2));
+		array.sort( (a, b) => this.math.sub(a, b) );
+		const half = Math.floor(this.math.div(array.length,2));
 		if(array.length % 2) {
 			return array[half];
 		}
 		else {
-			return this.math().div(this.math().add(array[half-1], array[half]), 2.0);
+			return this.math.div(this.math.add(array[half-1], array[half]), 2.0);
 		}
 	}
 	predict(array, val, text=false) {
