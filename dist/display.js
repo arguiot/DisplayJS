@@ -877,7 +877,7 @@ var DisplayJS = function () {
 					return this.shiftComma(this.countResult(intArr, 2), commaSum);
 				},
 				isSafeInteger: function isSafeInteger(result) {
-					if (result <= -(Math.pow(2, 53) - 1) || result >= Math.pow(2, 53) - 1) throw "The result is not a safe integer.";
+					if (result <= -(Math.pow(2, 53) - 1) || result >= Math.pow(2, 53) - 1) throw "DisplayJS: The result is not a safe integer.";
 				},
 				shiftComma: function shiftComma(result, commaPos) {
 					return this.toExponent(this.countDecimals([result]), -commaPos)[0];
@@ -919,11 +919,11 @@ var DisplayJS = function () {
 					return Math.min.apply(null, commaAr);
 				},
 				validMe: function validMe(args) {
-					if (args.length < 2) throw "Set at least two numerical values.";
+					if (args.length < 2) throw "DisplayJS: Set at least two numerical values.";
 					for (var i in args) {
 						args[i] = parseFloat(args[i]);
-						if (typeof args[i] !== "number" || isNaN(args[i])) throw "Every smMath argument must be of type number.";
-						if (args[i] === Number.POSITIVE_INFINITY || args[i] === Number.NEGATIVE_INFINITY) throw "Every smMath argument must be a numerical value between positive and negative Infinity.";
+						if (typeof args[i] !== "number" || isNaN(args[i])) throw "DisplayJS: Every Math argument must be of type number.";
+						if (args[i] === Number.POSITIVE_INFINITY || args[i] === Number.NEGATIVE_INFINITY) throw "DisplayJS: Every Math argument must be a numerical value between positive and negative Infinity.";
 					}
 					return args;
 				},
