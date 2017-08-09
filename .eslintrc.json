@@ -24,14 +24,14 @@
             "always"
         ],
         "no-console": [
-            "error", 
-            { 
+            "error",
+            {
                 "allow": [
-                    "warn", 
+                    "warn",
                     "error"
-                ] 
+                ]
             }
         ],
-        "no-unused-vars": "off"
+        "no-unused-vars": "off",
     }
 }

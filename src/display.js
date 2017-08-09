@@ -444,7 +444,6 @@ class DisplayJS {
 	dynamic (callback, push=250) {
 		window.setInterval(callback, push);
 	}
-
 	parent (el, n = 0) {
 		let newEl = el[0];
 		for (const i in this.range(n)) {
