@@ -768,7 +768,7 @@ class DisplayJS {
 }
 // Browserify / Node.js
 if (typeof define === "function" && define.amd) {
-	define(function () { return new DisplayJS; });
+	define(() => new DisplayJS);
 // CommonJS and Node.js module support.
 } else if (typeof exports !== "undefined") {
     // Support Node.js specific `module.exports` (which can be a function)
