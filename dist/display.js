@@ -21,7 +21,7 @@ var DisplayJS = function () {
 
 		this.obj = obj;
 	}
-	// DOM manipulation and browser API.
+	/* DOM manipulation and browser API.*/
 
 
 	_createClass(DisplayJS, [{
@@ -29,6 +29,7 @@ var DisplayJS = function () {
 		value: function _var(push) {
 			var _this = this;
 
+			// the function
 			var var_push = function var_push() {
 				_this.if();
 				_this.else();
@@ -38,6 +39,7 @@ var DisplayJS = function () {
 					elements[i].innerHTML = _this.obj[attr];
 				}
 			};
+			// push var cheking
 			if (!push) {
 				var_push();
 			} else if (push == true) {
@@ -51,6 +53,8 @@ var DisplayJS = function () {
 				}, push);
 			}
 		}
+		// aliases of $.var();
+
 	}, {
 		key: "render",
 		value: function render(push) {
@@ -61,6 +65,8 @@ var DisplayJS = function () {
 		value: function renderVariables(push) {
 			this.var(push);
 		}
+		// Transform HTML special chars
+
 	}, {
 		key: "xss",
 		value: function xss(str) {
@@ -70,11 +76,15 @@ var DisplayJS = function () {
 			var ic = /"/g;
 			return str.toString().replace(lt, "&lt;").replace(gt, "&gt;").replace(ap, "&#39;").replace(ic, "&#34;");
 		}
+		// encode the URI
+
 	}, {
 		key: "xssURI",
 		value: function xssURI(str) {
 			return encodeURI(str);
 		}
+		// Target input to variable
+
 	}, {
 		key: "target",
 		value: function target() {
@@ -143,6 +153,8 @@ var DisplayJS = function () {
 				});
 			});
 		}
+		// if...else function
+
 	}, {
 		key: "if",
 		value: function _if(push) {
@@ -205,6 +217,8 @@ var DisplayJS = function () {
 				}, push);
 			}
 		}
+		// custom repeat function
+
 	}, {
 		key: "repeat",
 		value: function repeat(el, array, join) {
@@ -224,6 +238,8 @@ var DisplayJS = function () {
 			text += end;
 			el[0].innerHTML = text;
 		}
+		// create your own $.var() like function
+
 	}, {
 		key: "custom",
 		value: function custom(targetAttr, callback, push) {
@@ -247,6 +263,8 @@ var DisplayJS = function () {
 				}, push);
 			}
 		}
+		// Object.prototype.watch() implementation
+
 	}, {
 		key: "live",
 		value: function live(watched, callback) {
@@ -291,6 +309,8 @@ var DisplayJS = function () {
 				callback(obj, prop, newVal, oldVal);
 			});
 		}
+		// Similar to jQuery's $.load();
+
 	}, {
 		key: "load",
 		value: function load(el, url) {
@@ -305,6 +325,8 @@ var DisplayJS = function () {
 				}
 			});
 		}
+		// parsing the DOM for on and action attribute
+
 	}, {
 		key: "onEvent",
 		value: function onEvent() {
@@ -322,6 +344,8 @@ var DisplayJS = function () {
 				_loop(i);
 			}
 		}
+		// apply function to each elements selected
+
 	}, {
 		key: "all",
 		value: function all(element, callback) {
@@ -331,6 +355,8 @@ var DisplayJS = function () {
 				callback(node);
 			});
 		}
+		/* Basic DOM manipulation */
+
 	}, {
 		key: "text",
 		value: function text(element, _text) {
@@ -385,6 +411,8 @@ var DisplayJS = function () {
 			}
 			return document.querySelector(str);
 		}
+		// alias of $.select()
+
 	}, {
 		key: "s",
 		value: function s(str) {
@@ -550,25 +578,12 @@ var DisplayJS = function () {
 				}
 			})();
 		}
-	}, {
-		key: "extend",
-		value: function extend(defaults, options) {
-			var extended = {};
-			var prop = void 0;
-			for (prop in defaults) {
-				if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
-					extended[prop] = defaults[prop];
-				}
-			}
-			for (prop in options) {
-				if (Object.prototype.hasOwnProperty.call(options, prop)) {
-					extended[prop] = options[prop];
-				}
-			}
-			return extended;
-		}
+		// Create a function in the DisplayJS object
+
 	}, {
 		key: "dynamic",
+
+		// dynamically update something
 		value: function dynamic(callback) {
 			var push = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 250;
 
@@ -596,6 +611,8 @@ var DisplayJS = function () {
 			return (typeof HTMLElement === "undefined" ? "undefined" : _typeof(HTMLElement)) === "object" ? el instanceof HTMLElement : //DOM2
 			el && (typeof el === "undefined" ? "undefined" : _typeof(el)) === "object" && el !== null && el.nodeType === 1 && typeof el.nodeName === "string";
 		}
+		// create custom component
+
 	}, {
 		key: "component",
 		value: function component(name, callback) {
@@ -616,6 +633,8 @@ var DisplayJS = function () {
 
 			customElements.define(name, component);
 		}
+		// Get the time difference from now to x.
+
 	}, {
 		key: "time_rel",
 		value: function time_rel(time) {
@@ -668,6 +687,8 @@ var DisplayJS = function () {
 			}
 			return time;
 		}
+		// import a script
+
 	}, {
 		key: "import",
 		value: function _import(source, callback) {
@@ -691,6 +712,23 @@ var DisplayJS = function () {
 		}
 		// Math and array manipulation
 
+	}, {
+		key: "extend",
+		value: function extend(defaults, options) {
+			var extended = {};
+			var prop = void 0;
+			for (prop in defaults) {
+				if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
+					extended[prop] = defaults[prop];
+				}
+			}
+			for (prop in options) {
+				if (Object.prototype.hasOwnProperty.call(options, prop)) {
+					extended[prop] = options[prop];
+				}
+			}
+			return extended;
+		}
 	}, {
 		key: "arange",
 		value: function arange(start, end, step, offset) {

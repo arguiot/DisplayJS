@@ -7,8 +7,9 @@ class DisplayJS {
 	constructor(obj) {
 		this.obj = obj;
 	}
-	// DOM manipulation and browser API.
+	/* DOM manipulation and browser API.*/
 	var(push) {
+		// the function
 		const var_push = () => {
 			this.if();
 			this.else();
@@ -18,6 +19,7 @@ class DisplayJS {
 				elements[i].innerHTML = this.obj[attr];
 			}
 		};
+		// push var cheking
 		if (!push) {
 			var_push();
 		} else if (push == true) {
@@ -31,12 +33,14 @@ class DisplayJS {
 			}, push);
 		}
 	}
+	// aliases of $.var();
 	render (push) {
 		this.var(push);
 	}
 	renderVariables (push) {
 		this.var(push);
 	}
+	// Transform HTML special chars
 	xss (str) {
 		const lt = /</g;
 		const gt = />/g;
@@ -44,9 +48,11 @@ class DisplayJS {
 		const ic = /"/g;
 		return str.toString().replace(lt, "&lt;").replace(gt, "&gt;").replace(ap, "&#39;").replace(ic, "&#34;");
 	}
+	// encode the URI
 	xssURI(str) {
 		return encodeURI(str);
 	}
+	// Target input to variable
 	target(callback= () => { this.var(); }) {
 		const addEventListener = ((() => {
 			if (document.addEventListener) {
@@ -107,6 +113,7 @@ class DisplayJS {
 			});
 		});
 	}
+	// if...else function
 	if(push) {
 		const if_push = () => {
 			const elements = document.querySelectorAll("[if]");
@@ -161,6 +168,7 @@ class DisplayJS {
 			}, push);
 		}
 	}
+	// custom repeat function
 	repeat(el, array, join, start="", end="") {
 		let text = start;
 		if (typeof(join) == "object") {
@@ -176,6 +184,7 @@ class DisplayJS {
 		text += end;
 		el[0].innerHTML = text;
 	}
+	// create your own $.var() like function
 	custom(targetAttr, callback, push) {
 		const custom_push = () => {
 			const elements = document.querySelectorAll(`[${targetAttr}]`);
@@ -197,6 +206,7 @@ class DisplayJS {
 			}, push);
 		}
 	}
+	// Object.prototype.watch() implementation
 	live(watched, callback) {
 		const ObjUtils = {
 			watch(object, property, onPropertyChange) {
@@ -239,6 +249,7 @@ class DisplayJS {
 			callback(obj, prop, newVal, oldVal);
 		});
 	}
+	// Similar to jQuery's $.load();
 	load (el, url, callback=() => {}) {
 		this.ajax(url, "GET", "", xhr => {
 			try {
@@ -250,6 +261,7 @@ class DisplayJS {
 
 		});
 	}
+	// parsing the DOM for on and action attribute
 	onEvent () {
 		const elements = document.querySelectorAll("[on]");
 		for (let i = 0; i < elements.length; i++) {
@@ -258,6 +270,7 @@ class DisplayJS {
 			elements[i].addEventListener(attr, () => { eval(action); });
 		}
 	}
+	// apply function to each elements selected
 	all(element, callback) {
 		element.forEach((data) => {
 			const node = [];
@@ -265,6 +278,7 @@ class DisplayJS {
 			callback(node);
 		});
 	}
+	/* Basic DOM manipulation */
 	text(element, text) {
 		element[0].innerHTML = this.xss(text);
 	}
@@ -301,6 +315,7 @@ class DisplayJS {
 		}
 		return document.querySelector(str);
 	}
+	// alias of $.select()
 	s (str) {
 		return this.select(str);
 	}
@@ -417,25 +432,11 @@ class DisplayJS {
 			}
 		}());
 	}
-	extend( defaults, options ) {
-		const extended = {};
-		let prop;
-		for (prop in defaults) {
-			if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
-				extended[prop] = defaults[prop];
-			}
-		}
-		for (prop in options) {
-			if (Object.prototype.hasOwnProperty.call(options, prop)) {
-				extended[prop] = options[prop];
-			}
-		}
-		return extended;
-	}
+	// Create a function in the DisplayJS object
 	get fn () {
 		return DisplayJS.prototype;
 	}
-
+	// dynamically update something
 	dynamic (callback, push=250) {
 		window.setInterval(callback, push);
 	}
@@ -458,6 +459,7 @@ class DisplayJS {
 				el && typeof el === "object" && el !== null && el.nodeType === 1 && typeof el.nodeName==="string"
 		);
 	}
+	// create custom component
 	component (name, callback) {
 		class component extends HTMLElement {
 			constructor () {
@@ -467,6 +469,7 @@ class DisplayJS {
 		}
 		customElements.define(name, component);
 	}
+	// Get the time difference from now to x.
 	time_rel(time) {
 		switch (typeof time) {
 		case "number":
@@ -521,6 +524,7 @@ class DisplayJS {
 		}
 		return time;
 	}
+	// import a script
 	import(source, callback) {
 		let script = document.createElement("script");
 		const prior = document.getElementsByTagName("script")[0];
@@ -539,6 +543,21 @@ class DisplayJS {
 		prior.parentNode.insertBefore(script, prior);
 	}
 	// Math and array manipulation
+	extend( defaults, options ) {
+		const extended = {};
+		let prop;
+		for (prop in defaults) {
+			if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
+				extended[prop] = defaults[prop];
+			}
+		}
+		for (prop in options) {
+			if (Object.prototype.hasOwnProperty.call(options, prop)) {
+				extended[prop] = options[prop];
+			}
+		}
+		return extended;
+	}
 	arange(start, end, step, offset) {
 		const len = (Math.abs(end - start) + ((offset || 0) * 2)) / (step || 1) + 1;
 		const direction = start < end ? 1 : -1;
