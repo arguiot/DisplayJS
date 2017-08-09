@@ -1,6 +1,6 @@
 /********************************************/
-/*				© Arthur Guiot 2017			*/
-/*					DisplayJS				*/
+/*						© Arthur Guiot 2017						*/
+/*								DisplayJS									*/
 /********************************************/
 class DisplayJS {
 	constructor(obj) {
@@ -132,7 +132,7 @@ class DisplayJS {
 				if_push();
 			}, push);
 		}
-	} 
+	}
 	else(push) {
 		const else_push = () => {
 			const elements = document.querySelectorAll("[else]");
@@ -247,7 +247,7 @@ class DisplayJS {
 			} catch(e) {
 				callback(e);
 			}
-			
+
 		});
 	}
 	onEvent () {
@@ -453,10 +453,10 @@ class DisplayJS {
 	}
 	isNode(el){
 		return (
-			typeof Node === "object" ? el instanceof Node : 
+			typeof Node === "object" ? el instanceof Node :
 				el && typeof el === "object" && typeof el.nodeType === "number" && typeof el.nodeName==="string"
 		);
-	}	
+	}
 	isElement(el){
 		return (
 			typeof HTMLElement === "object" ? el instanceof HTMLElement : //DOM2
@@ -647,7 +647,7 @@ class DisplayJS {
 		else {
 			return "DisplayJS: Error, can't find any pattern.";
 		}
-		
+
 	}
 	get math() {
 		const exactMath = {
@@ -685,7 +685,7 @@ class DisplayJS {
 				return this.shiftComma(this.countResult(intArr,2),commaSum);
 			},
 			isSafeInteger(result) {
-				if(result<=-(2 ** 53-1)||result>=(2 ** 53-1)) throw "The result is not a safe integer."; 
+				if(result<=-(2 ** 53-1)||result>=(2 ** 53-1)) throw "The result is not a safe integer.";
 			},
 			shiftComma(result, commaPos) {
 				return this.toExponent(this.countDecimals([result]),-commaPos)[0];
