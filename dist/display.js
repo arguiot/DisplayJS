@@ -11,8 +11,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /********************************************/
-/*				© Arthur Guiot 2017			*/
-/*					DisplayJS				*/
+/*			© Arthur Guiot 2017				*/
+/*				DisplayJS					*/
+/*			https://display.js.org/			*/
 /********************************************/
 var DisplayJS = function () {
 	function DisplayJS(obj) {
@@ -463,12 +464,10 @@ var DisplayJS = function () {
 					console.error("DisplayJS error: The ajax request returned an error.");
 				}
 			};
-
 			request.onerror = function () {
 				// There was a connection error of some sort
 				console.error("DisplayJS error: The ajax request returned an error.");
 			};
-
 			request.send(data);
 		}
 	}, {
@@ -533,9 +532,6 @@ var DisplayJS = function () {
 				}
 			})();
 		}
-
-		// fade in
-
 	}, {
 		key: "fadeIn",
 		value: function fadeIn(element) {

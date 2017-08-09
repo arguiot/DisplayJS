@@ -1,6 +1,7 @@
 /********************************************/
-/*						© Arthur Guiot 2017						*/
-/*								DisplayJS									*/
+/*			© Arthur Guiot 2017				*/
+/*				DisplayJS					*/
+/*			https://display.js.org/			*/
 /********************************************/
 class DisplayJS {
 	constructor(obj) {
@@ -224,7 +225,6 @@ class DisplayJS {
 					},
 				});
 			},
-
 			watchAll(object, onPropertyChange) {
 				if (typeof onPropertyChange !== "function") {
 					throw new Error(`DisplayJS: Invalid onPropertyChange handler: ${onPropertyChange}`);
@@ -352,12 +352,10 @@ class DisplayJS {
 				console.error("DisplayJS error: The ajax request returned an error.");
 			}
 		};
-
 		request.onerror = () => {
 			// There was a connection error of some sort
 			console.error("DisplayJS error: The ajax request returned an error.");
 		};
-
 		request.send(data);
 	}
 	hasClass(element, className) {
@@ -406,9 +404,6 @@ class DisplayJS {
 			}
 		}());
 	}
-
-	// fade in
-
 	fadeIn(element, i=0.1, display) {
 		const el = element[0];
 		el.style.opacity = 0;
