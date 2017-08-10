@@ -523,7 +523,7 @@ class DisplayJS {
 			}
 		}
 		format = time_formats[time_formats.length - 1];
-		return Math.floor(seconds / format[2]) + " " + format[1] + " " + token;
+		return `${Math.floor(seconds / format[2])} ${format[1]} ${token}`;
 	}
 	// import a script
 	import(source, callback) {
