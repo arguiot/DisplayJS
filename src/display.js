@@ -470,7 +470,7 @@ class DisplayJS {
 		customElements.define(name, component);
 	}
 	// Get the time difference from now to x.
-	time_rel(time) {
+	time_ago(time) {
 		switch (typeof time) {
 		case "number":
 			break;
@@ -514,7 +514,7 @@ class DisplayJS {
 		}
 		let i = 0;
 		let format;
-		while (format == time_formats[i++]) {
+		while (format = time_formats[i++]) {
 			if (seconds < format[0]) {
 				if (typeof format[2] == "string")
 					return format[list_choice];
@@ -522,7 +522,8 @@ class DisplayJS {
 					return `${Math.floor(seconds / format[2])} ${format[1]} ${token}`;
 			}
 		}
-		return time;
+		format = time_formats[time_formats.length - 1];
+		return Math.floor(seconds / format[2]) + " " + format[1] + " " + token;
 	}
 	// import a script
 	import(source, callback) {
@@ -771,11 +772,11 @@ if (typeof define === "function" && define.amd) {
 	define(() => new DisplayJS);
 // CommonJS and Node.js module support.
 } else if (typeof exports !== "undefined") {
-    // Support Node.js specific `module.exports` (which can be a function)
+		// Support Node.js specific `module.exports` (which can be a function)
 	if (typeof module !== "undefined" && module.exports) {
 		exports = module.exports = new DisplayJS;
 	}
-    // But always support CommonJS module 1.1.1 spec (`exports` cannot be a function)
+		// But always support CommonJS module 1.1.1 spec (`exports` cannot be a function)
 	exports.DisplayJS = new DisplayJS;
 } else {
 	global.DisplayJS = new DisplayJS;
