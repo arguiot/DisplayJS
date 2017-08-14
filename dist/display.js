@@ -225,6 +225,7 @@ var DisplayJS = function () {
 			var start = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
 			var end = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
 
+			el = this.s(el);
 			var text = start;
 			if ((typeof join === "undefined" ? "undefined" : _typeof(join)) == "object") {
 				for (var i = 0; i < array.length; i++) {
@@ -316,6 +317,7 @@ var DisplayJS = function () {
 		value: function load(el, url) {
 			var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
 
+			el = this.s(el);
 			this.ajax(url, "GET", "", function (xhr) {
 				try {
 					document.querySelector(el).innerHTML = xhr.responseXML.querySelector(el);
@@ -348,8 +350,9 @@ var DisplayJS = function () {
 
 	}, {
 		key: "all",
-		value: function all(element, callback) {
-			element.forEach(function (data) {
+		value: function all(el, callback) {
+			el = this.s(el);
+			el.forEach(function (data) {
 				var node = [];
 				node.push(data);
 				callback(node);
@@ -359,37 +362,44 @@ var DisplayJS = function () {
 
 	}, {
 		key: "text",
-		value: function text(element, _text) {
-			element[0].innerHTML = this.xss(_text);
+		value: function text(el, _text) {
+			el = this.s(el);
+			el[0].innerHTML = this.xss(_text);
 		}
 	}, {
 		key: "html",
-		value: function html(element, _html) {
-			element[0].innerHTML = _html;
+		value: function html(el, _html) {
+			el = this.s(el);
+			el[0].innerHTML = _html;
 		}
 	}, {
 		key: "append",
-		value: function append(element, html) {
-			element[0].innerHTML += html;
+		value: function append(el, html) {
+			el = this.s(el);
+			el[0].innerHTML += html;
 		}
 	}, {
 		key: "after",
-		value: function after(element, html) {
-			element[0].insertAdjacentHTML("afterend", html);
+		value: function after(el, html) {
+			el = this.s(el);
+			el[0].insertAdjacentHTML("afterend", html);
 		}
 	}, {
 		key: "before",
-		value: function before(element, html) {
-			element[0].insertAdjacentHTML("beforebegin", html);
+		value: function before(el, html) {
+			el = this.s(el);
+			el[0].insertAdjacentHTML("beforebegin", html);
 		}
 	}, {
 		key: "clone",
-		value: function clone(element) {
-			element[0].cloneNode(true);
+		value: function clone(el) {
+			el[0].cloneNode(true);
 		}
 	}, {
 		key: "is",
 		value: function is(el1, el2) {
+			el1 = this.s(el1);
+			el2 = this.s(el2);
 			if (el1[0] === el2[0]) {
 				return true;
 			}
@@ -420,23 +430,27 @@ var DisplayJS = function () {
 		}
 	}, {
 		key: "empty",
-		value: function empty(element) {
-			element[0].innerHTML = null;
+		value: function empty(el) {
+			el = this.s(el);
+			el[0].innerHTML = null;
 		}
 	}, {
 		key: "valEmpty",
-		value: function valEmpty(element) {
-			element[0].value = null;
+		value: function valEmpty(el) {
+			el = this.s(el);
+			el[0].value = null;
 		}
 	}, {
 		key: "remove",
-		value: function remove(element) {
-			element[0].parentNode.removeChild(element[0]);
+		value: function remove(el) {
+			el = this.s(el);
+			el[0].parentNode.removeChild(el[0]);
 		}
 	}, {
 		key: "on",
-		value: function on(element, event, callback) {
-			element[0].addEventListener(event, callback);
+		value: function on(el, event, callback) {
+			el = this.s(el);
+			el[0].addEventListener(event, callback);
 		}
 	}, {
 		key: "ready",
@@ -462,18 +476,21 @@ var DisplayJS = function () {
 		value: function scrollTop() {
 			var el = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [document.body];
 
+			el = this.s(el);
 			return el[0].scrollTop;
 		}
 	}, {
 		key: "show",
-		value: function show(element) {
-			element[0].style.display = "block";
+		value: function show(el) {
+			el = this.s(el);
+			el[0].style.display = "block";
 			return true;
 		}
 	}, {
 		key: "hide",
-		value: function hide(element) {
-			element[0].style.display = "none";
+		value: function hide(el) {
+			el = this.s(el);
+			el[0].style.display = "none";
 			return true;
 		}
 	}, {
@@ -500,56 +517,62 @@ var DisplayJS = function () {
 		}
 	}, {
 		key: "hasClass",
-		value: function hasClass(element, className) {
-			if (element[0].classList) {
-				return element[0].classList.contains(className);
+		value: function hasClass(el, className) {
+			el = this.s(el);
+			if (el[0].classList) {
+				return el[0].classList.contains(className);
 			}
-			return !!element[0].className.match(new RegExp("(\\s|^)" + className + "(\\s|$)"));
+			return !!el[0].className.match(new RegExp("(\\s|^)" + className + "(\\s|$)"));
 		}
 	}, {
 		key: "addClass",
-		value: function addClass(element, className) {
-			if (element[0].classList) {
-				element[0].classList.add(className);
-			} else if (!this.hasClass(element, className)) {
-				element[0].className += " " + className;
+		value: function addClass(el, className) {
+			el = this.s(el);
+			if (el[0].classList) {
+				el[0].classList.add(className);
+			} else if (!this.hasClass(el, className)) {
+				el[0].className += " " + className;
 			}
 		}
 	}, {
 		key: "removeClass",
-		value: function removeClass(element, className) {
-			if (element[0].classList) {
-				element[0].classList.remove(className);
-			} else if (this.hasClass(element, className)) {
+		value: function removeClass(el, className) {
+			el = this.s(el);
+			if (el[0].classList) {
+				el[0].classList.remove(className);
+			} else if (this.hasClass(el, className)) {
 				var reg = new RegExp("(\\s|^)" + className + "(\\s|$)");
-				element[0].className = element[0].className.replace(reg, " ");
+				el[0].className = el[0].className.replace(reg, " ");
 			}
 		}
 	}, {
 		key: "toggleClass",
-		value: function toggleClass(element, className) {
-			if (this.hasClass(element, className)) {
-				this.removeClass(element, className);
+		value: function toggleClass(el, className) {
+			el = this.s(el);
+			if (this.hasClass(el, className)) {
+				this.removeClass(el, className);
 			} else {
-				this.addClass(element, className);
+				this.addClass(el, className);
 			}
 		}
 	}, {
 		key: "css",
-		value: function css(element, name, value) {
-			element[0].style[name] = value;
+		value: function css(el, name, value) {
+			el = this.s(el);
+			el[0].style[name] = value;
 		}
 	}, {
 		key: "getStyle",
-		value: function getStyle(element, styleProp) {
-			return element[0].style[styleProp];
+		value: function getStyle(el, styleProp) {
+			el = this.s(el);
+			return el[0].style[styleProp];
 		}
 	}, {
 		key: "fadeOut",
-		value: function fadeOut(element) {
+		value: function fadeOut(el) {
 			var i = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.1;
 
-			var el = element[0];
+			el = this.s(el)[0];
 			el.style.opacity = 1;
 
 			(function fade() {
@@ -562,11 +585,11 @@ var DisplayJS = function () {
 		}
 	}, {
 		key: "fadeIn",
-		value: function fadeIn(element) {
+		value: function fadeIn(el) {
 			var i = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.1;
 			var display = arguments[2];
 
-			var el = element[0];
+			el = this.s(el)[0];
 			el.style.opacity = 0;
 			el.style.display = display || "block";
 
@@ -594,6 +617,7 @@ var DisplayJS = function () {
 		value: function parent(el) {
 			var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
+			el = this.s(el);
 			var newEl = el[0];
 			for (var i in this.range(n)) {
 				newEl = newEl.parentNode;
@@ -603,11 +627,13 @@ var DisplayJS = function () {
 	}, {
 		key: "isNode",
 		value: function isNode(el) {
+			el = this.s(el);
 			return (typeof Node === "undefined" ? "undefined" : _typeof(Node)) === "object" ? el instanceof Node : el && (typeof el === "undefined" ? "undefined" : _typeof(el)) === "object" && typeof el.nodeType === "number" && typeof el.nodeName === "string";
 		}
 	}, {
 		key: "isElement",
 		value: function isElement(el) {
+			el = this.s(el);
 			return (typeof HTMLElement === "undefined" ? "undefined" : _typeof(HTMLElement)) === "object" ? el instanceof HTMLElement : //DOM2
 			el && (typeof el === "undefined" ? "undefined" : _typeof(el)) === "object" && el !== null && el.nodeType === 1 && typeof el.nodeName === "string";
 		}
@@ -666,7 +692,8 @@ var DisplayJS = function () {
 			[5806080000, "Last century", "Next century"], // 60*60*24*7*4*12*100*2
 			[58060800000, "centuries", 2903040000] // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
 			];
-			var seconds = (+new Date() - time) / 1000;
+			var math = this.math;
+			var seconds = math.div(math.sub(+new Date(), time), 1000);
 			var token = "ago";
 			var list_choice = 1;
 
@@ -682,11 +709,11 @@ var DisplayJS = function () {
 			var format = void 0;
 			while (format = time_formats[i++]) {
 				if (seconds < format[0]) {
-					if (typeof format[2] == "string") return format[list_choice];else return Math.floor(seconds / format[2]) + " " + format[1] + " " + token;
+					if (typeof format[2] == "string") return format[list_choice];else return Math.floor(math.div(seconds, format[2])) + " " + format[1] + " " + token;
 				}
 			}
 			format = time_formats[time_formats.length - 1];
-			return Math.floor(seconds / format[2]) + " " + format[1] + " " + token;
+			return Math.floor(math.div(seconds, format[2])) + " " + format[1] + " " + token;
 		}
 		// import a script
 

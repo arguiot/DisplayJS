@@ -170,6 +170,7 @@ class DisplayJS {
 	}
 	// custom repeat function
 	repeat(el, array, join, start="", end="") {
+		el = this.s(el);
 		let text = start;
 		if (typeof(join) == "object") {
 			for (let i = 0; i < array.length; i++) {
@@ -251,6 +252,7 @@ class DisplayJS {
 	}
 	// Similar to jQuery's $.load();
 	load (el, url, callback=() => {}) {
+		el = this.s(el);
 		this.ajax(url, "GET", "", xhr => {
 			try {
 				document.querySelector(el).innerHTML = xhr.responseXML.querySelector(el);
@@ -271,33 +273,41 @@ class DisplayJS {
 		}
 	}
 	// apply function to each elements selected
-	all(element, callback) {
-		element.forEach((data) => {
+	all(el, callback) {
+		el = this.s(el);
+		el.forEach((data) => {
 			const node = [];
 			node.push(data);
 			callback(node);
 		});
 	}
 	/* Basic DOM manipulation */
-	text(element, text) {
-		element[0].innerHTML = this.xss(text);
+	text(el, text) {
+		el = this.s(el);
+		el[0].innerHTML = this.xss(text);
 	}
-	html(element, html) {
-		element[0].innerHTML = html;
+	html(el, html) {
+		el = this.s(el);
+		el[0].innerHTML = html;
 	}
-	append(element, html) {
-		element[0].innerHTML += html;
+	append(el, html) {
+		el = this.s(el);
+		el[0].innerHTML += html;
 	}
-	after(element, html) {
-		element[0].insertAdjacentHTML("afterend", html);
+	after(el, html) {
+		el = this.s(el);
+		el[0].insertAdjacentHTML("afterend", html);
 	}
-	before(element, html) {
-		element[0].insertAdjacentHTML("beforebegin", html);
+	before(el, html) {
+		el = this.s(el);
+		el[0].insertAdjacentHTML("beforebegin", html);
 	}
-	clone(element) {
-		element[0].cloneNode(true);
+	clone(el) {
+		el[0].cloneNode(true);
 	}
 	is(el1, el2) {
+		el1 = this.s(el1);
+		el2 = this.s(el2);
 		if (el1[0] === el2[0]) {
 			return true;
 		}
@@ -319,17 +329,21 @@ class DisplayJS {
 	s (str) {
 		return this.select(str);
 	}
-	empty(element) {
-		element[0].innerHTML = null;
+	empty(el) {
+		el = this.s(el);
+		el[0].innerHTML = null;
 	}
-	valEmpty(element) {
-		element[0].value = null;
+	valEmpty(el) {
+		el = this.s(el);
+		el[0].value = null;
 	}
-	remove(element) {
-		element[0].parentNode.removeChild(element[0]);
+	remove(el) {
+		el = this.s(el);
+		el[0].parentNode.removeChild(el[0]);
 	}
-	on(element, event, callback) {
-		element[0].addEventListener(event, callback);
+	on(el, event, callback) {
+		el = this.s(el);
+		el[0].addEventListener(event, callback);
 	}
 	ready(fn) {
 		if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
@@ -345,14 +359,17 @@ class DisplayJS {
 		window.scroll(x, y);
 	}
 	scrollTop (el = [document.body]) {
+		el = this.s(el);
 		return el[0].scrollTop;
 	}
-	show(element) {
-		element[0].style.display = "block";
+	show(el) {
+		el = this.s(el);
+		el[0].style.display = "block";
 		return true;
 	}
-	hide(element) {
-		element[0].style.display = "none";
+	hide(el) {
+		el = this.s(el);
+		el[0].style.display = "none";
 		return true;
 	}
 	ajax(url, method, data, callback, header="application/x-www-form-urlencoded; charset=UTF-8") {
@@ -373,42 +390,48 @@ class DisplayJS {
 		};
 		request.send(data);
 	}
-	hasClass(element, className) {
-		if (element[0].classList) {
-			return element[0].classList.contains(className);
+	hasClass(el, className) {
+		el = this.s(el);
+		if (el[0].classList) {
+			return el[0].classList.contains(className);
 		}
-		return !!element[0].className.match(new RegExp(`(\\s|^)${className}(\\s|$)`));
+		return !!el[0].className.match(new RegExp(`(\\s|^)${className}(\\s|$)`));
 	}
-	addClass(element, className) {
-		if (element[0].classList) {
-			element[0].classList.add(className);
-		} else if (!this.hasClass(element, className)) {
-			element[0].className += ` ${className}`;
+	addClass(el, className) {
+		el = this.s(el);
+		if (el[0].classList) {
+			el[0].classList.add(className);
+		} else if (!this.hasClass(el, className)) {
+			el[0].className += ` ${className}`;
 		}
 	}
-	removeClass(element, className) {
-		if (element[0].classList) {
-			element[0].classList.remove(className);
-		} else if (this.hasClass(element, className)) {
+	removeClass(el, className) {
+		el = this.s(el);
+		if (el[0].classList) {
+			el[0].classList.remove(className);
+		} else if (this.hasClass(el, className)) {
 			const reg = new RegExp(`(\\s|^)${className}(\\s|$)`);
-			element[0].className = element[0].className.replace(reg, " ");
+			el[0].className = el[0].className.replace(reg, " ");
 		}
 	}
-	toggleClass(element, className) {
-		if (this.hasClass(element, className)) {
-			this.removeClass(element, className);
+	toggleClass(el, className) {
+		el = this.s(el);
+		if (this.hasClass(el, className)) {
+			this.removeClass(el, className);
 		} else {
-			this.addClass(element, className);
+			this.addClass(el, className);
 		}
 	}
-	css(element, name, value) {
-		element[0].style[name] = value;
+	css(el, name, value) {
+		el = this.s(el);
+		el[0].style[name] = value;
 	}
-	getStyle(element, styleProp) {
-		return element[0].style[styleProp];
+	getStyle(el, styleProp) {
+		el = this.s(el);
+		return el[0].style[styleProp];
 	}
-	fadeOut(element, i=0.1) {
-		const el = element[0];
+	fadeOut(el, i=0.1) {
+		el = this.s(el)[0];
 		el.style.opacity = 1;
 
 		(function fade() {
@@ -419,8 +442,8 @@ class DisplayJS {
 			}
 		}());
 	}
-	fadeIn(element, i=0.1, display) {
-		const el = element[0];
+	fadeIn(el, i=0.1, display) {
+		el = this.s(el)[0];
 		el.style.opacity = 0;
 		el.style.display = display || "block";
 
@@ -441,6 +464,7 @@ class DisplayJS {
 		window.setInterval(callback, push);
 	}
 	parent (el, n = 0) {
+		el = this.s(el);
 		let newEl = el[0];
 		for (const i in this.range(n)) {
 			newEl = newEl.parentNode;
@@ -448,12 +472,14 @@ class DisplayJS {
 		return new Array(newEl);
 	}
 	isNode(el){
+		el = this.s(el);
 		return (
 			typeof Node === "object" ? el instanceof Node :
 				el && typeof el === "object" && typeof el.nodeType === "number" && typeof el.nodeName==="string"
 		);
 	}
 	isElement(el){
+		el = this.s(el);
 		return (
 			typeof HTMLElement === "object" ? el instanceof HTMLElement : //DOM2
 				el && typeof el === "object" && el !== null && el.nodeType === 1 && typeof el.nodeName==="string"
@@ -500,7 +526,8 @@ class DisplayJS {
 			[5806080000, "Last century", "Next century"], // 60*60*24*7*4*12*100*2
 			[58060800000, "centuries", 2903040000] // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
 		];
-		let seconds = (+new Date() - time) / 1000;
+		const math = this.math;
+		let seconds = math.div(math.sub(+new Date(), time), 1000);
 		let token = "ago";
 		let list_choice = 1;
 
@@ -519,11 +546,11 @@ class DisplayJS {
 				if (typeof format[2] == "string")
 					return format[list_choice];
 				else
-					return `${Math.floor(seconds / format[2])} ${format[1]} ${token}`;
+					return `${Math.floor(math.div(seconds, format[2]))} ${format[1]} ${token}`;
 			}
 		}
 		format = time_formats[time_formats.length - 1];
-		return `${Math.floor(seconds / format[2])} ${format[1]} ${token}`;
+		return `${Math.floor(math.div(seconds, format[2]))} ${format[1]} ${token}`;
 	}
 	// import a script
 	import(source, callback) {
