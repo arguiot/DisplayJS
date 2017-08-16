@@ -314,8 +314,8 @@ class DisplayJS {
 		return false;
 	}
 	select(str) {
-		if (this.isElement(str)) {
-			return new Array(str);
+		if (this.isElement(str[0])) {
+			return new Array(str[0]);
 		}
 		return document.querySelectorAll(str);
 	}
