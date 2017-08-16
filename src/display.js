@@ -76,7 +76,7 @@ class DisplayJS {
 				} else {
 					obj[attr1] = this.value;
 				}
-				callback();
+				callback(a[i]);
 			});
 			addEventListener(a[i], "keydown", function () {
 				const attr2 = a[i].getAttribute("target");
@@ -87,7 +87,7 @@ class DisplayJS {
 				} else {
 					obj[attr2] = this.value;
 				}
-				callback();
+				callback(a[i]);
 			});
 			addEventListener(a[i], "input", function () {
 				const attr3 = a[i].getAttribute("target");
@@ -98,7 +98,7 @@ class DisplayJS {
 				} else {
 					obj[attr3] = this.value;
 				}
-				callback();
+				callback(a[i]);
 			});
 			addEventListener(a[i], "paste", function () {
 				const attr4 = a[i].getAttribute("target");
@@ -109,7 +109,7 @@ class DisplayJS {
 				} else {
 					obj[attr4] = this.value;
 				}
-				callback();
+				callback(a[i]);
 			});
 		});
 	}
