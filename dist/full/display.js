@@ -901,6 +901,15 @@ var DisplayJS = function () {
 			}
 		}
 	}, {
+		key: "then",
+		value: function then(toCall, callback) {
+			try {
+				callback(toCall());
+			} catch (e) {
+				throw "DisplayJS: " + e;
+			}
+		}
+	}, {
 		key: "fn",
 		get: function get() {
 			return DisplayJS.prototype;

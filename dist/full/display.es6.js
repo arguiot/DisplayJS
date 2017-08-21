@@ -793,6 +793,13 @@ class DisplayJS {
 		};
 		return exactMath;
 	}
+	then(toCall, callback) {
+		try {
+			callback(toCall())
+		} catch (e) {
+			throw "DisplayJS: " + e;
+		}
+	}
 }
 // Browserify / Node.js
 if (typeof define === "function" && define.amd) {
