@@ -116,7 +116,7 @@ var DisplayJS = function () {
 					} else {
 						obj[attr1] = this.value;
 					}
-					callback();
+					callback(a[i]);
 				});
 				addEventListener(a[i], "keydown", function () {
 					var attr2 = a[i].getAttribute("target");
@@ -127,7 +127,7 @@ var DisplayJS = function () {
 					} else {
 						obj[attr2] = this.value;
 					}
-					callback();
+					callback(a[i]);
 				});
 				addEventListener(a[i], "input", function () {
 					var attr3 = a[i].getAttribute("target");
@@ -138,7 +138,7 @@ var DisplayJS = function () {
 					} else {
 						obj[attr3] = this.value;
 					}
-					callback();
+					callback(a[i]);
 				});
 				addEventListener(a[i], "paste", function () {
 					var attr4 = a[i].getAttribute("target");
@@ -149,7 +149,7 @@ var DisplayJS = function () {
 					} else {
 						obj[attr4] = this.value;
 					}
-					callback();
+					callback(a[i]);
 				});
 			});
 		}
@@ -238,94 +238,6 @@ var DisplayJS = function () {
 			}
 			text += end;
 			el[0].innerHTML = text;
-		}
-		// create your own $.var() like function
-
-	}, {
-		key: "custom",
-		value: function custom(targetAttr, callback, push) {
-			var custom_push = function custom_push() {
-				var elements = document.querySelectorAll("[" + targetAttr + "]");
-				for (var i = 0; i < elements.length; i++) {
-					var attr = elements[i].getAttribute(targetAttr);
-					callback(elements[i], attr);
-				}
-			};
-			if (!push) {
-				custom_push();
-			} else if (push == true) {
-				custom_push();
-				this.live(this.obj, function () {
-					custom_push();
-				});
-			} else {
-				window.setInterval(function () {
-					custom_push();
-				}, push);
-			}
-		}
-		// Object.prototype.watch() implementation
-
-	}, {
-		key: "live",
-		value: function live(watched, callback) {
-			var ObjUtils = {
-				watch: function watch(object, property, onPropertyChange) {
-					var descriptor = Object.getOwnPropertyDescriptor(object, property);
-
-					if (typeof descriptor === "undefined") {
-						throw new Error("DisplayJS: Invalid descriptor for property: " + property + ", object: " + object);
-					}
-
-					if (typeof onPropertyChange !== "function") {
-						throw new Error("DisplayJS: Invalid onPropertyChange handler: " + onPropertyChange);
-					}
-
-					var value = object[property];
-
-					Object.defineProperty(object, property, {
-						enumerable: true,
-						configurable: true,
-						get: function get() {
-							return value;
-						},
-						set: function set(newValue) {
-							if (newValue === value) return;
-							onPropertyChange(object, property, newValue, value);
-							return value = newValue;
-						}
-					});
-				},
-				watchAll: function watchAll(object, onPropertyChange) {
-					if (typeof onPropertyChange !== "function") {
-						throw new Error("DisplayJS: Invalid onPropertyChange handler: " + onPropertyChange);
-					}
-
-					for (var property in object) {
-						this.watch(object, property, onPropertyChange);
-					}
-				}
-			};
-			ObjUtils.watchAll(watched, function (obj, prop, newVal, oldVal) {
-				callback(obj, prop, newVal, oldVal);
-			});
-		}
-		// Similar to jQuery's $.load();
-
-	}, {
-		key: "load",
-		value: function load(el, url) {
-			var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
-
-			el = this.s(el);
-			this.ajax(url, "GET", "", function (xhr) {
-				try {
-					document.querySelector(el).innerHTML = xhr.responseXML.querySelector(el);
-					callback();
-				} catch (e) {
-					callback(e);
-				}
-			});
 		}
 		// parsing the DOM for on and action attribute
 
@@ -494,28 +406,6 @@ var DisplayJS = function () {
 			return true;
 		}
 	}, {
-		key: "ajax",
-		value: function ajax(url, method, data, callback) {
-			var header = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "application/x-www-form-urlencoded; charset=UTF-8";
-
-			var request = new XMLHttpRequest();
-			request.open(method, url, true);
-			request.setRequestHeader("Content-Type", header);
-			request.onload = function () {
-				if (request.status >= 200 && request.status < 400) {
-					var _data = request.responseText;
-					callback(_data);
-				} else {
-					console.error("DisplayJS error: The ajax request returned an error.");
-				}
-			};
-			request.onerror = function () {
-				// There was a connection error of some sort
-				console.error("DisplayJS error: The ajax request returned an error.");
-			};
-			request.send(data);
-		}
-	}, {
 		key: "hasClass",
 		value: function hasClass(el, className) {
 			el = this.s(el);
@@ -659,6 +549,225 @@ var DisplayJS = function () {
 
 			customElements.define(name, component);
 		}
+		// import a script
+
+	}, {
+		key: "import",
+		value: function _import(source, callback) {
+			var script = document.createElement("script");
+			var prior = document.getElementsByTagName("script")[0];
+			script.async = 1;
+
+			script.onload = script.onreadystatechange = function (_, isAbort) {
+				if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
+					script.onload = script.onreadystatechange = null;
+					script = undefined;
+
+					if (!isAbort) {
+						if (callback) callback();
+					}
+				}
+			};
+
+			script.src = source;
+			prior.parentNode.insertBefore(script, prior);
+		}
+		// Math and array manipulation + includes
+
+	}, {
+		key: "extend",
+		value: function extend(defaults, options) {
+			var extended = {};
+			var prop = void 0;
+			for (prop in defaults) {
+				if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
+					extended[prop] = defaults[prop];
+				}
+			}
+			for (prop in options) {
+				if (Object.prototype.hasOwnProperty.call(options, prop)) {
+					extended[prop] = options[prop];
+				}
+			}
+			return extended;
+		}
+	}, {
+		key: "arange",
+		value: function arange(start, end, step, offset) {
+			var len = (Math.abs(end - start) + (offset || 0) * 2) / (step || 1) + 1;
+			var direction = start < end ? 1 : -1;
+			var startingPoint = start - direction * (offset || 0);
+			var stepSize = direction * (step || 1);
+
+			return Array(len).fill(0).map(function (_, index) {
+				return startingPoint + stepSize * index;
+			});
+		}
+	}, {
+		key: "range",
+		value: function range(n) {
+			return this.arange(0, n, 1);
+		}
+	}, {
+		key: "linespace",
+		value: function linespace(start, end, n) {
+			var diff = end - start;
+			var step = diff / n;
+			return this.arange(start, end, step);
+		}
+	}, {
+		key: "reshape",
+		value: function reshape(array, part) {
+			var tmp = [];
+			for (var i = 0; i < array.length; i += part) {
+				tmp.push(array.slice(i, i + part));
+			}
+			return tmp;
+		}
+	}, {
+		key: "flatten",
+		value: function flatten(array) {
+			return array.reduce(function (a, b) {
+				return a.concat(b);
+			}, []);
+		}
+	}, {
+		key: "drop",
+		value: function drop(array, val) {
+			if (val > 0) {
+				return array.slice(val, array.length);
+			}
+			return array.slice(0, array.length - val);
+		}
+	}, {
+		key: "isIn",
+		value: function isIn(array, val) {
+			if (array.includes(val)) {
+				return true;
+			}
+			return false;
+		}
+	}, {
+		key: "rmFromArray",
+		value: function rmFromArray(array, condition) {
+			var obj = [];
+			for (var i in array) {
+				if (!condition(i)) {
+					obj.push(array[i]);
+				}
+			}
+			return obj;
+		}
+		// Similar to jQuery's $.load();
+
+	}, {
+		key: "load",
+		value: function load(el, url) {
+			var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+
+			el = this.s(el);
+			this.ajax(url, "GET", "", function (xhr) {
+				try {
+					document.querySelector(el).innerHTML = xhr.responseXML.querySelector(el);
+					callback();
+				} catch (e) {
+					callback(e);
+				}
+			});
+		}
+	}, {
+		key: "ajax",
+		value: function ajax(url, method, data, callback) {
+			var header = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "application/x-www-form-urlencoded; charset=UTF-8";
+
+			var request = new XMLHttpRequest();
+			request.open(method, url, true);
+			request.setRequestHeader("Content-Type", header);
+			request.onload = function () {
+				if (request.status >= 200 && request.status < 400) {
+					var _data = request.responseText;
+					callback(_data);
+				} else {
+					console.error("DisplayJS error: The ajax request returned an error.");
+				}
+			};
+			request.onerror = function () {
+				// There was a connection error of some sort
+				console.error("DisplayJS error: The ajax request returned an error.");
+			};
+			request.send(data);
+		}
+		// create your own $.var() like function
+
+	}, {
+		key: "custom",
+		value: function custom(targetAttr, callback, push) {
+			var custom_push = function custom_push() {
+				var elements = document.querySelectorAll("[" + targetAttr + "]");
+				for (var i = 0; i < elements.length; i++) {
+					var attr = elements[i].getAttribute(targetAttr);
+					callback(elements[i], attr);
+				}
+			};
+			if (!push) {
+				custom_push();
+			} else if (push == true) {
+				custom_push();
+				this.live(this.obj, function () {
+					custom_push();
+				});
+			} else {
+				window.setInterval(function () {
+					custom_push();
+				}, push);
+			}
+		}
+		// Object.prototype.watch() implementation
+
+	}, {
+		key: "live",
+		value: function live(watched, callback) {
+			var ObjUtils = {
+				watch: function watch(object, property, onPropertyChange) {
+					var descriptor = Object.getOwnPropertyDescriptor(object, property);
+
+					if (typeof descriptor === "undefined") {
+						throw new Error("DisplayJS: Invalid descriptor for property: " + property + ", object: " + object);
+					}
+
+					if (typeof onPropertyChange !== "function") {
+						throw new Error("DisplayJS: Invalid onPropertyChange handler: " + onPropertyChange);
+					}
+
+					var value = object[property];
+
+					Object.defineProperty(object, property, {
+						enumerable: true,
+						configurable: true,
+						get: function get() {
+							return value;
+						},
+						set: function set(newValue) {
+							if (newValue === value) return;
+							onPropertyChange(object, property, newValue, value);
+							return value = newValue;
+						}
+					});
+				},
+				watchAll: function watchAll(object, onPropertyChange) {
+					if (typeof onPropertyChange !== "function") {
+						throw new Error("DisplayJS: Invalid onPropertyChange handler: " + onPropertyChange);
+					}
+
+					for (var property in object) {
+						this.watch(object, property, onPropertyChange);
+					}
+				}
+			};
+			ObjUtils.watchAll(watched, function (obj, prop, newVal, oldVal) {
+				callback(obj, prop, newVal, oldVal);
+			});
+		}
 		// Get the time difference from now to x.
 
 	}, {
@@ -715,81 +824,6 @@ var DisplayJS = function () {
 			format = time_formats[time_formats.length - 1];
 			return Math.floor(math.div(seconds, format[2])) + " " + format[1] + " " + token;
 		}
-		// import a script
-
-	}, {
-		key: "import",
-		value: function _import(source, callback) {
-			var script = document.createElement("script");
-			var prior = document.getElementsByTagName("script")[0];
-			script.async = 1;
-
-			script.onload = script.onreadystatechange = function (_, isAbort) {
-				if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
-					script.onload = script.onreadystatechange = null;
-					script = undefined;
-
-					if (!isAbort) {
-						if (callback) callback();
-					}
-				}
-			};
-
-			script.src = source;
-			prior.parentNode.insertBefore(script, prior);
-		}
-		// Math and array manipulation
-
-	}, {
-		key: "extend",
-		value: function extend(defaults, options) {
-			var extended = {};
-			var prop = void 0;
-			for (prop in defaults) {
-				if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
-					extended[prop] = defaults[prop];
-				}
-			}
-			for (prop in options) {
-				if (Object.prototype.hasOwnProperty.call(options, prop)) {
-					extended[prop] = options[prop];
-				}
-			}
-			return extended;
-		}
-	}, {
-		key: "arange",
-		value: function arange(start, end, step, offset) {
-			var len = (Math.abs(end - start) + (offset || 0) * 2) / (step || 1) + 1;
-			var direction = start < end ? 1 : -1;
-			var startingPoint = start - direction * (offset || 0);
-			var stepSize = direction * (step || 1);
-
-			return Array(len).fill(0).map(function (_, index) {
-				return startingPoint + stepSize * index;
-			});
-		}
-	}, {
-		key: "range",
-		value: function range(n) {
-			return this.arange(0, n, 1);
-		}
-	}, {
-		key: "linespace",
-		value: function linespace(start, end, n) {
-			var diff = end - start;
-			var step = diff / n;
-			return this.arange(start, end, step);
-		}
-	}, {
-		key: "reshape",
-		value: function reshape(array, part) {
-			var tmp = [];
-			for (var i = 0; i < array.length; i += part) {
-				tmp.push(array.slice(i, i + part));
-			}
-			return tmp;
-		}
 	}, {
 		key: "sum",
 		value: function sum(array) {
@@ -807,40 +841,6 @@ var DisplayJS = function () {
 			return array.reduce(function (a, b) {
 				return _this7.math.mul(a, b);
 			}, 0);
-		}
-	}, {
-		key: "flatten",
-		value: function flatten(array) {
-			return array.reduce(function (a, b) {
-				return a.concat(b);
-			}, []);
-		}
-	}, {
-		key: "drop",
-		value: function drop(array, val) {
-			if (val > 0) {
-				return array.slice(val, array.length);
-			}
-			return array.slice(0, array.length - val);
-		}
-	}, {
-		key: "isIn",
-		value: function isIn(array, val) {
-			if (array.includes(val)) {
-				return true;
-			}
-			return false;
-		}
-	}, {
-		key: "rmFromArray",
-		value: function rmFromArray(array, condition) {
-			var obj = [];
-			for (var i in array) {
-				if (!condition(i)) {
-					obj.push(array[i]);
-				}
-			}
-			return obj;
 		}
 	}, {
 		key: "average",

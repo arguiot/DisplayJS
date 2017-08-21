@@ -185,84 +185,6 @@ class DisplayJS {
 		text += end;
 		el[0].innerHTML = text;
 	}
-	// create your own $.var() like function
-	custom(targetAttr, callback, push) {
-		const custom_push = () => {
-			const elements = document.querySelectorAll(`[${targetAttr}]`);
-			for (let i = 0; i < elements.length; i++) {
-				const attr = elements[i].getAttribute(targetAttr);
-				callback(elements[i], attr);
-			}
-		};
-		if (!push) {
-			custom_push();
-		} else if (push == true) {
-			custom_push();
-			this.live(this.obj, () => {
-				custom_push();
-			});
-		} else {
-			window.setInterval(() => {
-				custom_push();
-			}, push);
-		}
-	}
-	// Object.prototype.watch() implementation
-	live(watched, callback) {
-		const ObjUtils = {
-			watch(object, property, onPropertyChange) {
-				const descriptor = Object.getOwnPropertyDescriptor(object, property);
-
-				if (typeof descriptor === "undefined") {
-					throw new Error(`DisplayJS: Invalid descriptor for property: ${property}, object: ${object}`);
-				}
-
-				if (typeof onPropertyChange !== "function") {
-					throw new Error(`DisplayJS: Invalid onPropertyChange handler: ${onPropertyChange}`);
-				}
-
-				let value = object[property];
-
-				Object.defineProperty(object, property, {
-					enumerable: true,
-					configurable: true,
-					get() {
-						return value;
-					},
-					set(newValue) {
-						if (newValue === value) return;
-						onPropertyChange(object, property, newValue, value);
-						return value = newValue;
-					},
-				});
-			},
-			watchAll(object, onPropertyChange) {
-				if (typeof onPropertyChange !== "function") {
-					throw new Error(`DisplayJS: Invalid onPropertyChange handler: ${onPropertyChange}`);
-				}
-
-				for (const property in object) {
-					this.watch(object, property, onPropertyChange);
-				}
-			},
-		};
-		ObjUtils.watchAll(watched, (obj, prop, newVal, oldVal) => {
-			callback(obj, prop, newVal, oldVal);
-		});
-	}
-	// Similar to jQuery's $.load();
-	load (el, url, callback=() => {}) {
-		el = this.s(el);
-		this.ajax(url, "GET", "", xhr => {
-			try {
-				document.querySelector(el).innerHTML = xhr.responseXML.querySelector(el);
-				callback();
-			} catch(e) {
-				callback(e);
-			}
-
-		});
-	}
 	// parsing the DOM for on and action attribute
 	onEvent () {
 		const elements = document.querySelectorAll("[on]");
@@ -372,24 +294,6 @@ class DisplayJS {
 		el[0].style.display = "none";
 		return true;
 	}
-	ajax(url, method, data, callback, header="application/x-www-form-urlencoded; charset=UTF-8") {
-		const request = new XMLHttpRequest();
-		request.open(method, url, true);
-		request.setRequestHeader("Content-Type", header);
-		request.onload = () => {
-			if (request.status >= 200 && request.status < 400) {
-				const data = request.responseText;
-				callback(data);
-			} else {
-				console.error("DisplayJS error: The ajax request returned an error.");
-			}
-		};
-		request.onerror = () => {
-			// There was a connection error of some sort
-			console.error("DisplayJS error: The ajax request returned an error.");
-		};
-		request.send(data);
-	}
 	hasClass(el, className) {
 		el = this.s(el);
 		if (el[0].classList) {
@@ -495,63 +399,6 @@ class DisplayJS {
 		}
 		customElements.define(name, component);
 	}
-	// Get the time difference from now to x.
-	time_ago(time) {
-		switch (typeof time) {
-		case "number":
-			break;
-		case "string":
-			time = +new Date(time);
-			break;
-		case "object":
-			if (time.constructor === Date) time = time.getTime();
-			break;
-		default:
-			time = +new Date();
-		}
-		const time_formats = [
-			[60, "seconds", 1], // 60
-			[120, "1 minute ago", "1 minute from now"], // 60*2
-			[3600, "minutes", 60], // 60*60, 60
-			[7200, "1 hour ago", "1 hour from now"], // 60*60*2
-			[86400, "hours", 3600], // 60*60*24, 60*60
-			[172800, "Yesterday", "Tomorrow"], // 60*60*24*2
-			[604800, "days", 86400], // 60*60*24*7, 60*60*24
-			[1209600, "Last week", "Next week"], // 60*60*24*7*4*2
-			[2419200, "weeks", 604800], // 60*60*24*7*4, 60*60*24*7
-			[4838400, "Last month", "Next month"], // 60*60*24*7*4*2
-			[29030400, "months", 2419200], // 60*60*24*7*4*12, 60*60*24*7*4
-			[58060800, "Last year", "Next year"], // 60*60*24*7*4*12*2
-			[2903040000, "years", 29030400], // 60*60*24*7*4*12*100, 60*60*24*7*4*12
-			[5806080000, "Last century", "Next century"], // 60*60*24*7*4*12*100*2
-			[58060800000, "centuries", 2903040000] // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
-		];
-		const math = this.math;
-		let seconds = math.div(math.sub(+new Date(), time), 1000);
-		let token = "ago";
-		let list_choice = 1;
-
-		if (seconds == 0) {
-			return "Just now";
-		}
-		if (seconds < 0) {
-			seconds = Math.abs(seconds);
-			token = "from now";
-			list_choice = 2;
-		}
-		let i = 0;
-		let format;
-		while (format = time_formats[i++]) {
-			if (seconds < format[0]) {
-				if (typeof format[2] == "string")
-					return format[list_choice];
-				else
-					return `${Math.floor(math.div(seconds, format[2]))} ${format[1]} ${token}`;
-			}
-		}
-		format = time_formats[time_formats.length - 1];
-		return `${Math.floor(math.div(seconds, format[2]))} ${format[1]} ${token}`;
-	}
 	// import a script
 	import(source, callback) {
 		let script = document.createElement("script");
@@ -570,7 +417,7 @@ class DisplayJS {
 		script.src = source;
 		prior.parentNode.insertBefore(script, prior);
 	}
-	// Math and array manipulation
+	// Math and array manipulation + includes
 	extend( defaults, options ) {
 		const extended = {};
 		let prop;
@@ -609,12 +456,6 @@ class DisplayJS {
 		}
 		return tmp;
 	}
-	sum(array) {
-		return array.reduce((a, b) => this.math.add(a, b), 0);
-	}
-	multiply(array) {
-		return array.reduce((a, b) => this.math.mul(a, b), 0);
-	}
 	flatten(array) {
 		return array.reduce((a, b) => a.concat(b), []);
 	}
@@ -638,6 +479,165 @@ class DisplayJS {
 			}
 		}
 		return obj;
+	}
+	// Similar to jQuery's $.load();
+	load (el, url, callback=() => {}) {
+		el = this.s(el);
+		this.ajax(url, "GET", "", xhr => {
+			try {
+				document.querySelector(el).innerHTML = xhr.responseXML.querySelector(el);
+				callback();
+			} catch(e) {
+				callback(e);
+			}
+	
+		});
+	}
+	ajax(url, method, data, callback, header="application/x-www-form-urlencoded; charset=UTF-8") {
+		const request = new XMLHttpRequest();
+		request.open(method, url, true);
+		request.setRequestHeader("Content-Type", header);
+		request.onload = () => {
+			if (request.status >= 200 && request.status < 400) {
+				const data = request.responseText;
+				callback(data);
+			} else {
+				console.error("DisplayJS error: The ajax request returned an error.");
+			}
+		};
+		request.onerror = () => {
+			// There was a connection error of some sort
+			console.error("DisplayJS error: The ajax request returned an error.");
+		};
+		request.send(data);
+	}
+	// create your own $.var() like function
+	custom(targetAttr, callback, push) {
+		const custom_push = () => {
+			const elements = document.querySelectorAll(`[${targetAttr}]`);
+			for (let i = 0; i < elements.length; i++) {
+				const attr = elements[i].getAttribute(targetAttr);
+				callback(elements[i], attr);
+			}
+		};
+		if (!push) {
+			custom_push();
+		} else if (push == true) {
+			custom_push();
+			this.live(this.obj, () => {
+				custom_push();
+			});
+		} else {
+			window.setInterval(() => {
+				custom_push();
+			}, push);
+		}
+	}
+	// Object.prototype.watch() implementation
+	live(watched, callback) {
+		const ObjUtils = {
+			watch(object, property, onPropertyChange) {
+				const descriptor = Object.getOwnPropertyDescriptor(object, property);
+	
+				if (typeof descriptor === "undefined") {
+					throw new Error(`DisplayJS: Invalid descriptor for property: ${property}, object: ${object}`);
+				}
+	
+				if (typeof onPropertyChange !== "function") {
+					throw new Error(`DisplayJS: Invalid onPropertyChange handler: ${onPropertyChange}`);
+				}
+	
+				let value = object[property];
+	
+				Object.defineProperty(object, property, {
+					enumerable: true,
+					configurable: true,
+					get() {
+						return value;
+					},
+					set(newValue) {
+						if (newValue === value) return;
+						onPropertyChange(object, property, newValue, value);
+						return value = newValue;
+					},
+				});
+			},
+			watchAll(object, onPropertyChange) {
+				if (typeof onPropertyChange !== "function") {
+					throw new Error(`DisplayJS: Invalid onPropertyChange handler: ${onPropertyChange}`);
+				}
+	
+				for (const property in object) {
+					this.watch(object, property, onPropertyChange);
+				}
+			},
+		};
+		ObjUtils.watchAll(watched, (obj, prop, newVal, oldVal) => {
+			callback(obj, prop, newVal, oldVal);
+		});
+	}
+	// Get the time difference from now to x.
+	time_ago(time) {
+		switch (typeof time) {
+		case "number":
+			break;
+		case "string":
+			time = +new Date(time);
+			break;
+		case "object":
+			if (time.constructor === Date) time = time.getTime();
+			break;
+		default:
+			time = +new Date();
+		}
+		const time_formats = [
+			[60, "seconds", 1], // 60
+			[120, "1 minute ago", "1 minute from now"], // 60*2
+			[3600, "minutes", 60], // 60*60, 60
+			[7200, "1 hour ago", "1 hour from now"], // 60*60*2
+			[86400, "hours", 3600], // 60*60*24, 60*60
+			[172800, "Yesterday", "Tomorrow"], // 60*60*24*2
+			[604800, "days", 86400], // 60*60*24*7, 60*60*24
+			[1209600, "Last week", "Next week"], // 60*60*24*7*4*2
+			[2419200, "weeks", 604800], // 60*60*24*7*4, 60*60*24*7
+			[4838400, "Last month", "Next month"], // 60*60*24*7*4*2
+			[29030400, "months", 2419200], // 60*60*24*7*4*12, 60*60*24*7*4
+			[58060800, "Last year", "Next year"], // 60*60*24*7*4*12*2
+			[2903040000, "years", 29030400], // 60*60*24*7*4*12*100, 60*60*24*7*4*12
+			[5806080000, "Last century", "Next century"], // 60*60*24*7*4*12*100*2
+			[58060800000, "centuries", 2903040000] // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
+		];
+		const math = this.math;
+		let seconds = math.div(math.sub(+new Date(), time), 1000);
+		let token = "ago";
+		let list_choice = 1;
+	
+		if (seconds == 0) {
+			return "Just now";
+		}
+		if (seconds < 0) {
+			seconds = Math.abs(seconds);
+			token = "from now";
+			list_choice = 2;
+		}
+		let i = 0;
+		let format;
+		while (format = time_formats[i++]) {
+			if (seconds < format[0]) {
+				if (typeof format[2] == "string")
+					return format[list_choice];
+				else
+					return `${Math.floor(math.div(seconds, format[2]))} ${format[1]} ${token}`;
+			}
+		}
+		format = time_formats[time_formats.length - 1];
+		return `${Math.floor(math.div(seconds, format[2]))} ${format[1]} ${token}`;
+	}
+	sum(array) {
+		return array.reduce((a, b) => this.math.add(a, b), 0);
+	}
+	multiply(array) {
+		return array.reduce((a, b) => this.math.mul(a, b), 0);
 	}
 	average(array) {
 		const summed = this.sum(array);
@@ -689,7 +689,7 @@ class DisplayJS {
 		else {
 			return "DisplayJS: Error, can't find any pattern.";
 		}
-
+	
 	}
 	get math() {
 		const exactMath = {
@@ -706,7 +706,7 @@ class DisplayJS {
 				return mathFunctions.addSubDiv(arguments,3);
 			}
 		};
-
+	
 		var mathFunctions = {
 			addSubDiv(argArray, oper) {
 				const args = this.countDecimals(this.validMe(argArray));

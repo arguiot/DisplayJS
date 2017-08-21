@@ -2,7 +2,7 @@
   "name": "display.js",
   "version": "v1.2.3",
   "description": "A simple JavaScript framework for building ambitious UIs",
-  "main": "dist/display.min.js",
+  "main": "dist/full/display.min.js",
   "directories": {
     "doc": "docs"
   },
@@ -11,7 +11,7 @@
     "build": "npm test",
     "test": "npm run lint && npm run gulp && exit 0",
     "gulp": "gulp",
-    "lint": "./node_modules/.bin/eslint src/display.js --fix"
+    "lint": "./node_modules/.bin/eslint src/base.js --fix"
   },
   "repository": {
     "type": "git",
@@ -65,21 +65,8 @@
     "gulp-babel": "^6.1.2",
     "gulp-babili": "^0.1.4",
     "gulp-rename": "^1.2.2",
+    "gulp-rigger": "^0.5.8",
     "gulp-uglify": "^3.0.0"
   },
-  "dependencies": {},
-  "autoupdate": {
-    "source": "git",
-    "target": "git://github.com/arguiot/DisplayJS.git",
-    "fileMap": [
-      {
-        "basePath": "dist",
-        "files": [
-          "display.min.js",
-          "display.js",
-          "display.es6.js"
-        ]
-      }
-    ]
-  }
+  "dependencies": {}
 }
