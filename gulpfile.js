@@ -44,7 +44,7 @@ gulp.task("minify-full", function () {
 	}))
     .pipe(uglify())
     .pipe(rename({basename: "display", suffix: ".min"}))
-    .pipe(gulp.dest("dist/full"));
+    .pipe(gulp.dest("dist"));
 });
 gulp.task("copy-full", function () {
 	gulp.src("src/*.js")
@@ -53,13 +53,13 @@ gulp.task("copy-full", function () {
 		presets: ["env"]
 	}))
 	.pipe(rename({basename: "display"}))
-    .pipe(gulp.dest("dist/full"));
+    .pipe(gulp.dest("dist"));
 });
 gulp.task("modern-full", function () {
 	gulp.src("src/*.js")
 	.pipe(rigger())
 	.pipe(rename({basename: "display", suffix: ".es6"}))
-    .pipe(gulp.dest("dist/full"));
+    .pipe(gulp.dest("dist"));
 });
 gulp.task("modern-minify-full", function () {
 	gulp.src("src/*.js")
@@ -70,6 +70,6 @@ gulp.task("modern-minify-full", function () {
 		}
 	}))
     .pipe(rename({basename: "display", suffix: ".es6.min"}))
-    .pipe(gulp.dest("dist/full"));
+    .pipe(gulp.dest("dist"));
 });
 gulp.task("default", [ "minify", "copy", "modern", "modern-minify", "minify-full", "copy-full", "modern-full", "modern-minify-full" ]);

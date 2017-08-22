@@ -2,7 +2,7 @@
   "name": "display.js",
   "version": "v1.2.3",
   "description": "A simple JavaScript framework for building ambitious UIs",
-  "main": "dist/full/display.min.js",
+  "main": "dist/display.min.js",
   "directories": {
     "doc": "docs"
   },
