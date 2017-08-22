@@ -29,3 +29,8 @@ ajax(url, method, data, callback, header="application/x-www-form-urlencoded; cha
 	};
 	request.send(data);
 }
+get(url, callback, parse=false) {
+	this.ajax(url, "GET", "", (data) => {
+		parse ? callback(JSON.parse(data)) : callback(data)
+	})
+}

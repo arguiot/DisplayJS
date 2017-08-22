@@ -697,6 +697,15 @@ var DisplayJS = function () {
 			};
 			request.send(data);
 		}
+	}, {
+		key: "get",
+		value: function get(url, callback) {
+			var parse = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+			this.ajax(url, "GET", "", function (data) {
+				parse ? callback(JSON.parse(data)) : callback(data);
+			});
+		}
 		// create your own $.var() like function
 
 	}, {

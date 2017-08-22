@@ -511,6 +511,11 @@ class DisplayJS {
 		};
 		request.send(data);
 	}
+	get(url, callback, parse=false) {
+		this.ajax(url, "GET", "", (data) => {
+			parse ? callback(JSON.parse(data)) : callback(data)
+		})
+	}
 	// create your own $.var() like function
 	custom(targetAttr, callback, push) {
 		const custom_push = () => {
