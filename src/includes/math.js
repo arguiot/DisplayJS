@@ -56,10 +56,10 @@ time_ago(time) {
 	return `${Math.floor(math.div(seconds, format[2]))} ${format[1]} ${token}`;
 }
 sum(array) {
-	return array.reduce((a, b) => this.math.add(a, b), 0);
+	return array.reduce((a, b) => this.math.add(a, b));
 }
 multiply(array) {
-	return array.reduce((a, b) => this.math.mul(a, b), 0);
+	return array.reduce((a, b) => this.math.mul(a, b));
 }
 average(array) {
 	const summed = this.sum(array);

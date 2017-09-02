@@ -3,6 +3,6 @@
     "srcDir": "src",
     "destDir": "dist",
     "files": "**/*.js",
-    "command": "npm test"
+    "command": "npm run gulp"
   }
 ]

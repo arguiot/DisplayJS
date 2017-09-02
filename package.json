@@ -9,9 +9,11 @@
   "scripts": {
     "run": "npm test",
     "build": "npm test",
-    "test": "npm run gulp && npm run lint && exit 0",
+    "test": "npm run gulp && npm run lint && jest && exit 0",
     "gulp": "gulp",
-    "lint": "./node_modules/.bin/eslint dist/display.es6.js --fix"
+    "lint": "./node_modules/.bin/eslint dist/display.es6.js --fix",
+	"jest": "jest"
+
   },
   "repository": {
     "type": "git",

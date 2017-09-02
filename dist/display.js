@@ -634,18 +634,12 @@ var DisplayJS = function () {
 	}, {
 		key: "drop",
 		value: function drop(array, val) {
-			if (val > 0) {
-				return array.slice(val, array.length);
-			}
-			return array.slice(0, array.length - val);
+			return val > 0 ? array.slice(val, array.length) : array.slice(0, array.length + val);
 		}
 	}, {
 		key: "isIn",
 		value: function isIn(array, val) {
-			if (array.includes(val)) {
-				return true;
-			}
-			return false;
+			return array.includes(val) ? true : false;
 		}
 	}, {
 		key: "rmFromArray",
@@ -840,7 +834,7 @@ var DisplayJS = function () {
 
 			return array.reduce(function (a, b) {
 				return _this6.math.add(a, b);
-			}, 0);
+			});
 		}
 	}, {
 		key: "multiply",
@@ -849,7 +843,7 @@ var DisplayJS = function () {
 
 			return array.reduce(function (a, b) {
 				return _this7.math.mul(a, b);
-			}, 0);
+			});
 		}
 	}, {
 		key: "average",

@@ -634,18 +634,12 @@ var DisplayJS = function () {
 	}, {
 		key: "drop",
 		value: function drop(array, val) {
-			if (val > 0) {
-				return array.slice(val, array.length);
-			}
-			return array.slice(0, array.length - val);
+			return val > 0 ? array.slice(val, array.length) : array.slice(0, array.length + val);
 		}
 	}, {
 		key: "isIn",
 		value: function isIn(array, val) {
-			if (array.includes(val)) {
-				return true;
-			}
-			return false;
+			return array.includes(val) ? true : false;
 		}
 	}, {
 		key: "rmFromArray",

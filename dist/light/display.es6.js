@@ -460,16 +460,10 @@ class DisplayJS {
 		return array.reduce((a, b) => a.concat(b), []);
 	}
 	drop(array, val) {
-		if (val > 0) {
-			return array.slice(val, array.length);
-		}
-		return array.slice(0, array.length - val);
+		return val > 0 ? array.slice(val, array.length) : array.slice(0, array.length + val)
 	}
 	isIn(array, val) {
-		if (array.includes(val)) {
-			return true;
-		}
-		return false;
+		return array.includes(val) ? true : false
 	}
 	rmFromArray(array, condition) {
 		const obj = [];
