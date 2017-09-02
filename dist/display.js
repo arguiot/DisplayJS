@@ -921,13 +921,8 @@ var DisplayJS = function () {
 	}, {
 		key: "copy",
 		value: function copy(text) {
-			// IE specific
-			if (window.clipboardData && window.clipboardData.setData) {
-				return clipboardData.setData("Text", text);
-			}
-
 			// all other modern
-			target = document.createElement("textarea");
+			var target = document.createElement("textarea");
 			target.style.position = "absolute";
 			target.style.left = "-9999px";
 			target.style.top = "0";
@@ -941,7 +936,6 @@ var DisplayJS = function () {
 				document.execCommand("copy");
 				target.remove();
 			} catch (e) {
-				console.log("DisplayJS: Can't copy string on this browser.");
 				window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
 			}
 		}
