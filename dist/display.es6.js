@@ -460,10 +460,10 @@ class DisplayJS {
 		return array.reduce((a, b) => a.concat(b), []);
 	}
 	drop(array, val) {
-		return val > 0 ? array.slice(val, array.length) : array.slice(0, array.length + val);
+		return val > 0 ? array.slice(val, array.length) : array.slice(0, array.length + val)
 	}
 	isIn(array, val) {
-		return array.includes(val) ? true : false;
+		return array.includes(val) ? true : false
 	}
 	rmFromArray(array, condition) {
 		const obj = [];
@@ -477,9 +477,9 @@ class DisplayJS {
 	// Similar to jQuery's $.load();
 	load (el, url, callback=() => {}) {
 		el = this.s(el);
-		this.ajax(url, "GET", "", xhr => {
+		this.ajax(url, "GET", "", (text, xhr) => {
 			try {
-				document.querySelector(el).innerHTML = xhr.responseXML.querySelector(el);
+				this.text(el, xhr.responseXML.querySelector(el));
 				callback();
 			} catch(e) {
 				callback(e);
@@ -494,7 +494,7 @@ class DisplayJS {
 		request.onload = () => {
 			if (request.status >= 200 && request.status < 400) {
 				const data = request.responseText;
-				callback(data);
+				callback(data, request);
 			} else {
 				console.error("DisplayJS error: The ajax request returned an error.");
 			}
@@ -507,8 +507,8 @@ class DisplayJS {
 	}
 	get(url, callback, parse=false) {
 		this.ajax(url, "GET", "", (data) => {
-			parse ? callback(JSON.parse(data)) : callback(data);
-		});
+			parse ? callback(JSON.parse(data)) : callback(data)
+		})
 	}
 	// create your own $.var() like function
 	custom(targetAttr, callback, push) {
@@ -794,7 +794,7 @@ class DisplayJS {
 	}
 	then(toCall, callback) {
 		try {
-			callback(toCall());
+			callback(toCall())
 		} catch (e) {
 			throw "DisplayJS: " + e;
 		}

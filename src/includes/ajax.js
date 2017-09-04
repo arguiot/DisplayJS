@@ -1,9 +1,9 @@
 // Similar to jQuery's $.load();
 load (el, url, callback=() => {}) {
 	el = this.s(el);
-	this.ajax(url, "GET", "", xhr => {
+	this.ajax(url, "GET", "", (text, xhr) => {
 		try {
-			document.querySelector(el).innerHTML = xhr.responseXML.querySelector(el);
+			this.text(el, xhr.responseXML.querySelector(el));
 			callback();
 		} catch(e) {
 			callback(e);
@@ -18,7 +18,7 @@ ajax(url, method, data, callback, header="application/x-www-form-urlencoded; cha
 	request.onload = () => {
 		if (request.status >= 200 && request.status < 400) {
 			const data = request.responseText;
-			callback(data);
+			callback(data, request);
 		} else {
 			console.error("DisplayJS error: The ajax request returned an error.");
 		}

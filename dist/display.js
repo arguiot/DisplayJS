@@ -657,12 +657,14 @@ var DisplayJS = function () {
 	}, {
 		key: "load",
 		value: function load(el, url) {
+			var _this6 = this;
+
 			var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
 
 			el = this.s(el);
-			this.ajax(url, "GET", "", function (xhr) {
+			this.ajax(url, "GET", "", function (text, xhr) {
 				try {
-					document.querySelector(el).innerHTML = xhr.responseXML.querySelector(el);
+					_this6.text(el, xhr.responseXML.querySelector(el));
 					callback();
 				} catch (e) {
 					callback(e);
@@ -680,7 +682,7 @@ var DisplayJS = function () {
 			request.onload = function () {
 				if (request.status >= 200 && request.status < 400) {
 					var _data = request.responseText;
-					callback(_data);
+					callback(_data, request);
 				} else {
 					console.error("DisplayJS error: The ajax request returned an error.");
 				}
@@ -830,19 +832,19 @@ var DisplayJS = function () {
 	}, {
 		key: "sum",
 		value: function sum(array) {
-			var _this6 = this;
+			var _this7 = this;
 
 			return array.reduce(function (a, b) {
-				return _this6.math.add(a, b);
+				return _this7.math.add(a, b);
 			});
 		}
 	}, {
 		key: "multiply",
 		value: function multiply(array) {
-			var _this7 = this;
+			var _this8 = this;
 
 			return array.reduce(function (a, b) {
-				return _this7.math.mul(a, b);
+				return _this8.math.mul(a, b);
 			});
 		}
 	}, {
@@ -855,10 +857,10 @@ var DisplayJS = function () {
 	}, {
 		key: "median",
 		value: function median(array) {
-			var _this8 = this;
+			var _this9 = this;
 
 			array.sort(function (a, b) {
-				return _this8.math.sub(a, b);
+				return _this9.math.sub(a, b);
 			});
 			var half = Math.floor(this.math.div(array.length, 2));
 			if (array.length % 2) {
