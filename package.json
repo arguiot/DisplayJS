@@ -68,7 +68,8 @@
     "gulp-babili": "^0.1.4",
     "gulp-rename": "^1.2.2",
     "gulp-rigger": "^0.5.8",
-    "gulp-uglify": "^3.0.0"
+    "gulp-uglify": "^3.0.0",
+    "jest": "^20.0.4"
   },
   "dependencies": {}
 }
