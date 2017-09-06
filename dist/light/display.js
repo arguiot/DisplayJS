@@ -572,6 +572,14 @@ var DisplayJS = function () {
 			script.src = source;
 			prior.parentNode.insertBefore(script, prior);
 		}
+	}, {
+		key: "sleep",
+		value: function sleep(ms) {
+			var waitUntil = new Date().getTime() + ms;
+			while (new Date().getTime() < waitUntil) {
+				true;
+			}
+		}
 		// Math and array manipulation + includes
 
 	}, {
