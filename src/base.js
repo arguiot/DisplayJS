@@ -418,8 +418,8 @@ class DisplayJS {
 		prior.parentNode.insertBefore(script, prior);
 	}
 	sleep(ms){
-	    const waitUntil = new Date().getTime() + ms;
-	    while(new Date().getTime() < waitUntil) true;
+		const waitUntil = new Date().getTime() + ms;
+		while(new Date().getTime() < waitUntil) true;
 	}
 	// Math and array manipulation + includes
 	extend( defaults, options ) {

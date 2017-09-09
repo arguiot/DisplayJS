@@ -418,8 +418,8 @@ class DisplayJS {
 		prior.parentNode.insertBefore(script, prior);
 	}
 	sleep(ms){
-	    const waitUntil = new Date().getTime() + ms;
-	    while(new Date().getTime() < waitUntil) true;
+		const waitUntil = new Date().getTime() + ms;
+		while(new Date().getTime() < waitUntil) true;
 	}
 	// Math and array manipulation + includes
 	extend( defaults, options ) {
@@ -464,10 +464,10 @@ class DisplayJS {
 		return array.reduce((a, b) => a.concat(b), []);
 	}
 	drop(array, val) {
-		return val > 0 ? array.slice(val, array.length) : array.slice(0, array.length + val)
+		return val > 0 ? array.slice(val, array.length) : array.slice(0, array.length + val);
 	}
 	isIn(array, val) {
-		return array.includes(val) ? true : false
+		return array.includes(val) ? true : false;
 	}
 	rmFromArray(array, condition) {
 		const obj = [];
@@ -511,8 +511,8 @@ class DisplayJS {
 	}
 	get(url, callback, parse=false) {
 		this.ajax(url, "GET", "", (data) => {
-			parse ? callback(JSON.parse(data)) : callback(data)
-		})
+			parse ? callback(JSON.parse(data)) : callback(data);
+		});
 	}
 	// create your own $.var() like function
 	custom(targetAttr, callback, push) {
@@ -798,7 +798,7 @@ class DisplayJS {
 	}
 	then(toCall, callback) {
 		try {
-			callback(toCall())
+			callback(toCall());
 		} catch (e) {
 			throw "DisplayJS: " + e;
 		}
