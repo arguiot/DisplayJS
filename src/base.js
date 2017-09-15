@@ -122,9 +122,9 @@ class DisplayJS {
 				const el = [];
 				el.push(elements[i]);
 				if (eval(this.obj[attr])) {
-					this.show(el);
+					this.show(this.toNodeList(el[0]));
 				} else {
-					this.hide(el);
+					this.hide(this.toNodeList(el[0]));
 				}
 			}
 		};
@@ -149,9 +149,9 @@ class DisplayJS {
 				const el = [];
 				el.push(elements[i]);
 				if (eval(this.obj[attr])) {
-					this.hide(el);
+					this.hide(this.toNodeList(el[0]));
 				} else {
-					this.show(el);
+					this.show(this.toNodeList(el[0]));
 				}
 			}
 		};
@@ -167,6 +167,12 @@ class DisplayJS {
 				else_push();
 			}, push);
 		}
+	}
+	toNodeList(el){
+		el.setAttribute('wrapNodeList','');
+		const list = document.querySelectorAll('[wrapNodeList]');
+		el.removeAttribute('wrapNodeList');
+		return list;
 	}
 	// custom repeat function
 	repeat(el, array, join, start="", end="") {
@@ -198,9 +204,7 @@ class DisplayJS {
 	all(el, callback) {
 		el = this.s(el);
 		el.forEach((data) => {
-			const node = [];
-			node.push(data);
-			callback(node);
+			callback(this.toNodeList(data));
 		});
 	}
 	/* Basic DOM manipulation */
@@ -236,16 +240,10 @@ class DisplayJS {
 		return false;
 	}
 	select(str) {
-		if (this.isElement(str[0])) {
-			return new Array(str[0]);
-		}
-		return document.querySelectorAll(str);
+		return str instanceof NodeList ? str : document.querySelectorAll(str);
 	}
 	single(str) {
-		if (this.isElement(str)) {
-			return str;
-		}
-		return document.querySelector(str);
+		return this.isElement(str) ? str : document.querySelector(str);
 	}
 	// alias of $.select()
 	s (str) {
@@ -376,14 +374,12 @@ class DisplayJS {
 		return new Array(newEl);
 	}
 	isNode(el){
-		el = this.s(el);
 		return (
 			typeof Node === "object" ? el instanceof Node :
 				el && typeof el === "object" && typeof el.nodeType === "number" && typeof el.nodeName==="string"
 		);
 	}
 	isElement(el){
-		el = this.s(el);
 		return (
 			typeof HTMLElement === "object" ? el instanceof HTMLElement : //DOM2
 				el && typeof el === "object" && el !== null && el.nodeType === 1 && typeof el.nodeName==="string"
