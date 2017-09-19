@@ -122,9 +122,9 @@ class DisplayJS {
 				const el = [];
 				el.push(elements[i]);
 				if (eval(this.obj[attr])) {
-					this.show(el);
+					this.show(this.toNodeList(el[0]));
 				} else {
-					this.hide(el);
+					this.hide(this.toNodeList(el[0]));
 				}
 			}
 		};
@@ -149,9 +149,9 @@ class DisplayJS {
 				const el = [];
 				el.push(elements[i]);
 				if (eval(this.obj[attr])) {
-					this.hide(el);
+					this.hide(this.toNodeList(el[0]));
 				} else {
-					this.show(el);
+					this.show(this.toNodeList(el[0]));
 				}
 			}
 		};
@@ -167,6 +167,12 @@ class DisplayJS {
 				else_push();
 			}, push);
 		}
+	}
+	toNodeList(el){
+		el.setAttribute('wrapNodeList','');
+		const list = document.querySelectorAll('[wrapNodeList]');
+		el.removeAttribute('wrapNodeList');
+		return list;
 	}
 	// custom repeat function
 	repeat(el, array, join, start="", end="") {
@@ -198,19 +204,17 @@ class DisplayJS {
 	all(el, callback) {
 		el = this.s(el);
 		el.forEach((data) => {
-			const node = [];
-			node.push(data);
-			callback(node);
+			callback(this.toNodeList(data));
 		});
 	}
 	/* Basic DOM manipulation */
 	text(el, text) {
 		el = this.s(el);
-		el[0].innerHTML = this.xss(text);
+		return text ? el[0].innerHTML = this.xss(text) : el[0].innerHTML;
 	}
 	html(el, html) {
 		el = this.s(el);
-		el[0].innerHTML = html;
+		return html ? el[0].innerHTML = html : el[0].innerHTML;
 	}
 	append(el, html) {
 		el = this.s(el);
@@ -236,16 +240,10 @@ class DisplayJS {
 		return false;
 	}
 	select(str) {
-		if (this.isElement(str[0])) {
-			return new Array(str[0]);
-		}
-		return document.querySelectorAll(str);
+		return str instanceof NodeList ? str : document.querySelectorAll(str);
 	}
 	single(str) {
-		if (this.isElement(str)) {
-			return str;
-		}
-		return document.querySelector(str);
+		return this.isElement(str) ? str : document.querySelector(str);
 	}
 	// alias of $.select()
 	s (str) {
@@ -376,14 +374,12 @@ class DisplayJS {
 		return new Array(newEl);
 	}
 	isNode(el){
-		el = this.s(el);
 		return (
 			typeof Node === "object" ? el instanceof Node :
 				el && typeof el === "object" && typeof el.nodeType === "number" && typeof el.nodeName==="string"
 		);
 	}
 	isElement(el){
-		el = this.s(el);
 		return (
 			typeof HTMLElement === "object" ? el instanceof HTMLElement : //DOM2
 				el && typeof el === "object" && el !== null && el.nodeType === 1 && typeof el.nodeName==="string"
@@ -464,10 +460,10 @@ class DisplayJS {
 		return array.reduce((a, b) => a.concat(b), []);
 	}
 	drop(array, val) {
-		return val > 0 ? array.slice(val, array.length) : array.slice(0, array.length + val);
+		return val > 0 ? array.slice(val, array.length) : array.slice(0, array.length + val)
 	}
 	isIn(array, val) {
-		return array.includes(val) ? true : false;
+		return array.includes(val) ? true : false
 	}
 	rmFromArray(array, condition) {
 		const obj = [];
@@ -511,8 +507,8 @@ class DisplayJS {
 	}
 	get(url, callback, parse=false) {
 		this.ajax(url, "GET", "", (data) => {
-			parse ? callback(JSON.parse(data)) : callback(data);
-		});
+			parse ? callback(JSON.parse(data)) : callback(data)
+		})
 	}
 	// create your own $.var() like function
 	custom(targetAttr, callback, push) {
@@ -798,7 +794,7 @@ class DisplayJS {
 	}
 	then(toCall, callback) {
 		try {
-			callback(toCall());
+			callback(toCall())
 		} catch (e) {
 			throw "DisplayJS: " + e;
 		}

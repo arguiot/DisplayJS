@@ -12,7 +12,7 @@ By the way, you can ⭐️ the project to support it 😊
 [![Github All Releases](https://img.shields.io/github/downloads/arguiot/DisplayJS/total.svg)](https://github.com/arguiot/DisplayJS/)
 [![npm](https://img.shields.io/npm/dt/display.js.svg)](https://www.npmjs.com/package/display.js)
 [![License](https://img.shields.io/github/license/arguiot/DisplayJS.svg)](LICENSE)
-  
+
 </p>
 
 ## Browser support
@@ -66,7 +66,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 - **devrafalko** - *Helped a lot for the `$.math()` function* - [@devrafalko](https://github.com/devrafalko)
 - **Irving Ventura** - *Fixed a merge issue* - [@irvingv8](https://github.com/irvingv8)
 - **Vladimir B.** - *Fixed the global export warning* - [@ange007](https://github.com/ange007)
-
+- **ChenSheng** - *Fixed `$.s()` function* - [@Cslove](https://github.com/Cslove)
 See also the list of [contributors](https://github.com/arguiot/DisplayJS/contributors) who participated in this project. If you don't code but you have great ideas, don't hesitate to write your idea in the issue part. If your idea is accepted, I will add you to this list 😊.
 
 ## License

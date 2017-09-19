@@ -167,9 +167,9 @@ var DisplayJS = function () {
 					var el = [];
 					el.push(elements[i]);
 					if (eval(_this3.obj[attr])) {
-						_this3.show(el);
+						_this3.show(_this3.toNodeList(el[0]));
 					} else {
-						_this3.hide(el);
+						_this3.hide(_this3.toNodeList(el[0]));
 					}
 				}
 			};
@@ -198,9 +198,9 @@ var DisplayJS = function () {
 					var el = [];
 					el.push(elements[i]);
 					if (eval(_this4.obj[attr])) {
-						_this4.hide(el);
+						_this4.hide(_this4.toNodeList(el[0]));
 					} else {
-						_this4.show(el);
+						_this4.show(_this4.toNodeList(el[0]));
 					}
 				}
 			};
@@ -216,6 +216,14 @@ var DisplayJS = function () {
 					else_push();
 				}, push);
 			}
+		}
+	}, {
+		key: "toNodeList",
+		value: function toNodeList(el) {
+			el.setAttribute('wrapNodeList', '');
+			var list = document.querySelectorAll('[wrapNodeList]');
+			el.removeAttribute('wrapNodeList');
+			return list;
 		}
 		// custom repeat function
 
@@ -263,11 +271,11 @@ var DisplayJS = function () {
 	}, {
 		key: "all",
 		value: function all(el, callback) {
+			var _this5 = this;
+
 			el = this.s(el);
 			el.forEach(function (data) {
-				var node = [];
-				node.push(data);
-				callback(node);
+				callback(_this5.toNodeList(data));
 			});
 		}
 		/* Basic DOM manipulation */
@@ -276,13 +284,13 @@ var DisplayJS = function () {
 		key: "text",
 		value: function text(el, _text) {
 			el = this.s(el);
-			el[0].innerHTML = this.xss(_text);
+			return _text ? el[0].innerHTML = this.xss(_text) : el[0].innerHTML;
 		}
 	}, {
 		key: "html",
 		value: function html(el, _html) {
 			el = this.s(el);
-			el[0].innerHTML = _html;
+			return _html ? el[0].innerHTML = _html : el[0].innerHTML;
 		}
 	}, {
 		key: "append",
@@ -320,18 +328,12 @@ var DisplayJS = function () {
 	}, {
 		key: "select",
 		value: function select(str) {
-			if (this.isElement(str[0])) {
-				return new Array(str[0]);
-			}
-			return document.querySelectorAll(str);
+			return str instanceof NodeList ? str : document.querySelectorAll(str);
 		}
 	}, {
 		key: "single",
 		value: function single(str) {
-			if (this.isElement(str)) {
-				return str;
-			}
-			return document.querySelector(str);
+			return this.isElement(str) ? str : document.querySelector(str);
 		}
 		// alias of $.select()
 
@@ -517,13 +519,11 @@ var DisplayJS = function () {
 	}, {
 		key: "isNode",
 		value: function isNode(el) {
-			el = this.s(el);
 			return (typeof Node === "undefined" ? "undefined" : _typeof(Node)) === "object" ? el instanceof Node : el && (typeof el === "undefined" ? "undefined" : _typeof(el)) === "object" && typeof el.nodeType === "number" && typeof el.nodeName === "string";
 		}
 	}, {
 		key: "isElement",
 		value: function isElement(el) {
-			el = this.s(el);
 			return (typeof HTMLElement === "undefined" ? "undefined" : _typeof(HTMLElement)) === "object" ? el instanceof HTMLElement : //DOM2
 			el && (typeof el === "undefined" ? "undefined" : _typeof(el)) === "object" && el !== null && el.nodeType === 1 && typeof el.nodeName === "string";
 		}
@@ -538,10 +538,10 @@ var DisplayJS = function () {
 				function component() {
 					_classCallCheck(this, component);
 
-					var _this5 = _possibleConstructorReturn(this, (component.__proto__ || Object.getPrototypeOf(component)).call(this));
+					var _this6 = _possibleConstructorReturn(this, (component.__proto__ || Object.getPrototypeOf(component)).call(this));
 
-					callback(_this5);
-					return _this5;
+					callback(_this6);
+					return _this6;
 				}
 
 				return component;
