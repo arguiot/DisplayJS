@@ -106,9 +106,9 @@ var DisplayJS = function () {
 				};
 			}();
 			var obj = this.obj;
-			[].forEach.call(document.querySelectorAll("[target]"), function (x, i, a) {
-				addEventListener(a[i], "change", function () {
-					var attr1 = a[i].getAttribute("target");
+			[].forEach.call(document.querySelectorAll("[target]"), function (x) {
+				addEventListener(x, "change", function () {
+					var attr1 = x.getAttribute("target");
 					if (this.type == "checkbox") {
 						obj[attr1] = this.checked;
 					} else if (this.type == "select") {
@@ -116,10 +116,10 @@ var DisplayJS = function () {
 					} else {
 						obj[attr1] = this.value;
 					}
-					callback(a[i]);
+					callback(x);
 				});
-				addEventListener(a[i], "keydown", function () {
-					var attr2 = a[i].getAttribute("target");
+				addEventListener(x, "keydown", function () {
+					var attr2 = x.getAttribute("target");
 					if (this.type == "checkbox") {
 						obj[attr2] = this.checked;
 					} else if (this.type == "select") {
@@ -127,10 +127,10 @@ var DisplayJS = function () {
 					} else {
 						obj[attr2] = this.value;
 					}
-					callback(a[i]);
+					callback(x);
 				});
-				addEventListener(a[i], "input", function () {
-					var attr3 = a[i].getAttribute("target");
+				addEventListener(x, "input", function () {
+					var attr3 = x.getAttribute("target");
 					if (this.type == "checkbox") {
 						obj[attr3] = this.checked;
 					} else if (this.type == "select") {
@@ -138,10 +138,10 @@ var DisplayJS = function () {
 					} else {
 						obj[attr3] = this.value;
 					}
-					callback(a[i]);
+					callback(x);
 				});
-				addEventListener(a[i], "paste", function () {
-					var attr4 = a[i].getAttribute("target");
+				addEventListener(x, "paste", function () {
+					var attr4 = x.getAttribute("target");
 					if (this.type == "checkbox") {
 						obj[attr4] = this.checked;
 					} else if (this.type == "select") {
@@ -149,7 +149,7 @@ var DisplayJS = function () {
 					} else {
 						obj[attr4] = this.value;
 					}
-					callback(a[i]);
+					callback(x);
 				});
 			});
 		}
