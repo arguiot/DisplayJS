@@ -284,13 +284,13 @@ var DisplayJS = function () {
 		key: "text",
 		value: function text(el, _text) {
 			el = this.s(el);
-			el[0].innerHTML = this.xss(_text);
+			return _text ? el[0].innerHTML = this.xss(_text) : el[0].innerHTML;
 		}
 	}, {
 		key: "html",
 		value: function html(el, _html) {
 			el = this.s(el);
-			el[0].innerHTML = _html;
+			return _html ? el[0].innerHTML = _html : el[0].innerHTML;
 		}
 	}, {
 		key: "append",

@@ -210,11 +210,11 @@ class DisplayJS {
 	/* Basic DOM manipulation */
 	text(el, text) {
 		el = this.s(el);
-		el[0].innerHTML = this.xss(text);
+		return text ? el[0].innerHTML = this.xss(text) : el[0].innerHTML;
 	}
 	html(el, html) {
 		el = this.s(el);
-		el[0].innerHTML = html;
+		return html ? el[0].innerHTML = html : el[0].innerHTML;
 	}
 	append(el, html) {
 		el = this.s(el);
