@@ -66,7 +66,7 @@ class DisplayJS {
 			};
 		})());
 		const obj = this.obj;
-		[].forEach.call(document.querySelectorAll("[target]"), (x, i, a) => {
+		[].forEach.call(document.querySelectorAll("[target]"), (x) => {
 			addEventListener(x, "change", function () {
 				const attr1 = x.getAttribute("target");
 				if (this.type == "checkbox") {
