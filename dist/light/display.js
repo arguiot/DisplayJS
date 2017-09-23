@@ -514,7 +514,7 @@ var DisplayJS = function () {
 			for (var i in this.range(n)) {
 				newEl = newEl.parentNode;
 			}
-			return new Array(newEl);
+			return this.toNodeList(newEl);
 		}
 	}, {
 		key: "isNode",

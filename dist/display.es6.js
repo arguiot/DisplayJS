@@ -371,7 +371,7 @@ class DisplayJS {
 		for (const i in this.range(n)) {
 			newEl = newEl.parentNode;
 		}
-		return new Array(newEl);
+		return this.toNodeList(newEl);
 	}
 	isNode(el){
 		return (
