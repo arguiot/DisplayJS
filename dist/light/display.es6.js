@@ -251,7 +251,7 @@ class DisplayJS {
 	}
 	empty(el) {
 		el = this.s(el);
-		el[0].innerHTML = null;
+		el[0].innerHTML = "";
 	}
 	valEmpty(el) {
 		el = this.s(el);

@@ -1,9 +1,9 @@
 // Similar to jQuery's $.load();
 load (el, url, callback=() => {}) {
 	el = this.s(el);
-	this.ajax(url, "GET", "", (text, xhr) => {
+	this.ajax(url, "GET", "", text => {
 		try {
-			this.text(el, xhr.responseXML.querySelector(el));
+			el[0].innerHTML = text
 			callback();
 		} catch(e) {
 			callback(e);

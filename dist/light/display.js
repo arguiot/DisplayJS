@@ -346,7 +346,7 @@ var DisplayJS = function () {
 		key: "empty",
 		value: function empty(el) {
 			el = this.s(el);
-			el[0].innerHTML = null;
+			el[0].innerHTML = "";
 		}
 	}, {
 		key: "valEmpty",

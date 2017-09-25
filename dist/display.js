@@ -346,7 +346,7 @@ var DisplayJS = function () {
 		key: "empty",
 		value: function empty(el) {
 			el = this.s(el);
-			el[0].innerHTML = null;
+			el[0].innerHTML = "";
 		}
 	}, {
 		key: "valEmpty",
@@ -665,14 +665,12 @@ var DisplayJS = function () {
 	}, {
 		key: "load",
 		value: function load(el, url) {
-			var _this7 = this;
-
 			var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
 
 			el = this.s(el);
-			this.ajax(url, "GET", "", function (text, xhr) {
+			this.ajax(url, "GET", "", function (text) {
 				try {
-					_this7.text(el, xhr.responseXML.querySelector(el));
+					el[0].innerHTML = text;
 					callback();
 				} catch (e) {
 					callback(e);
@@ -840,19 +838,19 @@ var DisplayJS = function () {
 	}, {
 		key: "sum",
 		value: function sum(array) {
-			var _this8 = this;
+			var _this7 = this;
 
 			return array.reduce(function (a, b) {
-				return _this8.math.add(a, b);
+				return _this7.math.add(a, b);
 			});
 		}
 	}, {
 		key: "multiply",
 		value: function multiply(array) {
-			var _this9 = this;
+			var _this8 = this;
 
 			return array.reduce(function (a, b) {
-				return _this9.math.mul(a, b);
+				return _this8.math.mul(a, b);
 			});
 		}
 	}, {
@@ -865,10 +863,10 @@ var DisplayJS = function () {
 	}, {
 		key: "median",
 		value: function median(array) {
-			var _this10 = this;
+			var _this9 = this;
 
 			array.sort(function (a, b) {
-				return _this10.math.sub(a, b);
+				return _this9.math.sub(a, b);
 			});
 			var half = Math.floor(this.math.div(array.length, 2));
 			if (array.length % 2) {
