@@ -36,7 +36,19 @@ var DisplayJS = function () {
 				var elements = document.querySelectorAll("[var]");
 				for (var i = 0; i < elements.length; i++) {
 					var attr = elements[i].getAttribute("var");
-					elements[i].innerHTML = _this.obj[attr];
+
+					if (!attr.includes(".")) {
+						elements[i].innerHTML = _this.obj[attr];
+					} else {
+						var parts = attr.split(".");
+						var val = _this.obj[parts[0]];
+
+						for (var p = 1; p < parts.length; p++) {
+							val = val[parts[p]];
+						}
+
+						elements[i].innerHTML = val;
+					}
 				}
 			};
 			// push var cheking
