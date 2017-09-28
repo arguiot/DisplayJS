@@ -654,7 +654,7 @@ var DisplayJS = function () {
 		value: function rmFromArray(array, condition) {
 			var obj = [];
 			for (var i in array) {
-				if (!condition(i)) {
+				if (condition(i) == !1) {
 					obj.push(array[i]);
 				}
 			}

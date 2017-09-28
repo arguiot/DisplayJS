@@ -6,7 +6,7 @@ test("Math part", () => {
 	expect($.reshape($.range(5), 2)).toEqual([ [ 0, 1 ], [ 2, 3 ], [ 4, 5 ] ])
 	expect($.flatten([ [ 0, 1 ], [ 2, 3 ], [ 4, 5 ] ])).toEqual($.range(5))
 	expect($.drop($.range(5), -1)).toEqual($.range(4))
-	expect($.rmFromArray($.range(10), (a) => a % 2)).toEqual([ 0, 2, 4, 6, 8, 10 ])
+	expect($.rmFromArray($.range(10), a => a % 2 == 0)).toEqual([ 1, 3, 5, 7, 9 ])
 	var aDay = 24 * 60 * 60 * 1000;
 	expect($.time_ago(new Date(Date.now() - aDay))).toMatch(/Yesterday/)
 	expect($.sum($.range(100))).toBe(5050)

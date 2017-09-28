@@ -468,7 +468,7 @@ class DisplayJS {
 	rmFromArray(array, condition) {
 		const obj = [];
 		for (const i in array) {
-			if (!condition(i)) {
+			if (condition(i) == !1) {
 				obj.push(array[i]);
 			}
 		}

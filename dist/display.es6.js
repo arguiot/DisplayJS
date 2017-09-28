@@ -169,9 +169,9 @@ class DisplayJS {
 		}
 	}
 	toNodeList(el){
-		el.setAttribute('wrapNodeList','');
-		const list = document.querySelectorAll('[wrapNodeList]');
-		el.removeAttribute('wrapNodeList');
+		el.setAttribute("wrapNodeList","");
+		const list = document.querySelectorAll("[wrapNodeList]");
+		el.removeAttribute("wrapNodeList");
 		return list;
 	}
 	// custom repeat function
@@ -460,15 +460,15 @@ class DisplayJS {
 		return array.reduce((a, b) => a.concat(b), []);
 	}
 	drop(array, val) {
-		return val > 0 ? array.slice(val, array.length) : array.slice(0, array.length + val)
+		return val > 0 ? array.slice(val, array.length) : array.slice(0, array.length + val);
 	}
 	isIn(array, val) {
-		return array.includes(val) ? true : false
+		return array.includes(val) ? true : false;
 	}
 	rmFromArray(array, condition) {
 		const obj = [];
 		for (const i in array) {
-			if (!condition(i)) {
+			if (condition(i) == !1) {
 				obj.push(array[i]);
 			}
 		}
@@ -479,7 +479,7 @@ class DisplayJS {
 		el = this.s(el);
 		this.ajax(url, "GET", "", text => {
 			try {
-				el[0].innerHTML = text
+				el[0].innerHTML = text;
 				callback();
 			} catch(e) {
 				callback(e);
@@ -507,8 +507,8 @@ class DisplayJS {
 	}
 	get(url, callback, parse=false) {
 		this.ajax(url, "GET", "", (data) => {
-			parse ? callback(JSON.parse(data)) : callback(data)
-		})
+			parse ? callback(JSON.parse(data)) : callback(data);
+		});
 	}
 	// create your own $.var() like function
 	custom(targetAttr, callback, push) {
@@ -794,7 +794,7 @@ class DisplayJS {
 	}
 	then(toCall, callback) {
 		try {
-			callback(toCall())
+			callback(toCall());
 		} catch (e) {
 			throw "DisplayJS: " + e;
 		}
