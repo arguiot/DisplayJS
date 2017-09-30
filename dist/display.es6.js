@@ -338,7 +338,11 @@ class DisplayJS {
 	}
 	css(el, name, value) {
 		el = this.s(el);
-		el[0].style[name] = value;
+		if (typeof(name) == "object") {
+			el[0].style = name;
+		} else {
+			el[0].style[name] = value;
+		}
 	}
 	getStyle(el, styleProp) {
 		el = this.s(el);

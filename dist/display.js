@@ -463,7 +463,11 @@ var DisplayJS = function () {
 		key: "css",
 		value: function css(el, name, value) {
 			el = this.s(el);
-			el[0].style[name] = value;
+			if ((typeof name === "undefined" ? "undefined" : _typeof(name)) == 'object') {
+				el[0].style = name;
+			} else {
+				el[0].style[name] = value;
+			}
 		}
 	}, {
 		key: "getStyle",
