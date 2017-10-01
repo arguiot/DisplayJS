@@ -181,9 +181,9 @@ class DisplayJS {
 		}
 	}
 	toNodeList(el){
-		el.setAttribute("wrapNodeList","");
-		const list = document.querySelectorAll("[wrapNodeList]");
-		el.removeAttribute("wrapNodeList");
+		el.setAttribute('wrapNodeList','');
+		const list = document.querySelectorAll('[wrapNodeList]');
+		el.removeAttribute('wrapNodeList');
 		return list;
 	}
 	// custom repeat function
@@ -291,7 +291,7 @@ class DisplayJS {
 		window.scroll(x, y);
 	}
 	scrollTop (el) {
-		el = el != null ? el : document.body.scrollTop == 0 ? this.toNodeList(document.documentElement) : this.toNodeList(document.body);
+		el = el != null ? el : document.body.scrollTop == 0 ? this.toNodeList(document.documentElement) : this.toNodeList(document.body)
 		el = this.s(el);
 		return el[0].scrollTop;
 	}
@@ -339,8 +339,10 @@ class DisplayJS {
 	}
 	css(el, name, value) {
 		el = this.s(el);
-		if (typeof(name) == "object") {
-			el[0].style = name;
+		if (typeof(name) == 'object') {
+			for (let i in name) {
+				el[0].style[i] = name[i];
+			}
 		} else {
 			el[0].style[name] = value;
 		}
@@ -477,10 +479,10 @@ class DisplayJS {
 		return array.reduce((a, b) => a.concat(b), []);
 	}
 	drop(array, val) {
-		return val > 0 ? array.slice(val, array.length) : array.slice(0, array.length + val);
+		return val > 0 ? array.slice(val, array.length) : array.slice(0, array.length + val)
 	}
 	isIn(array, val) {
-		return array.includes(val) ? true : false;
+		return array.includes(val) ? true : false
 	}
 	rmFromArray(array, condition) {
 		const obj = [];
@@ -496,7 +498,7 @@ class DisplayJS {
 		el = this.s(el);
 		this.ajax(url, "GET", "", text => {
 			try {
-				el[0].innerHTML = text;
+				el[0].innerHTML = text
 				callback();
 			} catch(e) {
 				callback(e);
@@ -524,8 +526,8 @@ class DisplayJS {
 	}
 	get(url, callback, parse=false) {
 		this.ajax(url, "GET", "", (data) => {
-			parse ? callback(JSON.parse(data)) : callback(data);
-		});
+			parse ? callback(JSON.parse(data)) : callback(data)
+		})
 	}
 	// create your own $.var() like function
 	custom(targetAttr, callback, push) {
@@ -811,7 +813,7 @@ class DisplayJS {
 	}
 	then(toCall, callback) {
 		try {
-			callback(toCall());
+			callback(toCall())
 		} catch (e) {
 			throw "DisplayJS: " + e;
 		}

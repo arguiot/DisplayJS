@@ -463,7 +463,9 @@ var DisplayJS = function () {
 		value: function css(el, name, value) {
 			el = this.s(el);
 			if ((typeof name === "undefined" ? "undefined" : _typeof(name)) == 'object') {
-				el[0].style = name;
+				for (var i in name) {
+					el[0].style[i] = name[i];
+				}
 			} else {
 				el[0].style[name] = value;
 			}
