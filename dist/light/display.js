@@ -399,9 +399,8 @@ var DisplayJS = function () {
 		}
 	}, {
 		key: "scrollTop",
-		value: function scrollTop() {
-			var el = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.toNodeList(document.body);
-
+		value: function scrollTop(el) {
+			el = el != null ? el : document.body.scrollTop == 0 ? this.toNodeList(document.documentElement) : this.toNodeList(document.body);
 			el = this.s(el);
 			return el[0].scrollTop;
 		}

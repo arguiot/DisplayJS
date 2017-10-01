@@ -290,7 +290,8 @@ class DisplayJS {
 	scrollTo (x, y) {
 		window.scroll(x, y);
 	}
-	scrollTop (el = this.toNodeList(document.body)) {
+	scrollTop (el) {
+		el = el != null ? el : document.body.scrollTop == 0 ? this.toNodeList(document.documentElement) : this.toNodeList(document.body);
 		el = this.s(el);
 		return el[0].scrollTop;
 	}
