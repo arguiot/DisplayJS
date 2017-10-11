@@ -9,11 +9,10 @@
   "scripts": {
     "run": "npm test",
     "build": "npm test",
-    "test": "npm run gulp && npm run lint && npm run jest && exit 0",
+    "test": "npm run gulp && npm run lint && npm run eye && exit 0",
     "gulp": "gulp",
     "lint": "./node_modules/.bin/eslint dist/display.es6.js --fix",
-	"jest": "./node_modules/.bin/jest"
-
+    "eye": "./node_modules/.bin/eye"
   },
   "repository": {
     "type": "git",
@@ -63,13 +62,13 @@
     "eslint": "^4.8.0",
     "eslint-config-airbnb-base": "^12.0.1",
     "eslint-plugin-import": "^2.7.0",
+    "eye.js": "0.0.3",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-babili": "^0.1.4",
     "gulp-rename": "^1.2.2",
     "gulp-rigger": "^0.5.8",
-    "gulp-uglify": "^3.0.0",
-    "jest": "^21.2.1"
+    "gulp-uglify": "^3.0.0"
   },
   "dependencies": {}
 }
