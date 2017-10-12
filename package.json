@@ -9,9 +9,10 @@
   "scripts": {
     "run": "npm test",
     "build": "npm test",
-    "test": "npm run gulp && npm run lint && npm run eye && exit 0",
+    "test": "npm run gulp && npm run prettier && npm run lint && npm run eye && exit 0",
     "gulp": "gulp",
-    "lint": "./node_modules/.bin/eslint dist/display.es6.js --fix",
+	"prettier": "prettier \"dist/**/*.js\" --write",
+    "lint": "./node_modules/.bin/eslint \"dist/**/*\" --fix",
     "eye": "./node_modules/.bin/eye"
   },
   "repository": {
@@ -68,7 +69,8 @@
     "gulp-babili": "^0.1.4",
     "gulp-rename": "^1.2.2",
     "gulp-rigger": "^0.5.8",
-    "gulp-uglify": "^3.0.0"
+    "gulp-uglify": "^3.0.0",
+    "prettier": "1.7.4"
   },
   "dependencies": {}
 }

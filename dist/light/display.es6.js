@@ -46,27 +46,36 @@ class DisplayJS {
 		}
 	}
 	// aliases of $.var();
-	render (push) {
+	render(push) {
 		this.var(push);
 	}
-	renderVariables (push) {
+	renderVariables(push) {
 		this.var(push);
 	}
 	// Transform HTML special chars
-	xss (str) {
+	xss(str) {
 		const lt = /</g;
 		const gt = />/g;
 		const ap = /'/g;
 		const ic = /"/g;
-		return str.toString().replace(lt, "&lt;").replace(gt, "&gt;").replace(ap, "&#39;").replace(ic, "&#34;");
+		return str
+			.toString()
+			.replace(lt, "&lt;")
+			.replace(gt, "&gt;")
+			.replace(ap, "&#39;")
+			.replace(ic, "&#34;");
 	}
 	// encode the URI
 	xssURI(str) {
 		return encodeURI(str);
 	}
 	// Target input to variable
-	target(callback= () => { this.var(); }) {
-		const addEventListener = ((() => {
+	target(
+		callback = () => {
+			this.var();
+		}
+	) {
+		const addEventListener = (() => {
 			if (document.addEventListener) {
 				return (element, event, handler) => {
 					element.addEventListener(event, handler, false);
@@ -76,10 +85,10 @@ class DisplayJS {
 			return (element, event, handler) => {
 				element.attachEvent(`on${event}`, handler);
 			};
-		})());
+		})();
 		const obj = this.obj;
-		[].forEach.call(document.querySelectorAll("[target]"), (x) => {
-			addEventListener(x, "change", function () {
+		[].forEach.call(document.querySelectorAll("[target]"), x => {
+			addEventListener(x, "change", function() {
 				const attr1 = x.getAttribute("target");
 				if (this.type == "checkbox") {
 					obj[attr1] = this.checked;
@@ -90,7 +99,7 @@ class DisplayJS {
 				}
 				callback(x);
 			});
-			addEventListener(x, "keydown", function () {
+			addEventListener(x, "keydown", function() {
 				const attr2 = x.getAttribute("target");
 				if (this.type == "checkbox") {
 					obj[attr2] = this.checked;
@@ -101,7 +110,7 @@ class DisplayJS {
 				}
 				callback(x);
 			});
-			addEventListener(x, "input", function () {
+			addEventListener(x, "input", function() {
 				const attr3 = x.getAttribute("target");
 				if (this.type == "checkbox") {
 					obj[attr3] = this.checked;
@@ -112,7 +121,7 @@ class DisplayJS {
 				}
 				callback(x);
 			});
-			addEventListener(x, "paste", function () {
+			addEventListener(x, "paste", function() {
 				const attr4 = x.getAttribute("target");
 				if (this.type == "checkbox") {
 					obj[attr4] = this.checked;
@@ -180,22 +189,21 @@ class DisplayJS {
 			}, push);
 		}
 	}
-	toNodeList(el){
-		el.setAttribute('wrapNodeList','');
-		const list = document.querySelectorAll('[wrapNodeList]');
-		el.removeAttribute('wrapNodeList');
+	toNodeList(el) {
+		el.setAttribute("wrapNodeList", "");
+		const list = document.querySelectorAll("[wrapNodeList]");
+		el.removeAttribute("wrapNodeList");
 		return list;
 	}
 	// custom repeat function
-	repeat(el, array, join, start="", end="") {
+	repeat(el, array, join, start = "", end = "") {
 		el = this.s(el);
 		let text = start;
-		if (typeof(join) == "object") {
+		if (typeof join == "object") {
 			for (let i = 0; i < array.length; i++) {
 				text += join[i] + String(array[i]);
 			}
-		}
-		else {
+		} else {
 			for (let i = 0; i < array.length; i++) {
 				text += join + String(array[i]);
 			}
@@ -204,29 +212,31 @@ class DisplayJS {
 		el[0].innerHTML = text;
 	}
 	// parsing the DOM for on and action attribute
-	onEvent () {
+	onEvent() {
 		const elements = document.querySelectorAll("[on]");
 		for (let i = 0; i < elements.length; i++) {
 			const attr = elements[i].getAttribute("on");
 			const action = elements[i].getAttribute("action");
-			elements[i].addEventListener(attr, () => { eval(action); });
+			elements[i].addEventListener(attr, () => {
+				eval(action);
+			});
 		}
 	}
 	// apply function to each elements selected
 	all(el, callback) {
 		el = this.s(el);
-		el.forEach((data) => {
+		el.forEach(data => {
 			callback(this.toNodeList(data));
 		});
 	}
 	/* Basic DOM manipulation */
 	text(el, text) {
 		el = this.s(el);
-		return text ? el[0].innerHTML = this.xss(text) : el[0].innerHTML;
+		return text ? (el[0].innerHTML = this.xss(text)) : el[0].innerHTML;
 	}
 	html(el, html) {
 		el = this.s(el);
-		return html ? el[0].innerHTML = html : el[0].innerHTML;
+		return html ? (el[0].innerHTML = html) : el[0].innerHTML;
 	}
 	append(el, html) {
 		el = this.s(el);
@@ -258,7 +268,7 @@ class DisplayJS {
 		return this.isElement(str) ? str : document.querySelector(str);
 	}
 	// alias of $.select()
-	s (str) {
+	s(str) {
 		return this.select(str);
 	}
 	empty(el) {
@@ -278,20 +288,29 @@ class DisplayJS {
 		el[0].addEventListener(event, callback);
 	}
 	ready(fn) {
-		if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
+		if (
+			document.attachEvent
+				? document.readyState === "complete"
+				: document.readyState !== "loading"
+		) {
 			fn();
 		} else {
 			document.addEventListener("DOMContentLoaded", fn);
 		}
 	}
-	scroll (callback) {
+	scroll(callback) {
 		window.addEventListener("scroll", callback);
 	}
-	scrollTo (x, y) {
+	scrollTo(x, y) {
 		window.scroll(x, y);
 	}
-	scrollTop (el) {
-		el = el != null ? el : document.body.scrollTop == 0 ? this.toNodeList(document.documentElement) : this.toNodeList(document.body)
+	scrollTop(el) {
+		el =
+						el != null
+							? el
+							: document.body.scrollTop == 0
+								? this.toNodeList(document.documentElement)
+								: this.toNodeList(document.body);
 		el = this.s(el);
 		return el[0].scrollTop;
 	}
@@ -339,7 +358,7 @@ class DisplayJS {
 	}
 	css(el, name, value) {
 		el = this.s(el);
-		if (typeof(name) == 'object') {
+		if (typeof name == "object") {
 			for (let i in name) {
 				el[0].style[i] = name[i];
 			}
@@ -351,7 +370,7 @@ class DisplayJS {
 		el = this.s(el);
 		return el[0].style[styleProp];
 	}
-	fadeOut(el, i=0.1) {
+	fadeOut(el, i = 0.1) {
 		el = this.s(el)[0];
 		el.style.opacity = 1;
 
@@ -361,9 +380,9 @@ class DisplayJS {
 			} else {
 				requestAnimationFrame(fade);
 			}
-		}());
+		})();
 	}
-	fadeIn(el, i=0.1, display) {
+	fadeIn(el, i = 0.1, display) {
 		el = this.s(el)[0];
 		el.style.opacity = 0;
 		el.style.display = display || "block";
@@ -374,17 +393,17 @@ class DisplayJS {
 				el.style.opacity = val;
 				requestAnimationFrame(fade);
 			}
-		}());
+		})();
 	}
 	// Create a function in the DisplayJS object
-	get fn () {
+	get fn() {
 		return DisplayJS.prototype;
 	}
 	// dynamically update something
-	dynamic (callback, push=250) {
+	dynamic(callback, push = 250) {
 		window.setInterval(callback, push);
 	}
-	parent (el, n = 0) {
+	parent(el, n = 0) {
 		el = this.s(el);
 		let newEl = el[0];
 		for (const i in this.range(n)) {
@@ -392,22 +411,27 @@ class DisplayJS {
 		}
 		return this.toNodeList(newEl);
 	}
-	isNode(el){
-		return (
-			typeof Node === "object" ? el instanceof Node :
-				el && typeof el === "object" && typeof el.nodeType === "number" && typeof el.nodeName==="string"
-		);
+	isNode(el) {
+		return typeof Node === "object"
+			? el instanceof Node
+			: el &&
+										typeof el === "object" &&
+										typeof el.nodeType === "number" &&
+										typeof el.nodeName === "string";
 	}
-	isElement(el){
-		return (
-			typeof HTMLElement === "object" ? el instanceof HTMLElement : //DOM2
-				el && typeof el === "object" && el !== null && el.nodeType === 1 && typeof el.nodeName==="string"
-		);
+	isElement(el) {
+		return typeof HTMLElement === "object"
+			? el instanceof HTMLElement //DOM2
+			: el &&
+										typeof el === "object" &&
+										el !== null &&
+										el.nodeType === 1 &&
+										typeof el.nodeName === "string";
 	}
 	// create custom component
-	component (name, callback) {
+	component(name, callback) {
 		class component extends HTMLElement {
-			constructor () {
+			constructor() {
 				super();
 				callback(this);
 			}
@@ -421,23 +445,29 @@ class DisplayJS {
 		script.async = 1;
 
 		script.onload = script.onreadystatechange = (_, isAbort) => {
-			if(isAbort || !script.readyState || /loaded|complete/.test(script.readyState) ) {
+			if (
+				isAbort ||
+								!script.readyState ||
+								/loaded|complete/.test(script.readyState)
+			) {
 				script.onload = script.onreadystatechange = null;
 				script = undefined;
 
-				if(!isAbort) { if(callback) callback(); }
+				if (!isAbort) {
+					if (callback) callback();
+				}
 			}
 		};
 
 		script.src = source;
 		prior.parentNode.insertBefore(script, prior);
 	}
-	sleep(ms){
+	sleep(ms) {
 		const waitUntil = new Date().getTime() + ms;
-		while(new Date().getTime() < waitUntil) true;
+		while (new Date().getTime() < waitUntil) true;
 	}
 	// Math and array manipulation + includes
-	extend( defaults, options ) {
+	extend(defaults, options) {
 		const extended = {};
 		let prop;
 		for (prop in defaults) {
@@ -453,12 +483,14 @@ class DisplayJS {
 		return extended;
 	}
 	arange(start, end, step, offset) {
-		const len = (Math.abs(end - start) + ((offset || 0) * 2)) / (step || 1) + 1;
+		const len = (Math.abs(end - start) + (offset || 0) * 2) / (step || 1) + 1;
 		const direction = start < end ? 1 : -1;
-		const startingPoint = start - (direction * (offset || 0));
+		const startingPoint = start - direction * (offset || 0);
 		const stepSize = direction * (step || 1);
 
-		return Array(len).fill(0).map((_, index) => startingPoint + (stepSize * index));
+		return Array(len)
+			.fill(0)
+			.map((_, index) => startingPoint + stepSize * index);
 	}
 	range(n) {
 		return this.arange(0, n, 1);
@@ -479,10 +511,12 @@ class DisplayJS {
 		return array.reduce((a, b) => a.concat(b), []);
 	}
 	drop(array, val) {
-		return val > 0 ? array.slice(val, array.length) : array.slice(0, array.length + val)
+		return val > 0
+			? array.slice(val, array.length)
+			: array.slice(0, array.length + val);
 	}
 	isIn(array, val) {
-		return array.includes(val) ? true : false
+		return array.includes(val) ? true : false;
 	}
 	rmFromArray(array, condition) {
 		const obj = [];
@@ -497,15 +531,15 @@ class DisplayJS {
 }
 // Browserify / Node.js
 if (typeof define === "function" && define.amd) {
-	define(() => new DisplayJS);
-// CommonJS and Node.js module support.
+	define(() => new DisplayJS());
+	// CommonJS and Node.js module support.
 } else if (typeof exports !== "undefined") {
-		// Support Node.js specific `module.exports` (which can be a function)
+	// Support Node.js specific `module.exports` (which can be a function)
 	if (typeof module !== "undefined" && module.exports) {
-		exports = module.exports = new DisplayJS;
+		exports = module.exports = new DisplayJS();
 	}
-		// But always support CommonJS module 1.1.1 spec (`exports` cannot be a function)
-	exports.DisplayJS = new DisplayJS;
+	// But always support CommonJS module 1.1.1 spec (`exports` cannot be a function)
+	exports.DisplayJS = new DisplayJS();
 } else if (typeof global !== "undefined") {
-	global.DisplayJS = new DisplayJS;
+	global.DisplayJS = new DisplayJS();
 }

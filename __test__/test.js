@@ -1,4 +1,4 @@
-const djs = require(path.join(testFileDir, "../dist/display.es6"));
+const djs = require(path.join(testFileDir, "../dist/display.js"));
 eye.describe("Math part", () => {
 	eye.test("$.extend()", "node",
 		$ => $(djs.extend({"a": 1, "b": 3}, {"a": 2, "c": 6})).Equal({"a": 2, "b": 3, "c": 6})
