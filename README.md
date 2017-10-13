@@ -15,6 +15,10 @@ By the way, you can ⭐️ the project to support it 😊
 
 </p>
 
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/9h8vmsgmxHytQSRuA6A4iQZJ/arguiot/DisplayJS'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/9h8vmsgmxHytQSRuA6A4iQZJ/arguiot/DisplayJS.svg' />
+</a>
+
 ## Browser support
 The browser support table is not 100% accurate. The ⛔ mean that I didn't tested DisplayJS for this browser.
 
