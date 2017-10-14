@@ -42,3 +42,4 @@ eye.describe("Math part", () => {
 		$ => $(djs.math.add(0.2, 0.4)).Equal(0.6)
 	)
 })
+eye.test("DOM", "browser", path.join(testFileDir, "dom.html"))

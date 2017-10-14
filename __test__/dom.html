@@ -1,0 +1,61 @@
+<div class="render" var="a"></div>
+<div class="banner" var="b"></div>
+<div class="render" var="c"></div>
+<input type="text" name="input-test" target="c"/>
+<div class="render" var="d"></div>
+<input type="text" name="input-test" target="d"/>
+<div class="render" var="e"></div>
+<input type="checkbox" name="input-test" target="e"/>
+<div class="other"></div>
+<div class="a"></div>
+<div class="a"></div>
+<div class="a"></div>
+<div class="a"></div>
+<div class="a" if="e"></div>
+<div class="predict"></div>
+<div class="bg">Hello</div>
+<hello-element name="world"></hello-element>
+<script src="/eyejs/" charset="utf-8"></script>
+<script src="/static/display.js"></script>
+<script>
+	var render = {
+		a: "Timestamp:",
+		b: 0,
+		c: "",
+		d: "",
+		e: false,
+		f: false,
+	}
+	const djs = new DisplayJS(render);
+	eye.test(
+		$ => $(() => {
+			djs.target();
+			djs.var(true);
+			window.setInterval(() => {
+				render.b = new Date().getTime()/1000;
+			}, 1000/30);
+			var el = djs.select(".other");
+			djs.append(el, "Hello World!");
+			djs.all(djs.select(".a"), function(a) {
+				djs.append(a, "Hello")
+			})
+
+			djs.text(djs.select(".predict"),djs.predict([[1,5],[2,18]], 4, true))
+			djs.css(".bg", {
+				"background": "blue"
+			})
+			djs.component("hello-element", el => {
+				djs.html(djs.toNodeList(el), `Hello ${el.getAttribute("name")}`)
+			})
+		}).toRun()
+	)
+	eye.test(
+		$ => $(djs.single("hello-element").innerHTML).Match(/Hello/)
+	)
+	setTimeout(() => {
+		eye.test(
+			$ => $().visual()
+		)
+		eye.checkout()
+	}, 5000)
+</script>

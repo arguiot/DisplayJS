@@ -53,4 +53,10 @@ gulp.task("modern-minify-full", function () {
     .pipe(rename({basename: "display", suffix: ".min"}))
     .pipe(gulp.dest("dist"));
 });
-gulp.task("default", [ "minify", "copy", "modern", "modern-minify", "modern-full", "modern-minify-full" ]);
+gulp.task("tests", function () {
+	gulp.src("src/*.js")
+	.pipe(rigger())
+	.pipe(rename({basename: "display"}))
+    .pipe(gulp.dest("__test__"));
+});
+gulp.task("default", [ "minify", "copy", "modern", "modern-minify", "modern-full", "modern-minify-full", "tests" ]);
