@@ -44,7 +44,7 @@ var $ = new DisplayJS (window);
 ## The full docs can be found [here](https://github.com/arguiot/DisplayJS/wiki)
 
 ## Support
-DisplayJS is project that required a lot of work and effort. You can show your appreciation by leaving a ⭐️. But you can also contribute in a 'financial' way by giving some XMRs (if you have no idea of what this is, look for Monero on Google) at this address:
+DisplayJS is a project that required a lot of work and effort. You can show your appreciation by leaving a ⭐️. But you can also contribute in a 'financial' way by giving some XMRs (if you have no idea of what this is, look for Monero on Google) at this address:
 ```bash
 49qzWTyu4awZFpnVRUZHCQE8xz1bcoRkCQh1nrRsTHg3if6osQqVXRoFAyGYvhDR4pZ4w8WTKQDykYy5Z2Sj6i9TAj2fiBr
 ```
