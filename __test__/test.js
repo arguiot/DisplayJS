@@ -1,4 +1,4 @@
-const djs = require(path.join(testFileDir, "../dist/display.js"));
+const djs = require(__testDir + "../dist/display.js");
 eye.describe("Math part", () => {
 	eye.test("$.extend()", "node",
 		$ => $(djs.extend({"a": 1, "b": 3}, {"a": 2, "c": 6})).Equal({"a": 2, "b": 3, "c": 6})
@@ -42,4 +42,4 @@ eye.describe("Math part", () => {
 		$ => $(djs.math.add(0.2, 0.4)).Equal(0.6)
 	)
 })
-eye.test("DOM", "browser", path.join(testFileDir, "dom.html"))
+eye.test("DOM", "browser", __testDir + "dom.html")
