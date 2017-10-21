@@ -35,7 +35,11 @@ eye.describe("Math part", () => {
 		$ => $(djs.median([53, 9, 8, 37, 4])).Equal(9)
 	)
 	eye.test("$.predict()", "node",
-		$ => $(djs.predict([[1,3],[2,5],[3,7]], 4)).Equal(9)
+		$ => $(djs.predict({
+			1: 3,
+			2: 5,
+			3: 7,
+		}, 4)).Equal(9)
 	)
 	eye.test("$.math", "node",
 		$ => $(djs.math.mul(djs.math.div(1, 3), 6)).Equal(2),

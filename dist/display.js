@@ -718,38 +718,33 @@ class DisplayJS {
     }
   }
   predict(array, val, text = false) {
+    const math = this.math;
     const djs = this;
-    function main(valC, text) {
-      const first = array[0][0];
-      const second = array[1][0];
-      const firstVal = array[0][1];
-      const secondVal = array[1][1];
-      const a = djs.math.div(
-        djs.math.sub(firstVal, secondVal),
-        djs.math.sub(first, second)
-      );
-      const b = djs.math.sub(secondVal, djs.math.mul(second, a));
-      if (text == true) {
-        return `f(x) = ${a}x+${b}; f(${valC}) = ${valC * a + b}`;
-      } else {
-        return valC * a + b;
-      }
+    const X = Object.keys(array);
+    for (var i = 0; i < X.length; i++) X[i] = parseInt(X[i]);
+    const Y = Object.values(array);
+    const N = X.length; // could also be Y.length
+    let XY = [];
+    let XX = [];
+    for (let i of this.range(X.length - 1)) {
+      XX.push(math.mul(X[i], X[i]));
+      XY.push(math.mul(X[i], Y[i]));
     }
-    function patternMatching(array) {
-      if (array.length > 2) {
-        if (main(array[2][0], false) == array[2][1]) {
-          return true;
-        } else {
-          return false;
-        }
-      } else {
-        return true;
-      }
-    }
-    if (patternMatching(array)) {
-      return main(val, text);
+    const sumX = djs.sum(X);
+    const sumY = djs.sum(Y);
+    const sumXY = djs.sum(XY);
+    const sumXX = djs.sum(XX);
+
+    const slope = math.div(
+      math.sub(math.mul(N, sumXY), math.mul(sumX, sumY)),
+      math.sub(math.mul(N, sumXX), math.mul(sumX, sumX))
+    );
+    const intercept = math.div(math.sub(sumY, math.mul(slope, sumX)), N);
+    if (text == true) {
+      return `f(x) = ${slope}x+${intercept}; f(${val}) = ${val * slope +
+        intercept}`;
     } else {
-      return "DisplayJS: Error, can't find any pattern.";
+      return val * slope + intercept;
     }
   }
   get math() {
