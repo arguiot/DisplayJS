@@ -1,6 +1,6 @@
 {
   "name": "display.js",
-  "version": "v2.1.0",
+  "version": "v2.1.1",
   "description": "A simple JavaScript framework for building ambitious UIs",
   "main": "dist/display.min.js",
   "directories": {
