@@ -17,7 +17,7 @@ By the way, you can ⭐️ the project to support it 😊
 </div>
 
 ## Browser support
-The browser support table is not 100% accurate. The ⛔ mean that I didn't tested DisplayJS for this browser.
+The browser support table is not 100% accurate. The ⛔ means that I didn't test DisplayJS for that browser.
 
 | <img src="https://github.com/alrra/browser-logos/blob/master/src/chrome/chrome_128x128.png?raw=true" width="48px" height="48px" alt="Chrome logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/src/firefox/firefox_128x128.png?raw=true" width="48px" height="48px" alt="Firefox logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/src//archive/internet-explorer_9-11/internet-explorer_9-11_128x128.png?raw=true" width="48px" height="48px" alt="IE logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/src/opera/opera_128x128.png?raw=true" width="48px" height="48px" alt="Opera logo"> | <img src="https://github.com/alrra/browser-logos/blob/master/src/safari/safari_128x128.png?raw=true" width="48px" height="48px" alt="Safari logo"> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/android/android_128x128.png" width="48px" height="48px" alt="Android Browser Logo" >
 |:---:|:---:|:---:|:---:|:---:|:---:|
