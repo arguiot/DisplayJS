@@ -78,6 +78,10 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 - **ChenSheng** - *Fixed `$.s()` function* - [@Cslove](https://github.com/Cslove)
 
 See also the list of [contributors](https://github.com/arguiot/DisplayJS/contributors) who participated in this project. If you don't code but you have great ideas, don't hesitate to write your idea in the issue part. If your idea is accepted, I will add you to this list 😊.
+<dl>
+  <dt>Thank You</dt>
+  <dd>for support</dd>
+
 
 ## License
 
