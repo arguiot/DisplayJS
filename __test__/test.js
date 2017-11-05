@@ -43,7 +43,9 @@ eye.describe("Math part", () => {
 	)
 	eye.test("$.math", "node",
 		$ => $(djs.math.mul(djs.math.div(1, 3), 6)).Equal(2),
-		$ => $(djs.math.add(0.2, 0.4)).Equal(0.6)
+		$ => $(djs.math.add(0.2, 0.4)).Equal(0.6),
+		$ => $(djs.math.sub(6.3, 2.1)).Equal(4.2),
+		$ => $(djs.math.div(45, 3)).Equal(15)
 	)
 })
 eye.test("DOM", "browser", __testDir + "dom.html")
