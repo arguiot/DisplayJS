@@ -8,7 +8,7 @@ By the way, you can ⭐️ the project to support it 😊
 </p>
 
 <div align="center">
-  
+
 [![GitHub release](https://img.shields.io/github/release/arguiot/DisplayJS.svg)](https://github.com/arguiot/DisplayJS/releases)
 [![Build Status](https://travis-ci.org/arguiot/DisplayJS.svg?branch=master)](https://travis-ci.org/arguiot/DisplayJS)
 [![Github All Releases](https://img.shields.io/github/downloads/arguiot/DisplayJS/total.svg)](https://github.com/arguiot/DisplayJS/)
@@ -48,9 +48,6 @@ DisplayJS is a project that required a lot of work and effort. You can show your
 ```bash
 49qzWTyu4awZFpnVRUZHCQE8xz1bcoRkCQh1nrRsTHg3if6osQqVXRoFAyGYvhDR4pZ4w8WTKQDykYy5Z2Sj6i9TAj2fiBr
 ```
-**OR**  
-If you don't have any money, you can simply leave your computer all the night 🌙 on our [website](https://display.js.org) and it will simply mine cryptocurrency via [CoinHive](https://coinhive.com)
-
 ## Contributing
 
 Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
