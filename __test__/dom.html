@@ -40,7 +40,10 @@
 				djs.append(a, "Hello")
 			})
 
-			djs.text(djs.select(".predict"),djs.predict([[1,5],[2,18]], 4, true))
+			djs.text(djs.select(".predict"),djs.predict({
+				1: 5,
+				2: 18,
+			}, 4, true))
 			djs.css(".bg", {
 				"background": "blue"
 			})

@@ -80,7 +80,7 @@ predict(array, val, text=false) {
 	const math = this.math;
 	const djs = this;
 	const X = Object.keys(array)
-	for(var i=0; i<X.length;i++) X[i] = parseInt(X[i]);
+	for(var i=0; i<X.length;i++) X[i] = parseFloat(X[i]);
 	const Y = Object.values(array)
 	const N = X.length // could also be Y.length
 	let XY = [];
