@@ -466,6 +466,17 @@ class DisplayJS {
     const waitUntil = new Date().getTime() + ms;
     while (new Date().getTime() < waitUntil) true;
   }
+  getProp(el) {
+    el = this.s(el);
+    return this.extend(el[0], {
+      text: el[0].innerText,
+      html: el[0].innerHTML,
+      css: window.getComputedStyle(el[0]),
+      height: el[0].outerHeight,
+      width: el[0].outerWidth
+    });
+  }
+
   // Math and array manipulation + includes
   extend(defaults, options) {
     const extended = {};

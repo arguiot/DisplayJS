@@ -15,6 +15,13 @@
 <div class="predict"></div>
 <div class="bg">Hello</div>
 <hello-element name="world"></hello-element>
+<div class="height"></div>
+
+<style>
+.height {
+	width: 100px;
+}
+</style>
 <script src="/eyejs/" charset="utf-8"></script>
 <script src="/static/display.js"></script>
 <script>
@@ -54,6 +61,9 @@
 	)
 	eye.test(
 		$ => $(djs.single("hello-element").innerHTML).Match(/Hello/)
+	)
+	eye.test(
+		$ => $(djs.getProp(".height").css.width).Match(/100px/)
 	)
 	setTimeout(() => {
 		eye.test(

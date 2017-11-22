@@ -754,6 +754,20 @@ var DisplayJS = (function() {
           true;
         }
       }
+    },
+    {
+      key: "getProp",
+      value: function getProp(el) {
+        el = this.s(el);
+        return this.extend(el[0], {
+          text: el[0].innerText,
+          html: el[0].innerHTML,
+          css: window.getComputedStyle(el[0]),
+          height: el[0].outerHeight,
+          width: el[0].outerWidth
+        });
+      }
+
       // Math and array manipulation + includes
     },
     {
