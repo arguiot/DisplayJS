@@ -16,7 +16,9 @@
 <div class="bg">Hello</div>
 <hello-element name="world"></hello-element>
 <div class="height"></div>
-
+<div class="repeat">
+	Hello {data.name}
+</div>
 <style>
 .height {
 	width: 100px;
@@ -57,6 +59,7 @@
 			djs.component("hello-element", el => {
 				djs.html(djs.toNodeList(el), `Hello ${el.getAttribute("name")}`)
 			})
+			djs.repeat(".repeat", [{name: 'Arthur'}, {name: 'Charlotte'}])
 		}).toRun()
 	)
 	eye.test(
