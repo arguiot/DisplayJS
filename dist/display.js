@@ -188,7 +188,7 @@ class DisplayJS {
         return list;
     }
     // custom repeat function
-    repeat(el, object, position="in") {
+    repeat(el, object) {
         el = this.s(el);
         const text = el[0].innerHTML;
 		el[0].innerHTML  = ""
@@ -196,7 +196,7 @@ class DisplayJS {
         function interpolate(str) {
             return function interpolate(o) {
                 return str.replace(/{([^{}]*)}/g, function(a, b) {
-					const data = o;
+					window["data"] = o;
                     let r = eval(b)
                     return r
                 });

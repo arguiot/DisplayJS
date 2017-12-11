@@ -242,8 +242,6 @@ var DisplayJS = function () {
     }, {
         key: "repeat",
         value: function repeat(el, object) {
-            var position = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "in";
-
             el = this.s(el);
             var text = el[0].innerHTML;
             el[0].innerHTML = "";
@@ -251,7 +249,7 @@ var DisplayJS = function () {
             function interpolate(str) {
                 return function interpolate(o) {
                     return str.replace(/{([^{}]*)}/g, function (a, b) {
-                        var data = o;
+                        window["data"] = o;
                         var r = eval(b);
                         return r;
                     });
