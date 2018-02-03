@@ -64,7 +64,7 @@ Feel free to send me an email at [arguiot@gmail.com](mailto:arguiot@gmail.com), 
 ## Examples of projects using DisplayJS
 - [EyeJS](https://eye.js.org)
 - [Glottologist](https://glottologist.js.org)
-- [CrypTools Org](https://cryptools.github.io)
+- ~~[CrypTools Org](https://cryptools.github.io)~~ <!-- Cryptools deosn't use display.js anymore -->
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/arguiot/DisplayJS/tags).
