@@ -218,6 +218,17 @@ class DisplayJS {
             });
         }
     }
+    // Set value at path of object
+    setAtPath(obj, path, value) {
+        // Taken from https://stackoverflow.com/a/6842900
+		let i;
+		path = path.split(".");
+		for (i = 0; i < path.length - 1; i++) {
+			obj = obj[path[i]];
+		}
+	
+		obj[path[i]] = value;
+    }
     // apply function to each elements selected
     all(el, callback) {
         el = this.s(el);
