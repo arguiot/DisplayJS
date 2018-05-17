@@ -229,6 +229,17 @@ class DisplayJS {
 	
 		obj[path[i]] = value;
     }
+    // Get value at path of object
+    getAtPath(obj, path) {
+        const parts = path.split(".");
+        let val = obj[parts[0]];
+
+        for (let p = 1; p < parts.length; p++) {
+            val = val[parts[p]];
+        }
+	
+		return val;
+	}
     // apply function to each elements selected
     all(el, callback) {
         el = this.s(el);
