@@ -17,18 +17,7 @@ class DisplayJS {
             for (let i = 0; i < elements.length; i++) {
                 const attr = elements[i].getAttribute("var");
 
-                if (!attr.includes(".")) {
-                    elements[i].innerHTML = this.obj[attr];
-                } else {
-                    const parts = attr.split(".");
-                    let val = this.obj[parts[0]];
-
-                    for (let p = 1; p < parts.length; p++) {
-                        val = val[parts[p]];
-                    }
-
-                    elements[i].innerHTML = val;
-                }
+                elements[i].innerHTML = this.getAtPath(this.obj, attr);
             }
         };
         // push var cheking
