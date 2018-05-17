@@ -17,18 +17,7 @@ class DisplayJS {
             for (let i = 0; i < elements.length; i++) {
                 const attr = elements[i].getAttribute("var");
 
-                if (!attr.includes(".")) {
-                    elements[i].innerHTML = this.obj[attr];
-                } else {
-                    const parts = attr.split(".");
-                    let val = this.obj[parts[0]];
-
-                    for (let p = 1; p < parts.length; p++) {
-                        val = val[parts[p]];
-                    }
-
-                    elements[i].innerHTML = val;
-                }
+                elements[i].innerHTML = this.getAtPath(this.obj, attr);
             }
         };
         // push var cheking
@@ -80,51 +69,32 @@ class DisplayJS {
             };
         })());
         const obj = this.obj;
+        const setValue = (x, element) => {
+			const attr = x.getAttribute("target");
+
+			if (element.type == "checkbox") {
+				this.setAtPath(obj, attr, element.checked);
+			} else if (element.type == "select") {
+				this.setAtPath(obj, attr, element.options[element.selectedIndex].value);
+			} else {
+				this.setAtPath(obj, attr, element.value);
+            }
+            
+			callback(x);
+		};
         [].forEach.call(document.querySelectorAll("[target]"), (x) => {
-            addEventListener(x, "change", function() {
-                const attr1 = x.getAttribute("target");
-                if (this.type == "checkbox") {
-                    obj[attr1] = this.checked;
-                } else if (this.type == "select") {
-                    obj[attr1] = this.options[this.selectedIndex].value;
-                } else {
-                    obj[attr1] = this.value;
-                }
-                callback(x);
-            });
-            addEventListener(x, "keydown", function() {
-                const attr2 = x.getAttribute("target");
-                if (this.type == "checkbox") {
-                    obj[attr2] = this.checked;
-                } else if (this.type == "select") {
-                    obj[attr2] = this.options[this.selectedIndex].value;
-                } else {
-                    obj[attr2] = this.value;
-                }
-                callback(x);
-            });
-            addEventListener(x, "input", function() {
-                const attr3 = x.getAttribute("target");
-                if (this.type == "checkbox") {
-                    obj[attr3] = this.checked;
-                } else if (this.type == "select") {
-                    obj[attr3] = this.options[this.selectedIndex].value;
-                } else {
-                    obj[attr3] = this.value;
-                }
-                callback(x);
-            });
-            addEventListener(x, "paste", function() {
-                const attr4 = x.getAttribute("target");
-                if (this.type == "checkbox") {
-                    obj[attr4] = this.checked;
-                } else if (this.type == "select") {
-                    obj[attr4] = this.options[this.selectedIndex].value;
-                } else {
-                    obj[attr4] = this.value;
-                }
-                callback(x);
-            });
+            addEventListener(x, "change", function () {
+				return setValue(x, this);
+			});
+            addEventListener(x, "keydown", function () {
+				return setValue(x, this);
+			});
+            addEventListener(x, "input", function () {
+				return setValue(x, this);
+			});
+            addEventListener(x, "paste", function () {
+				return setValue(x, this);
+			});
         });
     }
     // if...else function
@@ -218,6 +188,28 @@ class DisplayJS {
             });
         }
     }
+    // Set value at path of object
+    setAtPath(obj, path, value) {
+        // Taken from https://stackoverflow.com/a/6842900
+		let i;
+		path = path.split(".");
+		for (i = 0; i < path.length - 1; i++) {
+			obj = obj[path[i]];
+		}
+	
+		obj[path[i]] = value;
+    }
+    // Get value at path of object
+    getAtPath(obj, path) {
+        const parts = path.split(".");
+        let val = obj[parts[0]];
+
+        for (let p = 1; p < parts.length; p++) {
+            val = val[parts[p]];
+        }
+	
+		return val;
+	}
     // apply function to each elements selected
     all(el, callback) {
         el = this.s(el);
