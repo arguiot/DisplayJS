@@ -64,7 +64,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eye.js": "0.1.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-babel": "^7.0.0",
     "gulp-babili": "^0.1.4",
     "gulp-rename": "^1.2.2",
