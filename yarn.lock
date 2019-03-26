@@ -466,6 +466,10 @@ babel-helper-is-void-0@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/babel-helper-is-void-0/-/babel-helper-is-void-0-0.2.0.tgz#6ed0ada8a9b1c5b6e88af6b47c1b3b5c080860eb"
 
+babel-helper-is-void-0@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/babel-helper-is-void-0/-/babel-helper-is-void-0-0.4.3.tgz#7d9c01b4561e7b95dbda0f6eee48f5b60e67313e"
+
 babel-helper-mark-eval-scopes@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/babel-helper-mark-eval-scopes/-/babel-helper-mark-eval-scopes-0.1.1.tgz#4554345edf9f2549427bd2098e530253f8af2992"
@@ -596,11 +600,11 @@ babel-plugin-minify-flip-comparisons@^0.1.2:
   dependencies:
     babel-helper-is-void-0 "^0.1.1"
 
-babel-plugin-minify-flip-comparisons@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-minify-flip-comparisons/-/babel-plugin-minify-flip-comparisons-0.2.0.tgz#0c9c8e93155c8f09dedad8118b634c259f709ef5"
+babel-plugin-minify-flip-comparisons@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/babel-plugin-minify-flip-comparisons/-/babel-plugin-minify-flip-comparisons-0.4.3.tgz#00ca870cb8f13b45c038b3c1ebc0f227293c965a"
   dependencies:
-    babel-helper-is-void-0 "^0.2.0"
+    babel-helper-is-void-0 "^0.4.3"
 
 babel-plugin-minify-guarded-expressions@^0.1.2:
   version "0.1.2"
