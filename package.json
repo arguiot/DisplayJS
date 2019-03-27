@@ -70,7 +70,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-rigger": "^0.5.8",
     "gulp-uglify": "^3.0.0",
-    "prettier": "1.7.4"
+    "prettier": "1.16.4"
   },
   "dependencies": {}
 }
