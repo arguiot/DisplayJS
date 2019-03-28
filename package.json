@@ -63,7 +63,7 @@
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.8.0",
-    "eye.js": "0.1.0",
+    "eye.js": "1.1.2",
     "gulp": "^4.0.0",
     "gulp-babel": "^7.0.0",
     "gulp-babili": "^0.1.4",
