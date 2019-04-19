@@ -909,13 +909,9 @@ babel-plugin-transform-member-expression-literals@^6.8.5:
   version "6.8.5"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-member-expression-literals/-/babel-plugin-transform-member-expression-literals-6.8.5.tgz#e06ae305cf48d819822e93a70d79269f04d89eec"
 
-babel-plugin-transform-merge-sibling-variables@^6.8.5:
-  version "6.8.5"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-merge-sibling-variables/-/babel-plugin-transform-merge-sibling-variables-6.8.5.tgz#03abdf107c61241913eb268ddede6d5bc541862c"
-
-babel-plugin-transform-merge-sibling-variables@^6.8.6:
-  version "6.8.6"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-merge-sibling-variables/-/babel-plugin-transform-merge-sibling-variables-6.8.6.tgz#6d21efa5ee4981f71657fae716f9594bb2622aef"
+babel-plugin-transform-merge-sibling-variables@^6.8.5, babel-plugin-transform-merge-sibling-variables@^6.8.6:
+  version "6.9.4"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-merge-sibling-variables/-/babel-plugin-transform-merge-sibling-variables-6.9.4.tgz#85b422fc3377b449c9d1cde44087203532401dae"
 
 babel-plugin-transform-minify-booleans@^6.8.2:
   version "6.8.2"
