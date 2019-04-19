@@ -34,7 +34,7 @@
   },
   "homepage": "https://display.js.org",
   "devDependencies": {
-    "babel-eslint": "^8.0.1",
+    "babel-eslint": "^10.0.1",
     "babel-helper-flip-expressions": "^0.2.0",
     "babel-plugin-minify-builtins": "^0.2.0",
     "babel-plugin-minify-constant-folding": "^0.2.0",
